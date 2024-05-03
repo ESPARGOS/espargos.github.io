@@ -1,0 +1,72 @@
+---
+title: "ESP32-based phase-coherent WiFi sensing device"
+draft: false
+type: page
+layout: list
+---
+
+<div class="container col-xxl-8 px-4 py-1">
+	<div class="row flex-lg-row-reverse align-items-center g-5 py-3">
+		<div class="col-10 col-sm-10 col-md-10 col-lg-6">
+			<img src="/img/pcb-render.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" width="500"
+				height="500" loading="lazy">
+		</div>
+		<div class="col-lg-6">
+			<h1 class="display-5 fw-bold lh-1 mb-3">ESPARGOS: ESP32-based WiFi sensing array</h1>
+			<p class="lead">
+				ESPARGOS makes developing and deploying real-time WiFi sensing applications effortless and affordable by packing phase-synchronized ESP32 chips into a 2 &times; 4 antenna array.
+			</p>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+				<a href="/setup/" type="button" class="btn btn-dark btn-lg px-4 me-md-2">Get Started</a>
+				<a href="/docs/" type="button" class="btn text-white btn-outline-secondary btn-lg px-4">Documentation</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<main class="flex-shrink-0">
+	<div class="container">
+		<div class="row g-4 py-5 row-cols-1 row-cols-md-3">
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/csi.svg">
+				</div>
+				<h2>Channel State Information</h2>
+				<p>
+					ESPARGOS provides <b>Channel State Information (CSI)</b> estimated from the L-LTF and HT-LTF pilot symbols in real time.
+					Viewed in frequency domain, CSI contains information about the phase shift and attenuation experienced by the OFDM subcarriers.
+					After a fourier transform, CSI can be interpreted as a channel impulse response.
+					ESPARGOS supports channel bonding, achieving a bandwidth of up to 40 MHz.
+				</p>
+			</div>
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/poe.svg">
+				</div>
+				<h2>Power over Ethernet</h2>
+				<p>
+					Avoid the hassle of running separate data, power and signalling cables: ESPARGOS is <b>controlled over Ethernet</b>, provides a simple web interface for configuration and can be powered from a power over ethernet (PoE) switch / injector.
+					This makes ESPARGOS easy to use and deployments are quick to set up.
+				</p>
+			</div>
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/python-logo-green.svg">
+				</div>
+				<h2>Python Library</h2>
+				<p>
+					With <a href="https://github.com/ESPARGOS/pyespargos"><code>pyespargos</code></a>, there is an easy-to-use library to control one or multiple ESPARGOS devices.
+					Configure ESPARGOS with the built-in web interface, and then easily stream channel state information to your application in real time.
+					The python library comes with a collection of demo applications to get you started.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container col-xl-12 px-3 py-1">
+		<div class="row align-items-center py-3">
+			<h2 class="fw-bold px-0 mb-3">This website is a work in progress!</h2>
+			More information on applications, resources, technical details coming soon.
+		</div>
+	</div>
+</main>

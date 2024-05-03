@@ -1,0 +1,36 @@
+$dark: #227b3d;
+$primary: #37c964;
+$secondary: #293135;
+$body-bg-dark: #11191e;
+
+.text-underline-hover {
+	text-decoration: none;
+}
+
+.text-underline-hover:hover {
+	text-decoration: underline;
+}
+
+.text-underline-hover-thick:hover {
+	text-decoration-thickness: 0.2em;
+}
+
+@import "bootstrap/scss/bootstrap";
+
+.btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: $primary;
+    border-color: $primary;
+}
+
+header .nav-link.active {
+	text-decoration: underline;
+	text-decoration-thickness: 0.2em;
+	background: transparent !important;
+}
+
+header .nav-link:hover {
+	text-decoration: underline;
+	text-decoration-thickness: 0.2em;
+	background: transparent !important;
+}

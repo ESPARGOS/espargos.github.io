@@ -1,0 +1,19 @@
+<header class="d-flex text-white flex-wrap justify-content-center p-3 mb-4">
+	<div class="container">
+		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+			{{ $logo := resources.Get "logo.svg" }}
+			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+				<img height="35" class="px-3" src="{{ $logo.Permalink }}">
+			</a>
+
+			<ul class="nav nav-pills">
+				{{ $currentPage := . }}
+				{{ range .Site.Menus.main }}
+				<li class="nav-item">
+					<a href="{{ .Page.Permalink }}" title="{{ .Title }}" class="nav-link text-white fw-bold {{if (in $currentPage.Permalink .Page.Permalink) }} active{{end}}" aria-current="page">{{ .Name }}</a>
+				</li>
+				{{ end }}
+			</ul>
+		</div>
+	</div>
+</header>

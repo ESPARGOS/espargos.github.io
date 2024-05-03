@@ -1,0 +1,6 @@
+baseURL = 'https://espargos.net/'
+languageCode = 'en-us'
+title = 'ESPARGOS Website'
+theme = 'espargostheme'
+relativeURLs = true
+

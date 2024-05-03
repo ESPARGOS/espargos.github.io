@@ -1,0 +1,25 @@
+<head>
+	<title>ESPARGOS - {{ .Title }}</title>
+
+	<meta charset=utf-8>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="ESPARGOS is a phase-coherent, ESP32-based WiFi antenna array designed for low-cost sensing applications.">
+
+	{{ $favicon16 := resources.Get "favicon-16x16.png" }}
+	{{ $favicon32 := resources.Get "favicon-32x32.png" }}
+	{{ $favicon194 := resources.Get "favicon-194x194.png" }}
+
+
+	<link rel="icon" type="image/png" sizes="194x194" href="{{ $favicon16.Permalink }}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.Permalink }}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon194.Permalink }}" />
+
+	{{ $sass := resources.Get "espargos.scss" }}
+	{{ $style := $sass | resources.ToCSS }}
+
+	<link rel="stylesheet" href="{{ $style.Permalink }}">
+
+	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" }}
+
+	<script src="{{ $bootstrap.Permalink }}"></script>
+</head>
