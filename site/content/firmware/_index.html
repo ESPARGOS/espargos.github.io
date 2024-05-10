@@ -13,8 +13,88 @@ menu:
 <main class="flex-shrink-0">
 	<div class="container">
 		<div class="row py-5 cols-12">
-			<h1 class="px-0">Firmware Download</h1>
-			You will soon find download links to controller and sensor firmware files here.
+			<h1 class="px-0">Firmware</h1>
+		</div>
+		<h3>Download Latest Build</h3>
+		<div class="row py-5 cols-12 justify-content-md-center">
+			<div class="col col-12 col-md-4 col-lg-3 col-xl-2">
+				<a class="firmware-download-button" href="espargos-sensor-firmware.bin">
+					<div class="text-center fw-bold py-4">
+						<div class ="mb-3">
+							<img width="92" height="92" src="img/sensor-board-icon.svg">
+						</div>
+
+						Sensor Firmware
+					</div>
+				</a>
+			</div>
+			<div class="col col-12 col-md-4 col-lg-3 col-xl-2">
+				<a class="firmware-download-button" href="espargos-controller-firmware.bin">
+					<div class="text-center fw-bold py-4">
+						<div class ="mb-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" fill="#37c964" class="bi bi-cpu" viewBox="0 0 16 16">
+								<path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0m-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+							</svg>
+						</div>
+
+						Controller Firmware
+					</div>
+				</a>
+			</div>
+			<div class="col col-12 col-md-4 col-lg-3 col-xl-2">
+				<a class="firmware-download-button" href="espargos-controller-assets.bin">
+					<div class="text-center fw-bold py-4">
+						<div class="mb-3">
+							<svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" fill="#37c964" class="bi bi-cpu" viewBox="0 0 16 16">
+								<path d="M3 6.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
+								<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v1H1V2a1 1 0 0 1 1-1zm1 3v10a1 1 0 0 1-1 1h-2V4zm-4 0v11H2a1 1 0 0 1-1-1V4z"/>
+							</svg>
+						</div>
+
+						Web Assets
+					</div>
+				</a>
+			</div>
+		</div>
+		<h3>Update Instructions</h3>
+		<div class="alert alert-primary" role="alert"><b>Important:</b> Always update ALL firmware components of your ESPARGOS device and update them in this order: First sensor firmware, then controller firmware, then web assets.</div>
+		<div class="alert alert-info" role="alert"><b>Hint:</b> Updates may fail if ESPARGOS is too busy streaming WiFi CSI. Make sure this is not the case.</div>
+
+		<h5>Web Browser</h5>
+		<div class="row justify-content-md-center">
+			<img class="col col-12 col-md-12 col-lg-8, col-xl-6 screenshot" src="img/fwupdate-browser.png" class="screenshot">
+		</div>
+		<div class="px-1 py-3">
+			<ul>
+				<li>Go to the web interface of your ESPARGOS device. See <a href="/setup">Setup</a> to learn how.</li>
+				<li>
+					One after the other, select and flash the firmware files for
+					<ul>
+						<li>sensor firmware,</li>
+						<li>controller firmware and</li>
+						<li>controller web assets.</li>
+					</ul>
+					ESPARGOS will reboot after every firmware update.
+				</li>
+			</ul>
+		</div>
+
+		<h5>Command Line</h5>
+		<div class="p-2" style="background: black;">
+			<code style="color: white;"><pre>
+# Download latest firmware files from espargos.net
+cd /tmp
+wget https://espargos.net/firmware/espargos-sensor-firmware.bin
+wget https://espargos.net/firmware/espargos-controller-firmware.bin
+wget https://espargos.net/firmware/espargos-controller-assets.bin
+
+# Upload firmware to ESPARGOS:
+# * Change ESPARGOS_HOST to the IP address / hostname of your ESPARGOS device.
+# * Make sure the update succeeded after every step. Otherwise, reboot ESPARGOS.
+ESPARGOS_HOST=192.168.1.2
+curl -# "http://$ESPARGOS_HOST/update_sensor_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
+curl -# "http://$ESPARGOS_HOST/update_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-firmware.bin | tee /dev/null
+curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
 		</div>
 	</div>
 </main>

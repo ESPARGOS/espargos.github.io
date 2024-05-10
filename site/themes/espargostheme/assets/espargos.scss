@@ -34,3 +34,22 @@ header .nav-link:hover {
 	text-decoration-thickness: 0.2em;
 	background: transparent !important;
 }
+
+.firmware-download-button {
+	border-radius: 4px;
+	text-decoration: none;
+	color: white;
+}
+
+.firmware-download-button>div:hover {
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.15);
+}
+
+pre {
+	margin-bottom: 0;
+}
+
+.screenshot {
+	border: 2px solid white;
+}
