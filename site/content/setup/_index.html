@@ -14,7 +14,14 @@ menu:
 	<div class="container">
 		<div class="row py-5 cols-12">
 			<h1 class="px-0">ESPARGOS Initial Setup</h1>
-			<img src="espargos-render-controller-green.png">
+			<img id="espargos-img" src="espargos-render-controller-green.png">
+			<script type="text/javascript">
+				let led = false;
+				setInterval(() => {
+					document.getElementById("espargos-img").src = led ? "espargos-render-controller-green.png" : "espargos-render-controller.png";
+					led = !led;
+				}, 800);
+			</script>
 			<h3 class="text-center">Coming soon...</h3>
 		</div>
 	</div>
