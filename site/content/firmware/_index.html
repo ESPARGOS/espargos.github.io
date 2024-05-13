@@ -12,7 +12,7 @@ menu:
 
 <main class="flex-shrink-0">
 	<div class="container">
-		<div class="row py-5 cols-12">
+		<div class="row py-3 cols-12">
 			<h1 class="px-0">Firmware</h1>
 		</div>
 		<h3>Download Latest Build</h3>
@@ -95,6 +95,163 @@ ESPARGOS_HOST=192.168.1.2
 curl -# "http://$ESPARGOS_HOST/update_sensor_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
+		</div>
+
+
+		<h2 class="mt-4">Sensor Update Behavior</h2>
+		<div class="row cols-12 justify-content-md-center">
+			<div class="col col-12 col-lg-8 col-xl-5 text-center">
+				<img id="espargos-sensorupdate" src="../setup/lowres/espargos-render-sensors-red.png" style="width: 100%; transform: scale(1.2);">
+				<script type="text/javascript">
+					const sensorupdate_sequence = [
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render-sensors-green-and-red.png"
+						},
+						{
+							"duration" : 300,
+							"image" : "../setup/lowres/espargos-render.png"
+						}
+					];
+	
+					do_blink(sensorupdate_sequence, "espargos-sensorupdate");
+				</script>
+			</div>
+			<div class="col col-12 col-lg-12 col-xl-7 py-5">
+				The ESPARGOS controller takes care of distributing the firmware update to all sensor microcontrollers.
+				<ul>
+					<li>While the update is being distributed, the sensors will quickly alternate between green and red.</li>
+					<li>In the end, the sensors will flash both red and green LEDs simultaneously to indicate that the update was succesful.</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </main>

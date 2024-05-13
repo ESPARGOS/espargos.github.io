@@ -17,3 +17,19 @@
 		</div>
 	</div>
 </header>
+
+<script type="text/javascript">
+	function do_blink(sequence, imgId) {
+		let img = document.getElementById(imgId);
+		let index = 0;
+
+		function update() {
+			console.log(index, sequence, sequence.length);
+			img.src = sequence[index].image;
+			setTimeout(update, sequence[index].duration);
+			index = (index + 1) % sequence.length;
+		}
+
+		update();
+	}
+</script>
