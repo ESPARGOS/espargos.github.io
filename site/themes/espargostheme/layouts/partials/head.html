@@ -22,4 +22,17 @@
 	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" }}
 
 	<script src="{{ $bootstrap.Permalink }}"></script>
+
+	{{ $highlight := resources.Get "highlight.min.js" }}
+
+	<script src="{{ $highlight.Permalink }}"></script>
+
+	{{ $copycode := resources.Get "copy-code.js" }}
+
+	<script src="{{ $copycode.Permalink }}"></script>
+
+	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" }}
+
+	<link rel="stylesheet" href="{{ $highlightTheme.Permalink }}">
+
 </head>

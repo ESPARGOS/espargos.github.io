@@ -1,0 +1,47 @@
+{{ define "main" }}
+
+<div class="container">
+    <h1>List of Public Datasets</h1>
+</div>
+<div class="album py-2">
+    <div class="container">
+        <article id="content">
+            {{ $pagecount := len .Pages }}
+            {{ if (eq $pagecount 0) }}
+                <div class="text-center h2">Datasets coming soon!</div>
+            {{ end }}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+                {{ range .Pages.ByDate.Reverse }}
+                {{ $metadata := ((.Resources.GetMatch "metadata.json").Content | unmarshal) }}
+                {{ $datasetDataPath := .File.Dir }}
+                {{ $datasetId := (path.Split $datasetDataPath).File }}
+                <div class="col">
+                    <div class="card shadow-sm position-relative">
+						<a href="/{{ $datasetDataPath }}">
+							<img class="card-img-top" width="100%" src="/{{$datasetDataPath}}/{{$metadata.thumbnail}}">
+						</a>
+
+                        <div class="card-body">
+                            <p class="card-title"><b><a class="text-white text-underline-hover" href="/{{ $datasetDataPath }}">{{ $metadata.name }}</a></b></p>
+                            <p class="card-text">{{ .RenderString $metadata.shortDescription }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ printf "%.1f" ( div $metadata.totalSize 1e9 ) }} GB</small>
+
+								<div>
+									{{ if isset $metadata "doi" }}
+										<a class="btn btn-secondary" href="https://doi.org/{{ $metadata.doi }}" type="button">DaRUS</a>
+									{{ end }}
+									<a class="btn btn-dark" href="/{{ $datasetDataPath }}">Explore</a>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </article>
+    </div>
+</div>
+
+{{ end }}

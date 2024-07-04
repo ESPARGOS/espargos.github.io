@@ -1,0 +1,1195 @@
+{{ define "main" }}
+
+<script type="text/javascript">
+	function initMap(target, gpx) {
+		const vectorSource = new ol.source.Vector({
+			url: gpx,
+			format: new ol.format.GPX()
+		});
+
+		const vector = new ol.layer.Vector({
+			source: vectorSource,
+			style: new ol.style.Style({
+				image: new ol.style.Circle({
+					fill: new ol.style.Fill({
+						color: "rgba(255,0,100,0.4)",
+					}),
+					stroke: new ol.style.Stroke({
+						color: "#f0a",
+						width: 1,
+					}),
+					radius: 5
+				}),
+			}),
+			renderMode: "image"
+		});
+
+		let map = new ol.Map({
+			controls: ol.control.defaults.defaults().extend([
+				new ol.control.ScaleLine({
+					units: "metric"
+				})
+			]),
+			target: target,
+			layers: [
+				new ol.layer.Tile({
+					source: new ol.source.OSM()
+				}),
+				vector
+			],
+			view: new ol.View({
+				center: [0, 0],
+				zoom: 1
+			})
+		});
+
+		vectorSource.once('change', function (e) {
+			if (vectorSource.getState() === 'ready') {
+				map.getView().fit(vectorSource.getExtent(), map.getSize());
+			}
+		});
+	}
+</script>
+
+<div class="container">
+	<article id="content">
+		{{ $spec := (.Resources.GetMatch "metadata.json").Content | unmarshal }}
+		<div class="position-relative">
+			<h1 style="padding-right: 70px;"><code class="nohighlight text-primary">{{ $spec.identifier }}</code> Dataset: {{ $spec.name }}</h1>
+		</div>
+		<p>
+			{{ .RenderString $spec.shortDescription }}
+		</p>
+		<p>
+			{{ if isset $spec "longDescription" }}
+				{{ .RenderString $spec.longDescription }}
+			{{ end }}
+		</p>
+
+		<div class="container-fluid">
+			<section>
+				<div class="row">
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+											<path
+												d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+											<path
+												d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ printf "%.3f" ( div $spec.bandwidth 1e6 ) }} MHz</h3>
+										<p class="mb-0">Signal Bandwidth</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-reception-4" viewBox="0 0 16 16">
+											<path
+												d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-8zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-11z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ $spec.subcarriers }}</h3>
+										<p class="mb-0">OFDM Subcarriers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16">
+											<path
+												d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ $spec.datapoints }}</h3>
+										<p class="mb-0">Data Points</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="58" height="48"
+											fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+											<path
+												d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+											<path
+												d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ printf "%.1f" $spec.duration }} s</h3>
+										<p class="mb-0">Total Duration</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+											<path
+												d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+											<path
+												d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ printf "%.1f" ( div $spec.totalSize 1e9 ) }} GB</h3>
+										<p class="mb-0">Total Download Size</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-broadcast-pin" viewBox="0 0 16 16">
+											<path
+												d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ $spec.antennaCount }}</h3>
+										<p class="mb-0">Number of Antennas</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+											<path fill-rule="evenodd"
+												d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+											<path fill-rule="evenodd"
+												d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ if $spec.outdoor }} Outdoor {{ else }} Indoor {{ end }}</h3>
+										<p class="mb-0">Type of Environment</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg viewBox="0 0 378.81385 377.95276" version="1.1" width="48" height="48">
+											<g fill="none" transform="translate(-183.29189,-158.1322)">
+    											<path style="fill:none;stroke:#ffffff;stroke-width:20.0006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="m 561.54401,531.08466 c -27.40108,0 -48.13702,-367.95216 -75.53809,-367.95216 m 0,0 c -27.40103,0 -48.137,367.95216 -75.53807,367.95216 -27.40107,0 -48.13702,-367.95216 -75.53808,-367.95216 m 0,0 c -27.40107,0 -48.13702,367.95216 -75.53808,367.95216 -27.40107,0 -48.13702,-367.95216 -75.53809,-367.95216" />
+											</g>
+										</svg>
+
+									</div>
+									<div class="text-end">
+										<h3>{{ printf "%.6f" ( div $spec.frequency 1e9 ) }} GHz</h3>
+										<p class="mb-0">Carrier Frequency</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-bounding-box" viewBox="0 0 16 16">
+											<path
+												d="M5 2V0H0v5h2v6H0v5h5v-2h6v2h5v-5h-2V5h2V0h-5v2H5zm6 1v2h2v6h-2v2H5v-2H3V5h2V3h6zm1-2h3v3h-3V1zm3 11v3h-3v-3h3zM4 15H1v-3h3v3zM1 4V1h3v3H1z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ if (eq (len $spec.antennas) 1) }} Co-Located {{ else }}
+											Distributed {{ end }}</h3>
+										<p class="mb-0">Antenna Setup</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					{{ if isset $spec.format "pos" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+											<path
+												d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+											<path
+												d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index $spec.format.pos.dimension 0 }}D LiDAR</h3>
+										<p class="mb-0">Position-Tagged</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+
+					{{ if isset $spec.format "pos-lidar" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+											<path
+												d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+											<path
+												d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index (index $spec.format "pos-lidar").dimension 0 }}D LiDAR</h3>
+										<p class="mb-0">Position-Tagged</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+
+					{{ if isset $spec.format "pos-tachy" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+											<path
+												d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+											<path
+												d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index (index $spec.format "pos-tachy").dimension 0 }}D Tachymeter</h3>
+										<p class="mb-0">Position-Tagged</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+
+					{{ if isset $spec.format "pos-gnss" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+											<path
+												d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+											<path
+												d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index (index $spec.format "pos-gnss").dimension 0 }}D GNSS</h3>
+										<p class="mb-0">Position-Tagged</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+
+					{{ if isset $spec.format "pos-gnss" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+											fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+											<path
+												d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
+											<path
+												d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index (index $spec.format "pos-gnss").dimension 0 }}D GNSS</h3>
+										<p class="mb-0">Position-Tagged</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+
+					{{ if isset $spec "regular-schedule-interval" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-calendar2-range" viewBox="0 0 16 16">
+											<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+											<path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM9 8a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1m-8 2h4a1 1 0 1 1 0 2H1z"/>
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ printf "%.3f" ( mul ( index  $spec "regular-schedule-interval" ) 1e3 ) }} ms</h3>
+										<p class="mb-0">Measurement Interval</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+				</div>
+			</section>
+		</div>
+
+		<div class="container" id="hanging-icons">
+			<div class="row g-4 row-cols-1 row-cols-lg-2">
+				<div class="px-0 col d-flex align-items-start">
+					<div>
+						<h2>Experiment Setup</h2>
+						<div id="photos-with-captions" class="carousel slide m-4" data-bs-interval="false">
+							<div class="carousel-inner">
+								{{ range $index, $photo := $spec.photos }}
+								<div class="carousel-item {{ if (eq $index 0) }} active {{ end }}">
+									<img src="{{ $photo.filename }}" class="d-block w-100" alt="{{ .description }}">
+									<div class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+										{{ $photo.description }}
+									</div>
+								</div>
+								{{ end }}
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#photos-with-captions"
+								data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#photos-with-captions"
+								data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="px-0 col d-flex align-items-start">
+					<div>
+						<h2>Data Analysis</h2>
+						<div id="plots-with-captions" class="carousel carousel-dark slide m-4" data-bs-interval="false">
+							<div class="carousel-inner">
+								{{/*
+									There are several cases that we need to handle here:
+									* There is only one antenna array and only one configuration
+									* There are multiple antenna arrays and only one configuration
+									* There is only one antenna array and multiple configuration
+									* There are multiple antenna arrays and multiple configurations
+								*/}}
+
+								{{ $plotsList := slice }}
+								{{ if isset $spec "configuration" }}
+									{{ range $variant := $spec.configuration.variants }}
+										{{ $plotsDict := dict "plots" $variant.plots "variant" $variant.name }}
+										{{ $plotsList = $plotsList | append $plotsDict }}
+									{{ end }}
+								{{ else }}
+									{{ $plotsDict := dict "plots" $spec.plots }}
+									{{ $plotsList = $plotsList | append $plotsDict }}
+								{{ end }}
+
+								{{ range $index, $plotsDict := $plotsList }}
+									<div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
+										<img src="{{ $plotsDict.plots.snrByPosition }}" class="d-block w-100" alt="">
+										<div class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+											Mean received signal-to-noise ratio by position{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+										</div>
+									</div>
+
+									{{ if isset $plotsDict.plots "snrByPositionAndArray" }}
+										{{ range $name, $filename := $plotsDict.plots.snrByPositionAndArray }}
+										<div class="carousel-item">
+											<img src="{{ $filename }}" class="d-block w-100" alt="">
+											<div
+												class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+												Mean received signal-to-noise ratio by position, seen from {{ $name }}{{ if isset $plotsDict "variant" }}, for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+											</div>
+										</div>
+										{{ end }}
+									{{ end }}
+
+									<div class="carousel-item">
+										<img src="{{ $plotsDict.plots.snrBoxplot }}" class="d-block w-100" alt="">
+										<div
+											class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+											SNR by receive antenna index{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+										</div>
+									</div>
+
+									{{/*{{ range $index, $filename := $plotsDict.plots.csiTensors }}
+									<div class="carousel-item">
+										<img src="{{ $filename }}" class="d-block w-100" alt="">
+										<div
+											class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+											Exemplary channel coefficient vector {{ add $index 1 }}
+										</div>
+									</div>
+									{{ end }}*/}}
+								{{ end }}
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#plots-with-captions"
+								data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#plots-with-captions"
+								data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{{ if isset $spec "warnings" }}
+		<h2>Warnings</h2>
+		{{ range $index, $warning := $spec.warnings }}
+		<div class="alert alert-warning d-flex p-3 align-items-center" role="alert">
+			<svg class="mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+				class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+				<path
+					d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+				<path
+					d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+			</svg>
+			<div class="mx-2">
+				{{ $warning }}
+			</div>
+		</div>
+		{{ end }}
+		{{ end }}
+
+		{{ if isset $spec "gnssMap" }}
+		<h2>GNSS Ground Truth Map</h2>
+		<div class="row my-3 p-3">
+			<div id="overall-map" class="lg-6" style="height: 500px;"></div>
+		</div>
+		<script type="text/javascript">
+			initMap("overall-map", "{{ $spec.gpx }}");
+		</script>
+		{{ end }}
+
+		<h2 id="antenna">Antenna Configuration</h2>
+		<div class="container-fluid">
+			<section>
+				<div class="row">
+					{{ range $index, $antenna := $spec.antennas }}
+					<div class="col-xl-6 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-title">
+									<h4>Antenna {{ add $index 1 }}: {{ $antenna.name }}</h4>
+								</div>
+								<div class="card-text">
+									This {{ $antenna.type }} has a vertical spacing of {{ $antenna.spacingX }}m and a
+									horizontal spacing of {{ $antenna.spacingY }}m.
+									{{ if isset $antenna "location" }}
+									In the dataset's cartesian coordinate system, its center is located at {{
+									$antenna.location }}
+										{{  if isset $antenna "direction"}}
+											and the antenna points in direction {{ $antenna.direction }}.
+										{{ else }}
+											and the plane in which all the array's antennas are located is spanned by two vectors:
+											The vector {{ $antenna.rightvector }}, which points to the right when looking at the array from the front, and the vector {{ $antenna.upvector }}, which points upwards.
+										{{ end }}	
+									{{ else }}
+									In the dataset's longitude / latitude coordinate system, it is located at N {{ index
+									$antenna.locationLonLat 0 }}°, E {{ index $antenna.locationLonLat 1 }}°, with the
+									center {{ $antenna.heightAboveGround }}m above the ground, which corresponds to {{
+									$antenna.ellipsoidalHeight }}m above sea level.
+									The antenna points in a direction that is characterized by a <a
+										href="https://en.wikipedia.org/wiki/Azimuth#In_navigation">true-north based
+										azimuth angle</a> of {{ $antenna.azimuth }}° a downwards tilt of {{
+									$antenna.tilt }}°.
+									{{ end }}
+
+
+									<div class="mt-3"><b>Antenna Channel Assignments</b></div>
+									<table class="table table-striped table-bordered align-middle w-25">
+										{{ range $rowindex, $row := $antenna.assignments }}
+										<tr>
+											{{ range $colindex, $channel := $row }}
+											<td align="center">
+												{{ if eq (int $channel) -1 }}
+													<span style="cursor: pointer;" title="No CSI for this antenna">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+															<path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+															<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+														</svg>
+													</span>
+												{{ else }}
+													{{ $channel }}
+												{{ end }}
+											</td>
+											{{ end }}
+										</tr>
+										{{ end }}
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
+				</div>
+			</section>
+		</div>
+
+		<h2 id="import">Python: Import with TensorFlow</h2>
+		{{ $formatkeys := slice }}
+		{{ range $name, $desc := $spec.format }}{{ $formatkeys = $formatkeys | append (strings.Replace $name "-" "_") }}
+		{{ end }}
+		{{ $tffilenames := slice }}
+		{{ range $file := $spec.tfrecords }}{{ $tffilenames = $tffilenames | append $file.filename }}{{ end }}
+		<pre class="m-0"><code class="language-python">#!/usr/bin/env python3
+import tensorflow as tf
+
+raw_dataset = tf.data.TFRecordDataset(["{{delimit $tffilenames "\", \""}}"])
+
+feature_description = {
+{{ range $name, $desc := $spec.format }}	"{{ $name }}": tf.io.FixedLenFeature([], {{ if eq $desc.type "tensor" }}tf.string, default_value = ''{{ else if eq $desc.type "tensor64" }}tf.string, default_value = ''{{ else if eq $desc.type "float32" }}tf.float32, default_value = 0{{end}}),
+{{ end }}}
+			
+def record_parse_function(proto):
+	record = tf.io.parse_single_example(proto, feature_description)
+{{ range $name, $desc := $spec.format }}
+	# {{ $desc.description }}
+	{{ strings.Replace $name "-" "_" }} = {{ if eq $desc.type "tensor" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float32), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensor64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "float32" }}tf.ensure_shape(record["{{ $name }}"], ()){{ end }}
+{{ end }}
+	return {{ delimit $formatkeys ", " }}
+			
+dataset = raw_dataset.map(record_parse_function, num_parallel_calls = tf.data.experimental.AUTOTUNE)
+
+# Optional: Cache dataset in RAM for faster training
+dataset = dataset.cache()</code></pre>
+		<script>hljs.highlightAll();</script>
+
+		{{ $authorlist := slice }}
+		{{ if isset $spec "authors" }}
+			{{ range $author := $spec.authors }}
+				{{ $fullname := $author.firstname | printf "%s, %s" $author.lastname | printf "%s" }}
+				{{ $authorlist = $authorlist | append $fullname }}
+			{{ end }}
+		{{ else }}
+			{{ $authorlist = $authorlist | append "Euchner, Florian" "Gauger, Marc" }}
+		{{ end }}
+
+		{{ if isset $spec "configuration" }}
+		<!-- Load only needed libraries -->
+		{{ if isset $spec.configuration "threedmodel"}}
+			<!-- ModelViewer -->
+			<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+		{{ end }}
+		{{ if isset $spec.configuration "pointcloud"}}
+			<!-- Potree -->
+			<script src="/potree/jquery-3.1.1.min.js"></script>
+			<script src="/potree/BinaryHeap.js"></script>
+			<script src="/potree/tween.min.js"></script>
+			<script src="/potree/proj4.js"></script>
+			<script src="/potree/potree.js"></script>
+			<script type="text/javascript">
+				// Prevent spacebar from scrolling page (used as pointcloud viewer control)
+				window.addEventListener("keydown", function(e) {
+					if (e.keyCode == 32)
+						e.preventDefault();
+				});
+			</script>
+		{{ end }}
+
+		<h2>Configuration Variants{{ if isset $spec.configuration "threedmodel" }} and Environment 3D Model{{ end }}{{ if isset $spec.configuration "pointcloud" }} and Pointcloud{{ end }}</h2>
+		<div class="row justify-content-center mb-2">
+			<div class="col-12 col-lg-12 col-xl-12 my-3 mx-0">
+				<select id="global-variant-selector" class="form-select mb-2" aria-label="Default select example">
+					{{ range $envid, $env := $spec.configuration.variants }}
+					<option data-gltf="{{ $env.gltf }}" data-potree="{{ $env.potree | jsonify }}" data-name="{{ $env.name }}" data-description="{{ $env.description }}">{{ $env.name }}</option>
+					{{ end }}
+				</select>
+
+				<p>
+					<b id="global-variant-name"></b>: <span id="global-variant-description"></span>
+				</p>
+
+				{{ if isset $spec.configuration "threedmodel" }}
+				<model-viewer id="global-3dmodel-viewer" alt="3D Model of the Environment" shadow-intensity="1" camera-controls touch-action="pan-y" class="w-100" style="min-height: 300px; height: 50vh;">
+					<div slot="progress-bar"></div>
+				</model-viewer>
+				{{ end }}
+				{{ if isset $spec.configuration "pointcloud" }}
+				<div id="global-pointcloud-viewer" alt="Pointcloud the Environment" class="w-100" style="min-height: 300px; height: 70vh; position: relative;">
+					<div style="position: absolute; bottom: 10px; z-index: 2; background: rgba(0, 0, 0, 0.5); width: 80%; text-align: center; color: white; left: 50%; transform: translateX(-50%);">
+						<b>Hint</b>: Move with W-A-S-D, up with spacebar, down with shift, pan with mouse
+					</div>
+
+					<div id="no-pointcloud-for-variant" style="position: absolute; z-index: 2; background: rgba(0, 0, 0, 0.5); width: 80%; text-align: center; color: white; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); font-size: 25pt;">
+						No pointcloud available for this configuration variant!
+					</div>
+				</div>
+				{{ end }}
+
+
+				<script type="text/javascript">
+					document.getElementById("global-variant-selector").addEventListener("change", function() {
+						const selected = this.options[this.selectedIndex];
+						document.getElementById("global-variant-name").textContent = selected.getAttribute("data-name");
+						document.getElementById("global-variant-description").textContent = selected.getAttribute("data-description");
+					});
+
+					document.addEventListener("DOMContentLoaded", () => {
+						const selector = document.getElementById("global-variant-selector");
+						selector.selectedIndex = 0;
+						selector.dispatchEvent(new Event("change"));
+					});
+				</script>
+
+				{{ if isset $spec.configuration "threedmodel" }}
+					<script type="text/javascript">
+						document.getElementById("global-variant-selector").addEventListener("change", function() {
+							const selected = this.options[this.selectedIndex];
+							document.getElementById("global-3dmodel-viewer").src = selected.dataset.gltf;
+						});
+					</script>
+				{{ end }}
+				{{ if isset $spec.configuration "pointcloud" }}
+					<script type="text/javascript">
+						document.getElementById("global-variant-selector").addEventListener("change", function() {
+							const selected = this.options[this.selectedIndex];
+
+							if (!window.viewer) {
+								window.viewer = new Potree.Viewer(document.getElementById("global-pointcloud-viewer"));	
+							}
+
+							window.viewer.scene.pointclouds.forEach(function(layer) {
+								window.viewer.scene.scenePointCloud.remove(layer);
+							});
+							window.viewer.scene.pointclouds = [];
+
+							if (selected.dataset.potree == "null") {
+								document.getElementById("no-pointcloud-for-variant").hidden = false;
+							} else {
+								document.getElementById("no-pointcloud-for-variant").hidden = true;
+
+								const attrs = JSON.parse(selected.dataset.potree);
+								Potree.loadPointCloud("pointcloud/" + attrs.folder + "/metadata.json").then(e => {
+									let scene = viewer.scene;
+									let pointcloud = e.pointcloud;
+									
+									let material = pointcloud.material;
+									material.size = 1;
+									material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+									material.shape = Potree.PointShape.CIRCLE;
+									scene.addPointCloud(pointcloud);
+
+									viewer.setDescription("");
+									viewer.setEDLEnabled(false);
+									viewer.setPointBudget(500_000);
+									viewer.scene.view.position.set(-2, -16, 1.8);
+									viewer.scene.view._pitch = 0;
+									viewer.scene.view.yaw = 0.8;
+									viewer.setFOV(70);
+									//viewer.setBackground("black");
+									viewer.fpControls.lockElevation = true;
+									viewer.fpControls.keys.UP = [" ".charCodeAt(0), 33];
+									viewer.fpControls.keys.DOWN = ["e".charCodeAt(0), 16];
+									viewer.setControls(viewer.fpControls);
+									viewer.setMoveSpeed(4);
+								});
+							}
+						});
+					</script>
+				{{ end }}
+			</div>
+			
+			{{ if isset $spec.configuration "threedmodel" }}
+			<h4>3D Model Download and Usage Instructions</h4>
+			<div class="col-12 col-lg-12 col-xl-12 py-3">
+				<p>
+					For this dataset, we provide a 3D model of the environment.
+					If your browser supports 3D rendering, you should see the model next to this text.
+					The model is provided in the same coordinate frame as the dataset.
+					You may find the 3D model useful for raytracing-based radio propagation modeling, or for visualization purposes.
+				</p>
+				<p>
+					Please note that we cannot capture all the fine details of the environment in the 3D model - too many fine details may be undesirable anyway for raytracing applications.
+				</p>
+				<p>
+					The 3D model is provided the <code>.blend</code> file format, which is the format natively used by <a href="https://www.blender.org/">Blender</a>.
+				</p>
+
+				<div class="mt-4 mb-3 d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="{{ $spec.configuration.threedmodel.blender }}" download><button class="btn btn-lg btn-dark" type="button">Download Blender 3D Model</button></a>
+				</div>
+
+				<p>
+					{{ if eq $spec.identifier "dichasus-dcxx" }}
+						{{ $modeldescription := ($.Resources.GetMatch $spec.configuration.threedmodel.descriptionFile) }}
+						{{ $modeldescription.Content | safeHTML }}
+					{{ end }}
+				</p>
+			</div>
+			{{ end }}
+
+			{{ if isset $spec.configuration "pointcloud" }}
+			<h4>Pointcloud Download and Usage Instructions</h4>
+			<div class="col-12 col-lg-12 col-xl-12 py-3">
+				<p>
+					For this dataset, we provide a pointcloud of the environment, which was generated using a 3D scanning device.
+					You may find the pointcloud useful for visualization purposes or to reconstruct and verify 3D models.
+					Pointclouds can be viewed and edited with applications like <a href="https://www.danielgm.net/cc/">CloudCompare</a>.
+				</p>
+
+				<div class="mt-4 mb-3 d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="{{ $spec.configuration.pointcloud.download }}" download><button class="btn btn-lg btn-dark" type="button">Download Pointcloud</button></a>
+				</div>
+
+				{{ $modeldescription := ($.Resources.GetMatch $spec.configuration.pointcloud.descriptionFile) }}
+				{{ $modeldescription.Content | .RenderString | safeHTML }}
+			</div>
+			{{ end }}
+		</div>
+
+		{{ $haveVideos := false }}
+		{{ range $index, $tfrecord := $spec.tfrecords }}
+			{{ if isset $tfrecord "darusVideoDownloadURL" }}
+				{{ $haveVideos = true }}
+			{{ end }}
+		{{ end }}
+
+		{{ if $haveVideos }}
+		<h2>Videos</h2>
+		<p>
+			This dataset includes <code>.mkv</code> videos of the environment / transmitter, each corresponding to individual <code>.tfrecords</code> dataset files..
+			You may want to use these videos to get a better understanding of what is going on in the environment, or for data visualization purposes.
+			The videos were synchronized to the dataset such that the first video frame is recorded at the same time that the earliest CSI datapoint contained in the dataset file is measured.
+			This way, by taking into account the CSI timestamps, you can match the video frames to the CSI measurements.
+			Please note that the earliest datapoint in the file may not be the one that appears first in the <code>.tfrecords</code> file, since the temporal order of the datapoints is not guaranteed.
+			The duration of the video should be approximately equal to the duration of the <code>.tfrecords</code> file (i.e., earliest timestamp subtracted from last timestamp).
+			The synchronization should be accurate down to 1-2 video frames.
+		</p>
+		{{ end }}
+
+		{{ end }}
+
+		<h2 id="cite">How to Cite</h2>
+		<p>
+			Please refer to the <a href="/">home page</a> for information on how to cite any of our datasets in your
+			research.
+			{{ if isset $spec "doi" }}
+			For this dataset in particular, you may use the following BibTeX:
+		<pre class="m-0"><code class="language-tex">@data{dataset-{{ $spec.identifier }},
+	author    = {{"{"}}{{ delimit $authorlist " and "}}{{"}"}},
+	publisher = {DaRUS},
+	title     = {{"{{"}}CSI Dataset {{ $spec.identifier }}: {{ $spec.name }}{{"}}"}},
+	doi       = {{"{"}}{{$spec.doi}}{{"}"}},
+	url       = {https://doi.org/{{$spec.doi}}},
+	year      = {{"{"}}{{$spec.year}}{{"}"}}
+}</code></pre>
+			{{ else }}
+			This particular dataset is currently not public. Please contact us if you want to cite this dataset in any of your publications.
+			{{ end }}
+		</p>
+
+		<h2 id="download">Download</h2>
+		<p class="mb-3">
+			This dataset consists of {{ len $spec.tfrecords }} file{{ if (gt (len $spec.tfrecords) 1) }}s{{ end }}.
+			Descriptions of {{ if (gt (len $spec.tfrecords) 1) }}these files{{ else }}this file{{ end }} as well as
+			download links are provided below.
+		</p>
+
+		<div>
+			{{ range $index, $tfrecord := $spec.tfrecords }}
+			<div class="m-3 p-3"
+				style="border-radius: 3px; border: 1px solid lightgrey; box-shadow: 0 0.125rem 0.25rem rgba(132, 138, 163, 0.1) !important;">
+				<div class="text mb-3">
+					<div class="h4 mb-1"><pre class="m-0">{{ $tfrecord.name }}</pre></div>
+				</div>
+
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-5">
+							<div class="container-fluid">
+								<section>
+									<div class="row">
+										<div class="col-12 ps-0 mb-2">
+											<div class="card">
+												<div class="card-body p-2">
+													<div class="d-flex justify-content-between px-md-1">
+														<div class="align-self-center">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+																<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+																<path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+															  </svg>
+														</div>
+														<div class="text-end">
+															<b>Textual Description</b>
+															<p class="mb-0" style="font-size: 10pt;">{{ $tfrecord.description }}</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xl-4 col-sm-4 col-6 ps-0 mb-2">
+											<div class="card">
+												<div class="card-body p-2">
+													<div class="d-flex justify-content-between px-md-1">
+														<div class="align-self-center">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																height="24" fill="currentColor" class="bi bi-download"
+																viewBox="0 0 16 16">
+																<path
+																	d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+																<path
+																	d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+															</svg>
+														</div>
+														<div class="text-end">
+															<b>{{ printf "%.1f" ( div $tfrecord.totalSize 1e9 ) }}
+																GB</b>
+															<p class="mb-0">File Size</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xl-4 col-sm-4 col-6 ps-0 mb-2">
+											<div class="card">
+												<div class="card-body p-2">
+													<div class="d-flex justify-content-between px-md-1">
+														<div class="align-self-center">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																height="24" fill="currentColor" class="bi bi-collection"
+																viewBox="0 0 16 16">
+																<path
+																	d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z" />
+															</svg>
+														</div>
+														<div class="text-end">
+															<b>{{ $tfrecord.datapoints }}</b>
+															<p class="mb-0">Points</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xl-4 col-sm-4 col-6 ps-0 mb-2">
+											<div class="card">
+												<div class="card-body p-2">
+													<div class="d-flex justify-content-between px-md-1">
+														<div class="align-self-center">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																height="24" fill="currentColor" class="bi bi-clock"
+																viewBox="0 0 16 16">
+																<path
+																	d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+																<path
+																	d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+															</svg>
+														</div>
+														<div class="text-end">
+															<b>{{ printf "%.1f" $tfrecord.duration }} s</b>
+															<p class="mb-0">Duration</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</section>
+							</div>
+						</div>
+						<div class="col-xl-7">
+							<div class="accordion mb-3" id="plot-accordion-{{ $index }}">
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingOne-{{ $index }}">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $index }}"
+											aria-expanded="false" aria-controls="collapseOne-{{ $index }}">
+											Mean SNR by Position Plot
+										</button>
+									</h2>
+									<div id="collapseOne-{{ $index }}" class="accordion-collapse collapse"
+										aria-labelledby="headingOne-{{ $index }}"
+										data-bs-parent="#plot-accordion-{{ $index }}">
+										<div class="accordion-body">
+											<img class="col-12" src="{{ $tfrecord.plots.snrByPosition }}" />
+											{{ if isset $tfrecord.plots "snrByPositionAndArray" }}
+												{{ range $name, $filename := $tfrecord.plots.snrByPositionAndArray }}
+													<img src="{{ $filename }}" class="d-block w-100" alt="">
+												{{ end }}
+											{{ end }}
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingTwo-{{ $index }}">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseTwo-{{ $index }}"
+											aria-expanded="false" aria-controls="collapseTwo-{{ $index }}">
+											SNR by Antenna Boxplot
+										</button>
+									</h2>
+									<div id="collapseTwo-{{ $index }}" class="accordion-collapse collapse"
+										aria-labelledby="headingTwo-{{ $index }}"
+										data-bs-parent="#plot-accordion-{{ $index }}">
+										<div class="accordion-body">
+											<img class="col-12" src="{{ $tfrecord.plots.snrBoxplot }}" />
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingThree-{{ $index }}">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseThree-{{ $index }}"
+											aria-expanded="false" aria-controls="collapseThree-{{ $index }}">
+											Channel Coefficient Vector Plot (Example)
+										</button>
+									</h2>
+									<div id="collapseThree-{{ $index }}" class="accordion-collapse collapse"
+										aria-labelledby="headingThree-{{ $index }}"
+										data-bs-parent="#plot-accordion-{{ $index }}">
+										<img class="col-12" src="{{ index $tfrecord.plots.csiTensors 0 }}" />
+									</div>
+								</div>
+								{{ if isset $spec.format "pos-gnss" }}
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingFour-{{ $index }}">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseFour-{{ $index }}"
+											aria-expanded="false" aria-controls="collapseFour-{{ $index }}">
+											GNSS Ground Truth Map
+										</button>
+									</h2>
+									<div id="collapseFour-{{ $index }}" class="accordion-collapse collapse"
+										aria-labelledby="headingFour-{{ $index }}"
+										data-bs-parent="#plot-accordion-{{ $index }}">
+										<div class="p-4" style="height: 300px; width: 100%;" id="map-{{ $index }}">
+										</div>
+										<script type="text/javascript">
+											document.getElementById("headingFour-{{ $index }}").addEventListener("click", () => {
+												let elem = document.getElementById("map-{{ $index }}");
+												if (!elem.dataset.initialized)
+													initMap("map-{{ $index }}", "{{ index $tfrecord.gpx }}");
+												elem.dataset.initialized = true;
+											});
+										</script>
+									</div>
+								</div>
+								{{ end }}
+								{{ if isset $tfrecord "configurationVariant" }}
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingFive-{{ $index }}">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseFive-{{ $index }}"
+											aria-expanded="false" aria-controls="collapseFive-{{ $index }}">
+											Configuration Variant {{ if isset $spec.configuration "threedmodel" }} and 3D Model{{ end }}
+										</button>
+									</h2>
+									<div id="collapseFive-{{ $index }}" class="accordion-collapse collapse"
+										aria-labelledby="headingFive-{{ $index }}"
+										data-bs-parent="#plot-accordion-{{ $index }}">
+										{{ $variant := (index $spec.configuration.variants $tfrecord.configurationVariant) }}
+										{{ if isset $spec.configuration "threedmodel" }}
+										<model-viewer alt="3D Model of the Environment" src="{{ $variant.gltf }}" shadow-intensity="1" camera-controls touch-action="pan-y" class="w-100" style="min-height: 300px; height: 50vh;">
+											<div slot="progress-bar"></div>
+										</model-viewer>
+										{{ end }}
+										<p class="p-3">
+											<b>{{ $variant.name }}</b>:
+											{{ $variant.description }}
+										</p>
+									</div>
+								</div>
+								{{ end }}
+							</div>
+
+							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								{{ if isset $tfrecord "darusVideoDownloadURL" }}
+									<a href="{{ $tfrecord.darusVideoDownloadURL }}"><button class="btn btn-lg btn-outline-primary me-md-2" type="button">Video</button></a>
+								{{ end }}
+
+								{{ if isset $tfrecord "darusDownloadURL" }}
+									<a href="{{ $tfrecord.darusViewURL }}"><button class="btn btn-lg btn-outline-primary me-md-2" type="button">View on DaRUS</button></a>
+									<a href="{{ $tfrecord.darusDownloadURL }}"><button class="btn btn-lg btn-dark" type="button">Download</button></a>
+								{{ else }}
+									<button class="btn btn-lg btn-dark" disabled>This dataset is not public yet</button>
+								{{ end }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+
+		{{ $channelStatsFile := ($.Resources.GetMatch "stats/stats.json") }}
+		{{ if not (eq $channelStatsFile nil) }}
+			{{ $channelStats := $channelStatsFile.Content | unmarshal }}
+			{{ $dsplots := slice }}
+			{{ $kfplots := slice }}
+
+			{{ if isset $spec "configuration" }}
+				{{ range $variantId, $variant := $spec.configuration.variants }}
+					{{ $dsplots = $dsplots | append (index $channelStats $variantId).plots.delaySpread }}
+					{{ $kfplots = $kfplots | append (index $channelStats $variantId).plots.kFactor }}
+				{{ end }}
+			{{ else }}
+				{{ $dsplots = $channelStats.plots.delaySpread }}
+				{{ $kfplots = $channelStats.plots.kFactor }}
+			{{ end }}
+
+			<h2 id="stats">Derived Channel Statistics</h2>
+			<p>
+				Channel statistics such as delay spread, k-Factor and path loss exponent are a good way to characterize a wireless channel measurement and to parametrize a channel model.
+				Using estimation algorithms contributed by Janina Sanzi, we automatically extract the following channel statistics from the measured datasets:	
+			</p>
+			
+			<div class="container-fluid">
+				<section>
+					<div class="row">
+						<div class="col-xl-6 col-sm-12 col-12 mb-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="card-title">
+										<h4>RMS Delay Spread</h4>
+										The <a href="https://en.wikipedia.org/wiki/Delay_spread">delay spread</a> of a wireless channel is inversely proportional to the channel's coherence bandwidth and indicates how "spread out" the lengths of the various multipath propagation paths are.
+										For every datapoint, the delay spread can be characterized by its <a href="https://en.wikipedia.org/wiki/Root_mean_square">root mean square</a> value and the resulting delay spreads can be plotted over the measurement area:
+										<div class="row justify-content-md-center">
+											<div id="delay-spread-plots" class="carousel carousel-dark slide m-4 col-12" data-bs-interval="false">
+												<div class="carousel-inner">
+													{{ range $index, $delaySpreadPlot := $dsplots }}
+														<div class="carousel-item {{ if (eq $index 0) }} active {{ end }}">
+															<img src="stats/{{ $delaySpreadPlot }}" class="d-block w-100">
+														</div>
+													{{ end }}
+												</div>
+												{{ if gt (len $dsplots) 1 }}
+													<button class="carousel-control-prev" type="button" data-bs-target="#delay-spread-plots" data-bs-slide="prev">
+														<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+														<span class="visually-hidden">Previous</span>
+													</button>
+													<button class="carousel-control-next" type="button" data-bs-target="#delay-spread-plots" data-bs-slide="next">
+														<span class="carousel-control-next-icon" aria-hidden="true"></span>
+														<span class="visually-hidden">Next</span>
+													</button>
+												{{ end }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xl-6 col-sm-12 col-12 mb-4">
+							<div class="card">
+								<div class="card-body">
+									<div class="card-title">
+										<h4>Rician K-Factor</h4>
+										The Rician K-factor is defined as the power ratio between dominant and diffuse component, usually expressed in decibels.
+										We estimate the K-factor with a <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=769521">moment-method based on the distribution of of channel coefficient powers</a>.
+										The resulting K-Factors be plotted over the measurement area:
+										<div class="row justify-content-md-center">
+											<div id="kfactor-plots" class="carousel carousel-dark slide m-4 col-12" data-bs-interval="false">
+												<div class="carousel-inner">
+													{{ range $index, $kFactor := $kfplots }}
+														<div class="carousel-item {{ if (eq $index 0) }} active {{ end }}">
+															<img src="stats/{{ $kFactor }}" class="d-block w-100">
+														</div>
+													{{ end }}
+												</div>
+												{{ if gt (len $kfplots) 1 }}
+													<button class="carousel-control-prev" type="button" data-bs-target="#kfactor-plots" data-bs-slide="prev">
+														<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+														<span class="visually-hidden">Previous</span>
+													</button>
+													<button class="carousel-control-next" type="button" data-bs-target="#kfactor-plots" data-bs-slide="next">
+														<span class="carousel-control-next-icon" aria-hidden="true"></span>
+														<span class="visually-hidden">Next</span>
+													</button>
+												{{ end }}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		{{ end }}
+	</article>
+</div>
+
+{{ end }}

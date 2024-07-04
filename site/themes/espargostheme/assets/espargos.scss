@@ -3,6 +3,7 @@ $primary: #37c964;
 $secondary: #293135;
 $body-bg-dark: #11191e;
 
+
 .text-underline-hover {
 	text-decoration: none;
 }
@@ -21,6 +22,10 @@ $body-bg-dark: #11191e;
     color: #fff;
     background-color: $primary;
     border-color: $primary;
+}
+
+.code-copy-container {
+	background: rgba(255, 255, 255, 0.02);
 }
 
 header .nav-link.active {
