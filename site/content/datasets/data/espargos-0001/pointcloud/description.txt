@@ -1,0 +1,16 @@
+The tachymeter was used to create a pointcloud scan.
+While it is stationed in the middle of the measurement area for the pointcloud scan, it was stationed elsewhere while the robot was moving.
+The coordinate system of the pointlcoud is the same coordinate system that was also used for the rest of the dataset (datapoint positions, antenna array positions).
+
+The pointcloud is available for download as a `.pts` file.
+
+PTS files are simple text files with the following format:
+* The first line contains the number of datapoints in the scan
+* The other lines contain `(x, y, z)` coordinates, reflection intensity and `(r, g, b)` color, e.g.:
+```
+x      y        z       i    r   g   b
+6.9912 -19.5173 14.7111 -546 183 190 174
+6.9930 -19.5178 14.7112 -505 162 171 154
+6.9888 -19.5181 14.7098 -570 193 200 184
+6.9902 -19.5111 14.7109 -578 184 191 173
+```

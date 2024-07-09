@@ -3,6 +3,14 @@ $primary: #37c964;
 $secondary: #293135;
 $body-bg-dark: #11191e;
 
+$carousel-control-color: black;
+$carousel-control-opacity: 0.8;
+$carousel-control-hover-opacity: 1.0;
+$carousel-indicator-transition: none;
+$carousel-indicator-height: 6px;
+$carousel-indicator-hit-area-height: 15px;
+$carousel-dark-indicator-active-bg: $dark;
+$carousel-indicator-opacity: 0.2;
 
 .text-underline-hover {
 	text-decoration: none;

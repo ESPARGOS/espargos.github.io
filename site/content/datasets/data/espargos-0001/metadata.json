@@ -1,0 +1,548 @@
+{
+    "identifier": "espargos-0001",
+    "name": "Four antenna arrays in indoor lab room",
+    "shortDescription": "Four antenna arrays are pointed at a small measurement area in a lab room. Only line-of-sight channels.",
+    "bandwidth": 36562500,
+    "frequency": 2462000000,
+    "outdoor": false,
+    "year": 2024,
+    "time-synchronization": false,
+    "synchronization-across-arrays": false,
+    "wifi-standard": "802.11n",
+    "warnings": [
+        "This is an experimental dataset and this dataset page is still under construction. Come back later for updates."
+    ],
+    "authors": [
+        {
+            "firstname": "Florian",
+            "lastname": "Euchner",
+            "orcid": "0000-0002-8090-1188",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Stephan",
+            "lastname": "ten Brink",
+            "orcid": "0000-0003-1502-2571",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        }
+    ],
+    "configuration": {
+        "pointcloud": {
+            "download": "pointcloud/espargos-0001-pointcloud.pts",
+            "descriptionFile": "pointcloud/description.txt"
+        },
+        "variants": {
+            "standard": {
+                "name": "Standard",
+                "description": "There is only one configuration variant called the \"Standard\" configuration.",
+                "potree": {
+                    "folder": "potree/euchnerlab",
+                    "position": {
+                        "x": 9.2,
+                        "y": -22.2,
+                        "z": 1.7
+                    },
+                    "pitch": 0,
+                    "yaw": 1.6,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
+                "plots": {
+                    "csiTensors": [
+                        "plots/standard-csi-0.png",
+                        "plots/standard-csi-1.png",
+                        "plots/standard-csi-2.png",
+                        "plots/standard-csi-3.png",
+                        "plots/standard-csi-4.png",
+                        "plots/standard-csi-5.png",
+                        "plots/standard-csi-6.png",
+                        "plots/standard-csi-7.png",
+                        "plots/standard-csi-8.png",
+                        "plots/standard-csi-9.png",
+                        "plots/standard-csi-10.png",
+                        "plots/standard-csi-11.png"
+                    ],
+                    "rssiByPosition": "plots/standard-rssi-position.png",
+                    "rssiBoxplot": "plots/standard-rssi-boxplot.png",
+                    "rssiByPositionAndArray": {
+                        "North (next to wall / door)": "plots/standard-rssi-position-array-0.png",
+                        "South (next to window)": "plots/standard-rssi-position-array-1.png",
+                        "West (next to chalkboard)": "plots/standard-rssi-position-array-2.png",
+                        "East (next to wall)": "plots/standard-rssi-position-array-3.png"
+                    }
+                },
+                "gpx": ""
+            }
+        }
+    },
+    "antennas": [
+        {
+            "name": "North (next to wall / door)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                9.3525,
+                -24.0696,
+                2.6093
+            ],
+            "upvector": [
+                -0.0328,
+                0.7042,
+                0.7092
+            ],
+            "rightvector": [
+                -0.9991,
+                -0.0378,
+                -0.0169
+            ]
+        },
+        {
+            "name": "South (next to window)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                9.2331,
+                -20.7883,
+                2.5842
+            ],
+            "upvector": [
+                0.0205,
+                -0.6801,
+                0.7329
+            ],
+            "rightvector": [
+                0.9971,
+                0.0669,
+                0.0353
+            ]
+        },
+        {
+            "name": "West (next to chalkboard)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                11.2143,
+                -22.4548,
+                2.6041
+            ],
+            "upvector": [
+                -0.8007,
+                -0.0427,
+                0.5975
+            ],
+            "rightvector": [
+                0.0945,
+                -0.9941,
+                0.0532
+            ]
+        },
+        {
+            "name": "East (next to wall)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                7.2405,
+                -22.7075,
+                2.6025
+            ],
+            "upvector": [
+                0.6823,
+                0.0786,
+                0.7268
+            ],
+            "rightvector": [
+                -0.1099,
+                0.9939,
+                -0.0017
+            ]
+        }
+    ],
+    "format": {
+        "csi": {
+            "description": "Channel coefficients for all antennas, over all subcarriers, complex-valued",
+            "type": "tensorcomplex64",
+            "dimension": [
+                4,
+                2,
+                4,
+                117
+            ]
+        },
+        "rssi": {
+            "description": "Received signal strength indicator (in dB) for all antennas",
+            "type": "tensor",
+            "dimension": [
+                4,
+                2,
+                4
+            ]
+        },
+        "pos": {
+            "description": "Position of transmitter determined by a tachymeter pointed at a prism mounted on top of the antenna, in meters (X / Y / Z coordinates)",
+            "type": "tensor64",
+            "dimension": [
+                3
+            ]
+        },
+        "time": {
+            "description": "Timestamp of measurement, seconds since UNIX epoch",
+            "type": "tensor64",
+            "dimension": []
+        }
+    },
+    "tfrecords": [
+        {
+            "filename": "tfrecords/espargos-0001-diagonal1.tfrecords",
+            "description": "Robot follows a trajectory of diagonal (southeast-northwest in antenna array nomenclature) meanders.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-diagonal1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-diagonal1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-diagonal1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-diagonal1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-diagonal1-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-diagonal1-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-diagonal1-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-diagonal1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 89083,
+            "duration": 741.848993062973,
+            "totalSize": 2695384331
+        },
+        {
+            "filename": "tfrecords/espargos-0001-diagonal2.tfrecords",
+            "description": "Robot follows a trajectory of diagonal (southwest-northeast in antenna array nomenclature) meanders.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-diagonal2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-diagonal2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-diagonal2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-diagonal2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-diagonal2-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-diagonal2-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-diagonal2-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-diagonal2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 95744,
+            "duration": 791.8864340782166,
+            "totalSize": 2896926208
+        },
+        {
+            "filename": "tfrecords/espargos-0001-meanders_ns1.tfrecords",
+            "description": "Robot follows a trajectory of meanders (north-south in antenna array nomenclature), with interruption in the end.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-meanders_ns1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-meanders_ns1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-meanders_ns1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-meanders_ns1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-meanders_ns1-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-meanders_ns1-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-meanders_ns1-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-meanders_ns1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 50870,
+            "duration": 422.46739649772644,
+            "totalSize": 1539173590
+        },
+        {
+            "filename": "tfrecords/espargos-0001-meanders_ns1_continued.tfrecords",
+            "description": "Robot follows a trajectory of meanders (north-south in antenna array nomenclature), continuation of previous trajectory.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-meanders_ns1_continued",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-meanders_ns1_continued-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-meanders_ns1_continued-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-meanders_ns1_continued-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-meanders_ns1_continued-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-meanders_ns1_continued-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-meanders_ns1_continued-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-meanders_ns1_continued-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 5639,
+            "duration": 46.846887826919556,
+            "totalSize": 170619223
+        },
+        {
+            "filename": "tfrecords/espargos-0001-meanders_we1.tfrecords",
+            "description": "Robot follows a trajectory of meanders (west-east in antenna array nomenclature).",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-meanders_we1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-meanders_we1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-meanders_we1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-meanders_we1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-meanders_we1-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-meanders_we1-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-meanders_we1-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-meanders_we1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 84186,
+            "duration": 694.486025094986,
+            "totalSize": 2547215802
+        },
+        {
+            "filename": "tfrecords/espargos-0001-randomwalk1.tfrecords",
+            "description": "Robot follows a pseudo-random trajectory in the measurement area.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-randomwalk1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-randomwalk1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-randomwalk1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-randomwalk1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-randomwalk1-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-randomwalk1-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-randomwalk1-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-randomwalk1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 175035,
+            "duration": 1428.4103662967682,
+            "totalSize": 5296033995
+        },
+        {
+            "filename": "tfrecords/espargos-0001-randomwalk2.tfrecords",
+            "description": "Robot follows a pseudo-random trajectory in the measurement area.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-randomwalk2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-randomwalk2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-randomwalk2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-randomwalk2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-randomwalk2-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-randomwalk2-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-randomwalk2-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-randomwalk2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 144354,
+            "duration": 1247.7643184661865,
+            "totalSize": 4367718978
+        },
+        {
+            "filename": "tfrecords/espargos-0001-spiral1.tfrecords",
+            "description": "Robot follows a spiral-shaped trajectory in the measurement area.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-spiral1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-spiral1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-spiral1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-spiral1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-spiral1-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-spiral1-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-spiral1-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-spiral1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 77527,
+            "duration": 630.8420696258545,
+            "totalSize": 2345734439
+        },
+        {
+            "filename": "tfrecords/espargos-0001-static_middle.tfrecords",
+            "description": "Robot remains static in the middle of the measurement area.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-static_middle",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-static_middle-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-static_middle-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-static_middle-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-static_middle-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-static_middle-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-static_middle-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-static_middle-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 2067,
+            "duration": 16.07145929336548,
+            "totalSize": 62541219
+        },
+        {
+            "filename": "tfrecords/espargos-0001-static_middle_with_person_walking_nearby.tfrecords",
+            "description": "Robot remains static in the middle of the measurement area. A person is walking around in the room.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-static_middle_with_person_walking_nearby",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-static_middle_with_person_walking_nearby-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-static_middle_with_person_walking_nearby-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 2661,
+            "duration": 20.588592052459717,
+            "totalSize": 80513877
+        },
+        {
+            "filename": "tfrecords/espargos-0001-circle.tfrecords",
+            "description": "Robot drives around in a circle (several times).",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-circle",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-circle-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-circle-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-circle-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-circle-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-circle-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-circle-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-circle-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 58092,
+            "duration": 519.858549118042,
+            "totalSize": 1757689644
+        },
+        {
+            "filename": "tfrecords/espargos-0001-wobble_middle.tfrecords",
+            "description": "Robot remains more or less in the middle of the measurement area, but moves around by a few centimeters.",
+            "configurationVariant": "standard",
+            "name": "espargos-0001-wobble_middle",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0001-wobble_middle-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0001-wobble_middle-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0001-wobble_middle-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "North (next to wall / door)": "plots/espargos-0001-wobble_middle-rssi-position-array-0.png",
+                    "South (next to window)": "plots/espargos-0001-wobble_middle-rssi-position-array-1.png",
+                    "West (next to chalkboard)": "plots/espargos-0001-wobble_middle-rssi-position-array-2.png",
+                    "East (next to wall)": "plots/espargos-0001-wobble_middle-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 6125,
+            "duration": 49.240116119384766,
+            "totalSize": 185324125
+        }
+    ],
+    "photos": [
+        {
+            "filename": "photosAll/all-arrays.jpg",
+            "description": "All four ESPARGOS antenna arrays."
+        },
+        {
+            "filename": "photosAll/tachymeter-and-arrays.jpg",
+            "description": "Tachymeter tracking the robot, and all four antenna arrays in the background."
+        },
+        {
+            "filename": "photosAll/all-arrays-labelled.jpg",
+            "description": "All four ESPARGOS antenna arrays with labels."
+        },
+        {
+            "filename": "photosAll/area-from-east.jpg",
+            "description": "Measurement and robot area seen from behind the \"East\" antenna array."
+        },
+        {
+            "filename": "photosAll/east-antenna-from-front.jpg",
+            "description": "ESPARGOS array \"East\" seen from the front."
+        },
+        {
+            "filename": "photosAll/from-south.jpg",
+            "description": "Measurement and robot area seen from behind the \"South\" antenna array."
+        },
+        {
+            "filename": "photosAll/robot-from-side.jpg",
+            "description": "Robot carrying the transmitter seen from the side, with antenna and prism used for tracking the antenna."
+        },
+        {
+            "filename": "photosAll/robot-from-top.jpg",
+            "description": "Robot carrying the transmitter seen from above."
+        },
+        {
+            "filename": "photosAll/southantenna-and-robot-focus.jpg",
+            "description": "Measurement area and robot seen from behind the \"South\" antenna array."
+        },
+        {
+            "filename": "photosAll/southantenna-pcb-focus.jpg",
+            "description": "ESPARGOS antenna array and controller circuit boards."
+        },
+        {
+            "filename": "photosAll/tachymeter.jpg",
+            "description": "Tachymeter tracking the robot inside the measurement area."
+        }
+    ],
+    "thumbnail": "photosAll/thumbnail.jpg",
+    "plots": {
+        "csiTensors": [
+            "plots/overall-csi-0.png",
+            "plots/overall-csi-1.png",
+            "plots/overall-csi-2.png",
+            "plots/overall-csi-3.png",
+            "plots/overall-csi-4.png",
+            "plots/overall-csi-5.png",
+            "plots/overall-csi-6.png",
+            "plots/overall-csi-7.png",
+            "plots/overall-csi-8.png",
+            "plots/overall-csi-9.png",
+            "plots/overall-csi-10.png",
+            "plots/overall-csi-11.png"
+        ],
+        "rssiByPosition": "plots/overall-rssi-position.png",
+        "rssiBoxplot": "plots/overall-rssi-boxplot.png",
+        "rssiByPositionAndArray": {
+            "North (next to wall / door)": "plots/overall-rssi-position-array-0.png",
+            "South (next to window)": "plots/overall-rssi-position-array-1.png",
+            "West (next to chalkboard)": "plots/overall-rssi-position-array-2.png",
+            "East (next to wall)": "plots/overall-rssi-position-array-3.png"
+        }
+    },
+    "gpx": "",
+    "datapoints": 791383,
+    "duration": 6610.311207532883,
+    "antennaCount": 32,
+    "subcarriers": 117,
+    "totalSize": 23944875431
+}

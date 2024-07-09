@@ -274,7 +274,7 @@
 										</svg>
 									</div>
 									<div class="text-end">
-										<h3>{{ index $spec.format.pos.dimension 0 }}D LiDAR</h3>
+										<h3>{{ index $spec.format.pos.dimension 0 }}D Tachymeter</h3>
 										<p class="mb-0">Position-Tagged</p>
 									</div>
 								</div>
@@ -399,6 +399,27 @@
 						</div>
 					</div>
 					{{ end }}
+
+					{{ if isset $spec "wifi-standard" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-wifi" viewBox="0 0 16 16">
+											<path d="M15.384 6.115a.485.485 0 0 0-.047-.736A12.44 12.44 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.52.52 0 0 0 .668.05A11.45 11.45 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049"/>
+											<path d="M13.229 8.271a.482.482 0 0 0-.063-.745A9.46 9.46 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065m-2.183 2.183c.226-.226.185-.605-.1-.75A6.5 6.5 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.5 5.5 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091zM9.06 12.44c.196-.196.198-.52-.04-.66A2 2 0 0 0 8 11.5a2 2 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z"/>
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index $spec "wifi-standard" }}</h3>
+										<p class="mb-0">WiFi Standard</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
 				</div>
 			</section>
 		</div>
@@ -458,29 +479,29 @@
 
 								{{ range $index, $plotsDict := $plotsList }}
 									<div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-										<img src="{{ $plotsDict.plots.snrByPosition }}" class="d-block w-100" alt="">
+										<img src="{{ $plotsDict.plots.rssiByPosition }}" class="d-block w-100" alt="">
 										<div class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
 											Mean received signal-to-noise ratio by position{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
 										</div>
 									</div>
 
-									{{ if isset $plotsDict.plots "snrByPositionAndArray" }}
-										{{ range $name, $filename := $plotsDict.plots.snrByPositionAndArray }}
+									{{ if isset $plotsDict.plots "rssiByPositionAndArray" }}
+										{{ range $name, $filename := $plotsDict.plots.rssiByPositionAndArray }}
 										<div class="carousel-item">
 											<img src="{{ $filename }}" class="d-block w-100" alt="">
 											<div
 												class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
-												Mean received signal-to-noise ratio by position, seen from {{ $name }}{{ if isset $plotsDict "variant" }}, for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+												Mean received signal-to-noise ratio by position, seen from antenna array "{{ $name }}"{{ if isset $plotsDict "variant" }}, for configuration variant "{{ $plotsDict.variant }}" {{ end }}
 											</div>
 										</div>
 										{{ end }}
 									{{ end }}
 
 									<div class="carousel-item">
-										<img src="{{ $plotsDict.plots.snrBoxplot }}" class="d-block w-100" alt="">
+										<img src="{{ $plotsDict.plots.rssiBoxplot }}" class="d-block w-100" alt="">
 										<div
 											class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
-											SNR by receive antenna index{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+											RSSI by receive antenna index{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
 										</div>
 									</div>
 
@@ -552,7 +573,7 @@
 									<h4>Antenna {{ add $index 1 }}: {{ $antenna.name }}</h4>
 								</div>
 								<div class="card-text">
-									This {{ $antenna.type }} has a vertical spacing of {{ $antenna.spacingX }}m and a
+									This ESPARGOS array has a vertical spacing of {{ $antenna.spacingX }}m and a
 									horizontal spacing of {{ $antenna.spacingY }}m.
 									{{ if isset $antenna "location" }}
 									In the dataset's cartesian coordinate system, its center is located at {{
@@ -573,29 +594,6 @@
 										azimuth angle</a> of {{ $antenna.azimuth }}° a downwards tilt of {{
 									$antenna.tilt }}°.
 									{{ end }}
-
-
-									<div class="mt-3"><b>Antenna Channel Assignments</b></div>
-									<table class="table table-striped table-bordered align-middle w-25">
-										{{ range $rowindex, $row := $antenna.assignments }}
-										<tr>
-											{{ range $colindex, $channel := $row }}
-											<td align="center">
-												{{ if eq (int $channel) -1 }}
-													<span style="cursor: pointer;" title="No CSI for this antenna">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
-															<path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
-															<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-														</svg>
-													</span>
-												{{ else }}
-													{{ $channel }}
-												{{ end }}
-											</td>
-											{{ end }}
-										</tr>
-										{{ end }}
-									</table>
 								</div>
 							</div>
 						</div>
@@ -617,14 +615,14 @@ import tensorflow as tf
 raw_dataset = tf.data.TFRecordDataset(["{{delimit $tffilenames "\", \""}}"])
 
 feature_description = {
-{{ range $name, $desc := $spec.format }}	"{{ $name }}": tf.io.FixedLenFeature([], {{ if eq $desc.type "tensor" }}tf.string, default_value = ''{{ else if eq $desc.type "tensor64" }}tf.string, default_value = ''{{ else if eq $desc.type "float32" }}tf.float32, default_value = 0{{end}}),
+{{ range $name, $desc := $spec.format }}	"{{ $name }}": tf.io.FixedLenFeature([], {{ if eq $desc.type "tensor" }}tf.string, default_value = ''{{ else if eq $desc.type "tensorcomplex64" }}tf.string, default_value = ''{{ else if eq $desc.type "tensor64" }}tf.string, default_value = ''{{ else if eq $desc.type "float32" }}tf.float32, default_value = 0{{end}}),
 {{ end }}}
 			
 def record_parse_function(proto):
 	record = tf.io.parse_single_example(proto, feature_description)
 {{ range $name, $desc := $spec.format }}
 	# {{ $desc.description }}
-	{{ strings.Replace $name "-" "_" }} = {{ if eq $desc.type "tensor" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float32), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensor64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "float32" }}tf.ensure_shape(record["{{ $name }}"], ()){{ end }}
+	{{ strings.Replace $name "-" "_" }} = {{ if eq $desc.type "tensor" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float32), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensorcomplex64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.complex64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensor64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "float32" }}tf.ensure_shape(record["{{ $name }}"], ()){{ end }}
 {{ end }}
 	return {{ delimit $formatkeys ", " }}
 			
@@ -752,10 +750,10 @@ dataset = dataset.cache()</code></pre>
 									viewer.setDescription("");
 									viewer.setEDLEnabled(false);
 									viewer.setPointBudget(500_000);
-									viewer.scene.view.position.set(-2, -16, 1.8);
-									viewer.scene.view._pitch = 0;
-									viewer.scene.view.yaw = 0.8;
-									viewer.setFOV(70);
+									viewer.scene.view.position.set(attrs.position.x, attrs.position.y, attrs.position.z);
+									viewer.scene.view._pitch = attrs.pitch;
+									viewer.scene.view.yaw = attrs.yaw;
+									viewer.setFOV(attrs.fov);
 									//viewer.setBackground("black");
 									viewer.fpControls.lockElevation = true;
 									viewer.fpControls.keys.UP = [" ".charCodeAt(0), 33];
@@ -857,6 +855,23 @@ dataset = dataset.cache()</code></pre>
 			This particular dataset is currently not public. Please contact us if you want to cite this dataset in any of your publications.
 			{{ end }}
 		</p>
+
+		<h2 id="interpolation">A Note on WiFi Subcarriers, Bandwidth and Interpolation</h2>
+		<p>
+			WiFi has a concept of "guard" subcarriers, which act as guard bands that protect against interference with systems on neighboring WiFi channels.
+			This means that not all subcarriers get driven (i.e., not all subcarriers contain useful QAM symbols), some subcarriers simply carry zeroes.
+			If these subcarriers are at the edge of the considered spectrum, CSI from these guard subcarriers is simply not included in the dataset.
+			This explains the odd (non-power of two) number of subcarriers and the strange OFDM signal bandwidth.
+			Otherwise, if the guard subcarriers are not at the edges of the spectrum, linear interpolation is used to assign realistic values to these guard subcarriers.
+			This case occurs when using channel bandwidths greater than 40MHz.
+		</p>
+
+		<h2 id="interpolation">A Note on Synchronization</h2>
+		To make sense of the measured CSI data, please take into account:
+		<ul>
+			{{ if (not (index $spec "time-synchronization")) }}<li><b>Lack of time synchronization:</b> While ESPARGOS ensures phase synchronization across antennas in the same array, due to an esp-idf software limitation at the time of creating this dataset, there is no sampling time synchronization.</li>{{ end }}
+			{{ if (not (index $spec "synchronization-across-arrays")) }}<li><b>No synchronization across arrays:</b> There is no phase or time synchronization across different antenna arrays.</li>{{ end }}
+		</ul>
 
 		<h2 id="download">Download</h2>
 		<p class="mb-3">
@@ -977,16 +992,16 @@ dataset = dataset.cache()</code></pre>
 										<button class="accordion-button collapsed" type="button"
 											data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $index }}"
 											aria-expanded="false" aria-controls="collapseOne-{{ $index }}">
-											Mean SNR by Position Plot
+											Mean RSSI by Position Plot
 										</button>
 									</h2>
 									<div id="collapseOne-{{ $index }}" class="accordion-collapse collapse"
 										aria-labelledby="headingOne-{{ $index }}"
 										data-bs-parent="#plot-accordion-{{ $index }}">
 										<div class="accordion-body">
-											<img class="col-12" src="{{ $tfrecord.plots.snrByPosition }}" />
-											{{ if isset $tfrecord.plots "snrByPositionAndArray" }}
-												{{ range $name, $filename := $tfrecord.plots.snrByPositionAndArray }}
+											<img class="col-12" src="{{ $tfrecord.plots.rssiByPosition }}" />
+											{{ if isset $tfrecord.plots "rssiByPositionAndArray" }}
+												{{ range $name, $filename := $tfrecord.plots.rssiByPositionAndArray }}
 													<img src="{{ $filename }}" class="d-block w-100" alt="">
 												{{ end }}
 											{{ end }}
@@ -998,14 +1013,14 @@ dataset = dataset.cache()</code></pre>
 										<button class="accordion-button collapsed" type="button"
 											data-bs-toggle="collapse" data-bs-target="#collapseTwo-{{ $index }}"
 											aria-expanded="false" aria-controls="collapseTwo-{{ $index }}">
-											SNR by Antenna Boxplot
+											RSSI by Antenna Boxplot
 										</button>
 									</h2>
 									<div id="collapseTwo-{{ $index }}" class="accordion-collapse collapse"
 										aria-labelledby="headingTwo-{{ $index }}"
 										data-bs-parent="#plot-accordion-{{ $index }}">
 										<div class="accordion-body">
-											<img class="col-12" src="{{ $tfrecord.plots.snrBoxplot }}" />
+											<img class="col-12" src="{{ $tfrecord.plots.rssiBoxplot }}" />
 										</div>
 									</div>
 								</div>
