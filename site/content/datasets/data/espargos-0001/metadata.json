@@ -9,9 +9,6 @@
     "time-synchronization": false,
     "synchronization-across-arrays": false,
     "wifi-standard": "802.11n",
-    "warnings": [
-        "This is an experimental dataset and this dataset page is still under construction. Come back later for updates."
-    ],
     "authors": [
         {
             "firstname": "Florian",
