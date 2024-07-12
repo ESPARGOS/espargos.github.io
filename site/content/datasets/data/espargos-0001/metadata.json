@@ -25,7 +25,7 @@
     ],
     "configuration": {
         "pointcloud": {
-            "download": "pointcloud/espargos-0001-pointcloud.pts",
+            "download": "pointcloud/espargos-0001-pointcloud.zip",
             "descriptionFile": "pointcloud/description.txt"
         },
         "variants": {
