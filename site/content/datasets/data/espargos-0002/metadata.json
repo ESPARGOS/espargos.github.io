@@ -1,0 +1,509 @@
+{
+    "identifier": "espargos-0002",
+    "name": "Larger combined antenna array, indoor lab room with metal wall, LoS and NLoS areas",
+    "shortDescription": "Four ESPARGOS arrays are combined into one large array with 8 by 4 antennas. A metall wall blocks the LoS path in parts of the measurement area.",
+    "bandwidth": 36562500,
+    "frequency": 2462000000,
+    "outdoor": false,
+    "year": 2024,
+    "time-synchronization": false,
+    "synchronization-across-arrays": true,
+    "wifi-standard": "802.11n",
+    "authors": [
+        {
+            "firstname": "Florian",
+            "lastname": "Euchner",
+            "orcid": "0000-0002-8090-1188",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Stephan",
+            "lastname": "ten Brink",
+            "orcid": "0000-0003-1502-2571",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        }
+    ],
+    "configuration": {
+        "variants": {
+            "with-wall": {
+                "name": "With wall",
+                "description": "There is a metallic wall in the measurement area, partially blocking the LoS path.",
+                "plots": {
+                    "csiTensors": [
+                        "plots/with-wall-csi-0.png",
+                        "plots/with-wall-csi-1.png",
+                        "plots/with-wall-csi-2.png",
+                        "plots/with-wall-csi-3.png",
+                        "plots/with-wall-csi-4.png",
+                        "plots/with-wall-csi-5.png",
+                        "plots/with-wall-csi-6.png",
+                        "plots/with-wall-csi-7.png",
+                        "plots/with-wall-csi-8.png",
+                        "plots/with-wall-csi-9.png",
+                        "plots/with-wall-csi-10.png",
+                        "plots/with-wall-csi-11.png"
+                    ],
+                    "rssiByPosition": "plots/with-wall-rssi-position.png",
+                    "rssiBoxplot": "plots/with-wall-rssi-boxplot.png",
+                    "rssiByPositionAndArray": {
+                        "First (Leftmost)": "plots/with-wall-rssi-position-array-0.png",
+                        "Second": "plots/with-wall-rssi-position-array-1.png",
+                        "Third": "plots/with-wall-rssi-position-array-2.png",
+                        "Fourth (Rightmost)": "plots/with-wall-rssi-position-array-3.png"
+                    }
+                },
+                "gpx": ""
+            }
+        }
+    },
+    "antennas": [
+        {
+            "name": "First (Leftmost)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -5.3097,
+                4.6357,
+                -0.5358
+            ],
+            "upvector": [
+                0.7256,
+                0.6878,
+                -0.0209
+            ],
+            "rightvector": [
+                -0.1085,
+                0.0843,
+                -0.9905
+            ]
+        },
+        {
+            "name": "Second",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -5.2223,
+                4.7186,
+                -0.5385
+            ],
+            "upvector": [
+                0.7282,
+                0.6851,
+                -0.0204
+            ],
+            "rightvector": [
+                -0.106,
+                0.0841,
+                -0.9908
+            ]
+        },
+        {
+            "name": "Third",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -5.1348,
+                4.8018,
+                -0.5411
+            ],
+            "upvector": [
+                0.7276,
+                0.6858,
+                -0.0195
+            ],
+            "rightvector": [
+                -0.1061,
+                0.0866,
+                -0.9906
+            ]
+        },
+        {
+            "name": "Fourth (Rightmost)",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -5.0496,
+                4.8881,
+                -0.543
+            ],
+            "upvector": [
+                0.673,
+                0.7396,
+                0.0049
+            ],
+            "rightvector": [
+                -0.1069,
+                0.0906,
+                -0.9901
+            ]
+        }
+    ],
+    "format": {
+        "csi": {
+            "description": "Channel coefficients for all antennas, over all subcarriers, complex-valued",
+            "type": "tensorcomplex64",
+            "dimension": [
+                4,
+                2,
+                4,
+                117
+            ]
+        },
+        "rssi": {
+            "description": "Received signal strength indicator (in dB) for all antennas",
+            "type": "tensor",
+            "dimension": [
+                4,
+                2,
+                4
+            ]
+        },
+        "pos": {
+            "description": "Position of transmitter determined by a tachymeter pointed at a prism mounted on top of the antenna, in meters (X / Y / Z coordinates)",
+            "type": "tensor64",
+            "dimension": [
+                3
+            ]
+        },
+        "time": {
+            "description": "Timestamp of measurement, seconds since UNIX epoch",
+            "type": "tensor64",
+            "dimension": []
+        }
+    },
+    "tfrecords": [
+        {
+            "filename": "tfrecords/espargos-0002-nlos-meanders-1.tfrecords",
+            "description": "Robot follows a trajectory of meanders, mainly in NLoS area behind metal wall. Meanders are approximately parallel to wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-meanders-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-meanders-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-meanders-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-meanders-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-meanders-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-meanders-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-meanders-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-meanders-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 71136,
+            "duration": 662.4356143474579,
+            "totalSize": 2152361952
+        },
+        {
+            "filename": "tfrecords/espargos-0002-nlos-meanders-2.tfrecords",
+            "description": "Robot follows a trajectory of meanders, mainly in NLoS area behind metal wall. Meanders are approximately orthogonal to wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-meanders-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-meanders-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-meanders-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-meanders-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-meanders-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-meanders-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-meanders-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-meanders-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 99159,
+            "duration": 982.1583786010742,
+            "totalSize": 3000253863
+        },
+        {
+            "filename": "tfrecords/espargos-0002-nlos-meanders-3.tfrecords",
+            "description": "Robot follows a trajectory of meanders, mainly in NLoS area behind metal wall. Meanders are approximately parallel to wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-meanders-3",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-meanders-3-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-meanders-3-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-meanders-3-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-meanders-3-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-meanders-3-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-meanders-3-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-meanders-3-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 85300,
+            "duration": 798.7470059394836,
+            "totalSize": 2580922100
+        },
+        {
+            "filename": "tfrecords/espargos-0002-nlos-meanders-4.tfrecords",
+            "description": "Robot follows a trajectory of meanders, mainly in NLoS area behind metal wall. Meanders are approximately orthogonal to wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-meanders-4",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-meanders-4-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-meanders-4-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-meanders-4-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-meanders-4-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-meanders-4-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-meanders-4-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-meanders-4-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 111663,
+            "duration": 1010.0317430496216,
+            "totalSize": 3378587391
+        },
+        {
+            "filename": "tfrecords/espargos-0002-nlos-randomwalk-1.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory, mainly in NLoS area behind metal wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-randomwalk-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-randomwalk-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-randomwalk-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-randomwalk-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-randomwalk-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-randomwalk-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 154394,
+            "duration": 1384.3107466697693,
+            "totalSize": 4671499258
+        },
+        {
+            "filename": "tfrecords/espargos-0002-nlos-randomwalk-2.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory, mainly in NLoS area behind metal wall.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-nlos-randomwalk-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-nlos-randomwalk-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-nlos-randomwalk-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-nlos-randomwalk-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-nlos-randomwalk-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-nlos-randomwalk-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-nlos-randomwalk-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-nlos-randomwalk-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 215104,
+            "duration": 1960.8713355064392,
+            "totalSize": 6508401728
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-spiral-1.tfrecords",
+            "description": "Robot follows a trajectory of clockwise spirals (when viewed from top) around the metal wall, travelling through LoS and NLoS areas of the measurement area.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-spiral-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-spiral-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-spiral-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-spiral-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-spiral-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-spiral-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-spiral-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-spiral-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 166195,
+            "duration": 1416.316296339035,
+            "totalSize": 5028562115
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-spiral-2.tfrecords",
+            "description": "Robot follows a trajectory of counter-clockwise spirals (when viewed from top) around the metal wall, travelling through LoS and NLoS areas of the measurement area.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-spiral-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-spiral-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-spiral-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-spiral-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-spiral-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-spiral-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-spiral-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-spiral-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 78836,
+            "duration": 682.3358318805695,
+            "totalSize": 2385340852
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-randomwalk-1.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory all around the metal wall, containing both LoS and NLoS areas.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-randomwalk-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-randomwalk-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-randomwalk-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-randomwalk-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-randomwalk-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-randomwalk-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 110818,
+            "duration": 964.0244269371033,
+            "totalSize": 3353020226
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-randomwalk-2.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory all around the metal wall, containing both LoS and NLoS areas.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-randomwalk-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-randomwalk-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-randomwalk-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-randomwalk-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-randomwalk-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-randomwalk-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-randomwalk-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-randomwalk-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 122841,
+            "duration": 1071.4424250125885,
+            "totalSize": 3716800137
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-randomwalk-3.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory all around the metal wall, containing both LoS and NLoS areas. Robot movement is slower than all-randomwalk-1 and all-randomwalk-2.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-randomwalk-3",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-randomwalk-3-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-randomwalk-3-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-randomwalk-3-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-randomwalk-3-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-randomwalk-3-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-randomwalk-3-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-randomwalk-3-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 243041,
+            "duration": 2181.062998533249,
+            "totalSize": 7353691537
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-radial-meanders.tfrecords",
+            "description": "Robot follows a trajectory of radial meanders, i.e., it is usually moving either towards or away from the metal wall in the center.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-radial-meanders",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-radial-meanders-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-radial-meanders-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-radial-meanders-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-radial-meanders-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-radial-meanders-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-radial-meanders-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-radial-meanders-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 159954,
+            "duration": 1466.215571641922,
+            "totalSize": 4839728178
+        }
+    ],
+    "photos": [
+        {
+            "filename": "photosAll/array-and-metalwall.jpg",
+            "description": "Antenna array and metall wall blocking the line of sight path in parts of the measurement area."
+        },
+        {
+            "filename": "photosAll/from-behind-array.jpg",
+            "description": "Measurement area seen from the point of view of the antenna array."
+        },
+        {
+            "filename": "photosAll/from-robot.jpg",
+            "description": "Antenna array and metal wall (frontside is metal, backside is wood) seen from robot's point of view."
+        },
+        {
+            "filename": "photosAll/largearray.jpg",
+            "description": "Four ESPARGOS boards combined into one large array."
+        },
+        {
+            "filename": "photosAll/prism-on-antenna.jpg",
+            "description": "Prism that is tracked by the tachymeter is attached to the tip of the WiFi antenna."
+        },
+        {
+            "filename": "photosAll/robot-behind-metalwall.jpg",
+            "description": "Robot is behind the metall wall, visual LoS is blocked from antenna array's point of view."
+        }
+    ],
+    "thumbnail": "photosAll/thumbnail.jpg",
+    "plots": {
+        "csiTensors": [
+            "plots/overall-csi-0.png",
+            "plots/overall-csi-1.png",
+            "plots/overall-csi-2.png",
+            "plots/overall-csi-3.png",
+            "plots/overall-csi-4.png",
+            "plots/overall-csi-5.png",
+            "plots/overall-csi-6.png",
+            "plots/overall-csi-7.png",
+            "plots/overall-csi-8.png",
+            "plots/overall-csi-9.png",
+            "plots/overall-csi-10.png",
+            "plots/overall-csi-11.png"
+        ],
+        "rssiByPosition": "plots/overall-rssi-position.png",
+        "rssiBoxplot": "plots/overall-rssi-boxplot.png",
+        "rssiByPositionAndArray": {
+            "First (Leftmost)": "plots/overall-rssi-position-array-0.png",
+            "Second": "plots/overall-rssi-position-array-1.png",
+            "Third": "plots/overall-rssi-position-array-2.png",
+            "Fourth (Rightmost)": "plots/overall-rssi-position-array-3.png"
+        }
+    },
+    "gpx": "",
+    "datapoints": 1618441,
+    "duration": 14579.952374458313,
+    "antennaCount": 32,
+    "subcarriers": 117,
+    "totalSize": 48969169337
+}

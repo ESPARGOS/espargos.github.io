@@ -123,7 +123,7 @@
 										</svg>
 									</div>
 									<div class="text-end">
-										<h3>{{ $spec.datapoints }}</h3>
+										<h3>{{ $spec.datapoints | int }}</h3>
 										<p class="mb-0">Data Points</p>
 									</div>
 								</div>
@@ -250,9 +250,8 @@
 										</svg>
 									</div>
 									<div class="text-end">
-										<h3>{{ if (eq (len $spec.antennas) 1) }} Co-Located {{ else }}
-											Distributed {{ end }}</h3>
-										<p class="mb-0">Antenna Setup</p>
+										<h3>{{ if (index $spec "synchronization-across-arrays") }} Global {{ else }} Array-Wise {{ end }}</h3>
+										<p class="mb-0">Synchronization</p>
 									</div>
 								</div>
 							</div>
@@ -570,7 +569,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="card-title">
-									<h4>Antenna {{ add $index 1 }}: {{ $antenna.name }}</h4>
+									<h4>ESPARGOS {{ add $index 1 }}: {{ $antenna.name }}</h4>
 								</div>
 								<div class="card-text">
 									This ESPARGOS array has a vertical spacing of {{ $antenna.spacingX }}m and a
@@ -950,8 +949,8 @@ dataset = dataset.cache()</code></pre>
 															</svg>
 														</div>
 														<div class="text-end">
-															<b>{{ $tfrecord.datapoints }}</b>
-															<p class="mb-0">Points</p>
+															<b>{{ $tfrecord.datapoints | int }}</b>
+															<p class="mb-0">Data Points</p>
 														</div>
 													</div>
 												</div>
