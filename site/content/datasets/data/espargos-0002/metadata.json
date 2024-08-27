@@ -1,7 +1,7 @@
 {
     "identifier": "espargos-0002",
     "name": "Larger combined antenna array, indoor lab room with metal wall, LoS and NLoS areas",
-    "shortDescription": "Four ESPARGOS arrays are combined into one large array with 8 by 4 antennas. A metall wall blocks the LoS path in parts of the measurement area.",
+    "shortDescription": "Four ESPARGOS arrays are combined into one large array with 8 by 4 antennas. A metal wall blocks the LoS path in parts of the measurement area. The wall is later removed.",
     "bandwidth": 36562500,
     "frequency": 2462000000,
     "outdoor": false,
@@ -26,7 +26,7 @@
     "configuration": {
         "variants": {
             "with-wall": {
-                "name": "With wall",
+                "name": "With metal wall",
                 "description": "There is a metallic wall in the measurement area, partially blocking the LoS path.",
                 "plots": {
                     "csiTensors": [
@@ -41,7 +41,8 @@
                         "plots/with-wall-csi-8.png",
                         "plots/with-wall-csi-9.png",
                         "plots/with-wall-csi-10.png",
-                        "plots/with-wall-csi-11.png"
+                        "plots/with-wall-csi-11.png",
+                        "plots/with-wall-csi-12.png"
                     ],
                     "rssiByPosition": "plots/with-wall-rssi-position.png",
                     "rssiBoxplot": "plots/with-wall-rssi-boxplot.png",
@@ -50,6 +51,28 @@
                         "Second": "plots/with-wall-rssi-position-array-1.png",
                         "Third": "plots/with-wall-rssi-position-array-2.png",
                         "Fourth (Rightmost)": "plots/with-wall-rssi-position-array-3.png"
+                    }
+                },
+                "gpx": ""
+            },
+            "without-wall": {
+                "name": "Without metal wall",
+                "description": "The measurement area is empty, the metal wall was removed, only visual LoS paths.",
+                "plots": {
+                    "csiTensors": [
+                        "plots/without-wall-csi-0.png",
+                        "plots/without-wall-csi-1.png",
+                        "plots/without-wall-csi-2.png",
+                        "plots/without-wall-csi-3.png",
+                        "plots/without-wall-csi-4.png"
+                    ],
+                    "rssiByPosition": "plots/without-wall-rssi-position.png",
+                    "rssiBoxplot": "plots/without-wall-rssi-boxplot.png",
+                    "rssiByPositionAndArray": {
+                        "First (Leftmost)": "plots/without-wall-rssi-position-array-0.png",
+                        "Second": "plots/without-wall-rssi-position-array-1.png",
+                        "Third": "plots/without-wall-rssi-position-array-2.png",
+                        "Fourth (Rightmost)": "plots/without-wall-rssi-position-array-3.png"
                     }
                 },
                 "gpx": ""
@@ -193,7 +216,9 @@
             "gpx": "",
             "datapoints": 71136,
             "duration": 662.4356143474579,
-            "totalSize": 2152361952
+            "totalSize": 2152361952,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/2",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/2"
         },
         {
             "filename": "tfrecords/espargos-0002-nlos-meanders-2.tfrecords",
@@ -216,7 +241,9 @@
             "gpx": "",
             "datapoints": 99159,
             "duration": 982.1583786010742,
-            "totalSize": 3000253863
+            "totalSize": 3000253863,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/3",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/3"
         },
         {
             "filename": "tfrecords/espargos-0002-nlos-meanders-3.tfrecords",
@@ -239,7 +266,9 @@
             "gpx": "",
             "datapoints": 85300,
             "duration": 798.7470059394836,
-            "totalSize": 2580922100
+            "totalSize": 2580922100,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/4",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/4"
         },
         {
             "filename": "tfrecords/espargos-0002-nlos-meanders-4.tfrecords",
@@ -262,7 +291,9 @@
             "gpx": "",
             "datapoints": 111663,
             "duration": 1010.0317430496216,
-            "totalSize": 3378587391
+            "totalSize": 3378587391,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/5",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/5"
         },
         {
             "filename": "tfrecords/espargos-0002-nlos-randomwalk-1.tfrecords",
@@ -285,7 +316,9 @@
             "gpx": "",
             "datapoints": 154394,
             "duration": 1384.3107466697693,
-            "totalSize": 4671499258
+            "totalSize": 4671499258,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/6",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/6"
         },
         {
             "filename": "tfrecords/espargos-0002-nlos-randomwalk-2.tfrecords",
@@ -308,7 +341,9 @@
             "gpx": "",
             "datapoints": 215104,
             "duration": 1960.8713355064392,
-            "totalSize": 6508401728
+            "totalSize": 6508401728,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/7",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/7"
         },
         {
             "filename": "tfrecords/espargos-0002-all-spiral-1.tfrecords",
@@ -331,7 +366,9 @@
             "gpx": "",
             "datapoints": 166195,
             "duration": 1416.316296339035,
-            "totalSize": 5028562115
+            "totalSize": 5028562115,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/8",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/8"
         },
         {
             "filename": "tfrecords/espargos-0002-all-spiral-2.tfrecords",
@@ -354,7 +391,9 @@
             "gpx": "",
             "datapoints": 78836,
             "duration": 682.3358318805695,
-            "totalSize": 2385340852
+            "totalSize": 2385340852,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/9",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/9"
         },
         {
             "filename": "tfrecords/espargos-0002-all-randomwalk-1.tfrecords",
@@ -377,7 +416,9 @@
             "gpx": "",
             "datapoints": 110818,
             "duration": 964.0244269371033,
-            "totalSize": 3353020226
+            "totalSize": 3353020226,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/10",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/10"
         },
         {
             "filename": "tfrecords/espargos-0002-all-randomwalk-2.tfrecords",
@@ -400,7 +441,9 @@
             "gpx": "",
             "datapoints": 122841,
             "duration": 1071.4424250125885,
-            "totalSize": 3716800137
+            "totalSize": 3716800137,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/11",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/11"
         },
         {
             "filename": "tfrecords/espargos-0002-all-randomwalk-3.tfrecords",
@@ -423,36 +466,190 @@
             "gpx": "",
             "datapoints": 243041,
             "duration": 2181.062998533249,
-            "totalSize": 7353691537
+            "totalSize": 7353691537,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/12",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/12"
         },
         {
-            "filename": "tfrecords/espargos-0002-all-radial-meanders.tfrecords",
+            "filename": "tfrecords/espargos-0002-all-radial-meanders-1.tfrecords",
             "description": "Robot follows a trajectory of radial meanders, i.e., it is usually moving either towards or away from the metal wall in the center.",
             "configurationVariant": "with-wall",
-            "name": "espargos-0002-all-radial-meanders",
+            "name": "espargos-0002-all-radial-meanders-1",
             "plots": {
                 "csiTensors": [
-                    "plots/espargos-0002-all-radial-meanders-csi-0.png"
+                    "plots/espargos-0002-all-radial-meanders-1-csi-0.png"
                 ],
-                "rssiByPosition": "plots/espargos-0002-all-radial-meanders-rssi-position.png",
-                "rssiBoxplot": "plots/espargos-0002-all-radial-meanders-rssi-boxplot.png",
+                "rssiByPosition": "plots/espargos-0002-all-radial-meanders-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-radial-meanders-1-rssi-boxplot.png",
                 "rssiByPositionAndArray": {
-                    "First (Leftmost)": "plots/espargos-0002-all-radial-meanders-rssi-position-array-0.png",
-                    "Second": "plots/espargos-0002-all-radial-meanders-rssi-position-array-1.png",
-                    "Third": "plots/espargos-0002-all-radial-meanders-rssi-position-array-2.png",
-                    "Fourth (Rightmost)": "plots/espargos-0002-all-radial-meanders-rssi-position-array-3.png"
+                    "First (Leftmost)": "plots/espargos-0002-all-radial-meanders-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-radial-meanders-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-radial-meanders-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-radial-meanders-1-rssi-position-array-3.png"
                 }
             },
             "gpx": "",
             "datapoints": 159954,
             "duration": 1466.215571641922,
-            "totalSize": 4839728178
+            "totalSize": 4839728178,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/13",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/13"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-all-radial-meanders-2.tfrecords",
+            "description": "Robot follows a trajectory of radial meanders, i.e., it is usually moving either towards or away from the metal wall in the center.",
+            "configurationVariant": "with-wall",
+            "name": "espargos-0002-all-radial-meanders-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-all-radial-meanders-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-all-radial-meanders-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-all-radial-meanders-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-all-radial-meanders-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-all-radial-meanders-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-all-radial-meanders-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-all-radial-meanders-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 140610,
+            "duration": 1251.1351311206818,
+            "totalSize": 4254436770,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/14",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/14"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-no-wall-meanders-1.tfrecords",
+            "description": "Robot follows a trajectory of meanders (parallel to chalkboard seen in photos).",
+            "configurationVariant": "without-wall",
+            "name": "espargos-0002-no-wall-meanders-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-no-wall-meanders-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-no-wall-meanders-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-no-wall-meanders-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-no-wall-meanders-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-no-wall-meanders-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-no-wall-meanders-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-no-wall-meanders-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 252002,
+            "duration": 2150.862098455429,
+            "totalSize": 7624824514,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/15",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/15"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-no-wall-meanders-2.tfrecords",
+            "description": "Robot follows a trajectory of meanders (parallel to wall of cupboards / room door as seen in photos).",
+            "configurationVariant": "without-wall",
+            "name": "espargos-0002-no-wall-meanders-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-no-wall-meanders-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-no-wall-meanders-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-no-wall-meanders-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-no-wall-meanders-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-no-wall-meanders-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-no-wall-meanders-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-no-wall-meanders-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 319747,
+            "duration": 2726.6910259723663,
+            "totalSize": 9674584979,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/16",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/16"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-no-wall-randomwalk-1.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory in the whole measurement area.",
+            "configurationVariant": "without-wall",
+            "name": "espargos-0002-no-wall-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-no-wall-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-no-wall-randomwalk-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-no-wall-randomwalk-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-no-wall-randomwalk-1-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-no-wall-randomwalk-1-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-no-wall-randomwalk-1-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-no-wall-randomwalk-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 265634,
+            "duration": 2252.9801070690155,
+            "totalSize": 8037287938,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/17",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/17"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-no-wall-randomwalk-2.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory in the whole measurement area.",
+            "configurationVariant": "without-wall",
+            "name": "espargos-0002-no-wall-randomwalk-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-no-wall-randomwalk-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-no-wall-randomwalk-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-no-wall-randomwalk-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-no-wall-randomwalk-2-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-no-wall-randomwalk-2-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-no-wall-randomwalk-2-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-no-wall-randomwalk-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 127241,
+            "duration": 1080.6393203735352,
+            "totalSize": 3849930937,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/18",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/18"
+        },
+        {
+            "filename": "tfrecords/espargos-0002-no-wall-randomwalk-3.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory in the whole measurement area.",
+            "configurationVariant": "without-wall",
+            "name": "espargos-0002-no-wall-randomwalk-3",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0002-no-wall-randomwalk-3-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0002-no-wall-randomwalk-3-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0002-no-wall-randomwalk-3-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "First (Leftmost)": "plots/espargos-0002-no-wall-randomwalk-3-rssi-position-array-0.png",
+                    "Second": "plots/espargos-0002-no-wall-randomwalk-3-rssi-position-array-1.png",
+                    "Third": "plots/espargos-0002-no-wall-randomwalk-3-rssi-position-array-2.png",
+                    "Fourth (Rightmost)": "plots/espargos-0002-no-wall-randomwalk-3-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 136129,
+            "duration": 1133.984105348587,
+            "totalSize": 4118855153,
+            "darusViewURL": "https://doi.org/10.18419/darus-4456/19",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/:persistentId?persistentId=doi:10.18419/darus-4456/19"
         }
     ],
     "photos": [
         {
             "filename": "photosAll/array-and-metalwall.jpg",
-            "description": "Antenna array and metall wall blocking the line of sight path in parts of the measurement area."
+            "description": "Antenna array and metal wall blocking the line of sight path in parts of the measurement area."
         },
         {
             "filename": "photosAll/from-behind-array.jpg",
@@ -472,10 +669,23 @@
         },
         {
             "filename": "photosAll/robot-behind-metalwall.jpg",
-            "description": "Robot is behind the metall wall, visual LoS is blocked from antenna array's point of view."
+            "description": "Robot is behind the metal wall, visual LoS is blocked from antenna array's point of view."
+        },
+        {
+            "filename": "photosAll/robot-between-antenna-and-wall.jpg",
+            "description": "Antenna array on the left, robot in the middle and metal wall on the right, all in one picture."
+        },
+        {
+            "filename": "photosAll/no-wall-measurement-area.jpg",
+            "description": "Empty measurement area after wall is removed."
+        },
+        {
+            "filename": "photosAll/no-wall-from-antenna.jpg",
+            "description": "Measurement area after wall is removed, seen from point of view of large antenna array."
         }
     ],
     "thumbnail": "photosAll/thumbnail.jpg",
+    "doi": "doi:10.18419/darus-4456",
     "plots": {
         "csiTensors": [
             "plots/overall-csi-0.png",
@@ -489,7 +699,13 @@
             "plots/overall-csi-8.png",
             "plots/overall-csi-9.png",
             "plots/overall-csi-10.png",
-            "plots/overall-csi-11.png"
+            "plots/overall-csi-11.png",
+            "plots/overall-csi-12.png",
+            "plots/overall-csi-13.png",
+            "plots/overall-csi-14.png",
+            "plots/overall-csi-15.png",
+            "plots/overall-csi-16.png",
+            "plots/overall-csi-17.png"
         ],
         "rssiByPosition": "plots/overall-rssi-position.png",
         "rssiBoxplot": "plots/overall-rssi-boxplot.png",
@@ -501,9 +717,9 @@
         }
     },
     "gpx": "",
-    "datapoints": 1618441,
-    "duration": 14579.952374458313,
+    "datapoints": 2859804,
+    "duration": 25176.244162797928,
     "antennaCount": 32,
     "subcarriers": 117,
-    "totalSize": 48969169337
+    "totalSize": 86529089628
 }
