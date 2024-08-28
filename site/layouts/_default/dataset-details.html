@@ -631,15 +631,29 @@ dataset = raw_dataset.map(record_parse_function, num_parallel_calls = tf.data.ex
 dataset = dataset.cache()</code></pre>
 		<script>hljs.highlightAll();</script>
 
-		{{ $authorlist := slice }}
-		{{ if isset $spec "authors" }}
-			{{ range $author := $spec.authors }}
-				{{ $fullname := $author.firstname | printf "%s, %s" $author.lastname | printf "%s" }}
-				{{ $authorlist = $authorlist | append $fullname }}
+		{{ if isset $spec "array-combination" }}
+		<h2 id="combination">Python: Combining sub-arrays into large arrays</h2>
+		<p>
+			This dataset contains {{ len (index $spec "array-combination") }} <i>combined</i> antenna array{{ if gt (len (index $spec "array-combination")) 1 }}s{{ end }}.
+			A combined antenna array is a large array that is made up of multiple phase-synchronized ESPARGOS arrays mounted next to each other.
+
+			However, the <code>csi</code> records in the dataset files contains the channel coefficients in the usual format, i.e., in a multi-dimensional array of shape B &times; 2 &times; 4 &times; N<sub>sub</sub>, where B is the number of antenna arrays and N<sub>sub</sub> is the number of subcarriers.
+			You might prefer to have the CSI data of the combined antenna array in a multidimensional array of format R &times; M &times; N<sub>sub</sub>, where R is the number of rows in the combined array and M is the number of antenna columns.
+			The following Python source code takes care of reshaping CSI data into that format.
+		</p>
+		{{ range $combination := (index $spec "array-combination") }}
+			{{ if gt (len (index $spec "array-combination")) 1 }}
+				<h4>{{ $combination.name }}</h4>
 			{{ end }}
-		{{ else }}
-			{{ $authorlist = $authorlist | append "Euchner, Florian" "Gauger, Marc" }}
+			<pre class="m-0"><code class="language-python">assignments = [
+{{ range $rowidx, $row := $combination.assignments }}	[{{ range $colidx, $ant := $row }}({{ delimit $ant ", " }}){{ if not (eq $colidx (sub (len $row) 1)) }}, {{ end }}{{ end }}]{{ if not (eq $rowidx (sub (len $combination.assignments) 1)) }},{{ end }}
+{{ end }}]
+
+dataset = dataset.map(lambda csi, *args : (tf.gather_nd(csi, assignments), *args))</code></pre>
 		{{ end }}
+
+		{{ end }}
+
 
 		{{ if isset $spec "configuration" }}
 		<!-- Load only needed libraries -->
@@ -837,6 +851,15 @@ dataset = dataset.cache()</code></pre>
 		{{ end }}
 
 		<h2 id="cite">How to Cite</h2>
+		{{ $authorlist := slice }}
+		{{ if isset $spec "authors" }}
+			{{ range $author := $spec.authors }}
+				{{ $fullname := $author.firstname | printf "%s, %s" $author.lastname | printf "%s" }}
+				{{ $authorlist = $authorlist | append $fullname }}
+			{{ end }}
+		{{ else }}
+			{{ $authorlist = $authorlist | append "Euchner, Florian" "Gauger, Marc" }}
+		{{ end }}
 		<p>
 			Please refer to the <a href="/">home page</a> for information on how to cite any of our datasets in your
 			research.

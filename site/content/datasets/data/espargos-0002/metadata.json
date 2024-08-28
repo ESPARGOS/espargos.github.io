@@ -23,11 +23,202 @@
             "affiliation": "Institute of Telecommunications, University of Stuttgart"
         }
     ],
+    "array-combination": [
+        {
+            "name": "Main Combined Array",
+            "assignments": [
+                [
+                    [
+                        0,
+                        1,
+                        0
+                    ],
+                    [
+                        0,
+                        0,
+                        0
+                    ],
+                    [
+                        1,
+                        1,
+                        0
+                    ],
+                    [
+                        1,
+                        0,
+                        0
+                    ],
+                    [
+                        2,
+                        1,
+                        0
+                    ],
+                    [
+                        2,
+                        0,
+                        0
+                    ],
+                    [
+                        3,
+                        1,
+                        0
+                    ],
+                    [
+                        3,
+                        0,
+                        0
+                    ]
+                ],
+                [
+                    [
+                        0,
+                        1,
+                        1
+                    ],
+                    [
+                        0,
+                        0,
+                        1
+                    ],
+                    [
+                        1,
+                        1,
+                        1
+                    ],
+                    [
+                        1,
+                        0,
+                        1
+                    ],
+                    [
+                        2,
+                        1,
+                        1
+                    ],
+                    [
+                        2,
+                        0,
+                        1
+                    ],
+                    [
+                        3,
+                        1,
+                        1
+                    ],
+                    [
+                        3,
+                        0,
+                        1
+                    ]
+                ],
+                [
+                    [
+                        0,
+                        1,
+                        2
+                    ],
+                    [
+                        0,
+                        0,
+                        2
+                    ],
+                    [
+                        1,
+                        1,
+                        2
+                    ],
+                    [
+                        1,
+                        0,
+                        2
+                    ],
+                    [
+                        2,
+                        1,
+                        2
+                    ],
+                    [
+                        2,
+                        0,
+                        2
+                    ],
+                    [
+                        3,
+                        1,
+                        2
+                    ],
+                    [
+                        3,
+                        0,
+                        2
+                    ]
+                ],
+                [
+                    [
+                        0,
+                        1,
+                        3
+                    ],
+                    [
+                        0,
+                        0,
+                        3
+                    ],
+                    [
+                        1,
+                        1,
+                        3
+                    ],
+                    [
+                        1,
+                        0,
+                        3
+                    ],
+                    [
+                        2,
+                        1,
+                        3
+                    ],
+                    [
+                        2,
+                        0,
+                        3
+                    ],
+                    [
+                        3,
+                        1,
+                        3
+                    ],
+                    [
+                        3,
+                        0,
+                        3
+                    ]
+                ]
+            ]
+        }
+    ],
     "configuration": {
+        "pointcloud": {
+            "download": "pointcloud/espargos-0002-pointcloud.zip",
+            "descriptionFile": "pointcloud/description.txt"
+        },
         "variants": {
             "with-wall": {
                 "name": "With metal wall",
                 "description": "There is a metallic wall in the measurement area, partially blocking the LoS path.",
+                "potree": {
+                    "folder": "potree/with-wall",
+                    "position": {
+                        "x": -5,
+                        "y": 0.4,
+                        "z": -1
+                    },
+                    "pitch": -0.1,
+                    "yaw": 5.5,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
                 "plots": {
                     "csiTensors": [
                         "plots/with-wall-csi-0.png",
@@ -58,6 +249,18 @@
             "without-wall": {
                 "name": "Without metal wall",
                 "description": "The measurement area is empty, the metal wall was removed, only visual LoS paths.",
+                "potree": {
+                    "folder": "potree/no-wall",
+                    "position": {
+                        "x": -5,
+                        "y": 0.4,
+                        "z": -1
+                    },
+                    "pitch": -0.1,
+                    "yaw": 5.5,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
                 "plots": {
                     "csiTensors": [
                         "plots/without-wall-csi-0.png",

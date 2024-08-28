@@ -1,0 +1,23 @@
+The tachymeter was used to create multiple pointcloud scans.
+During the measurement campaign, i.e., while the robot was moving, the tachymeter was stationed outside of the measurement area, but was moved there for making the pointcloud scan.
+The coordinate system of the pointlcoud is the same coordinate system that was also used for the rest of the dataset (datapoint positions, antenna array positions).
+We achieve this using some reference position markers in the room.
+Due to small errors in the measurement of these reference positions, there might also be small errors in the pointcloud coordinates.
+
+The pointclouds are available for download as `.pts` files inside a `.tar.xz` archive.
+The following pointcloud scans are available:
+
+* `with-wall-wood.pts`: Pointcloud for configuration variant with metal wall. The tachymeter was stationed on the "wooden" site of the wall, i.e., between metal wall and antenna array.
+* `with-wall-metal.pts`: Pointcloud for configuration variant with metal wall. The tachymeter was stationed on the "metallic" site of the wall, i.e., between metal wall and lab room door.
+* `no-wall.pts`: Pointcloud for configuration variant without metal wall
+
+PTS files are simple text files with the following format:
+* The first line contains the number of datapoints in the scan
+* The other lines contain `(x, y, z)` coordinates, reflection intensity and `(r, g, b)` color, e.g.:
+```
+x      y        z       i    r   g   b
+6.9912 -19.5173 14.7111 -546 183 190 174
+6.9930 -19.5178 14.7112 -505 162 171 154
+6.9888 -19.5181 14.7098 -570 193 200 184
+6.9902 -19.5111 14.7109 -578 184 191 173
+```
