@@ -80,9 +80,8 @@ menu:
 		</div>
 
 		<h5>Command Line</h5>
-		<div class="p-2" style="background: black;">
-			<code style="color: white;"><pre>
-# Download latest firmware files from espargos.net
+		<div class="p-2">
+			<pre class="m-0"><code class="language-bash" style="background: black;"># Download latest firmware files from espargos.net
 cd /tmp
 wget https://espargos.net/firmware/espargos-sensor-firmware.bin
 wget https://espargos.net/firmware/espargos-controller-firmware.bin
@@ -95,7 +94,8 @@ ESPARGOS_HOST=192.168.1.2
 curl -# "http://$ESPARGOS_HOST/update_sensor_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
-		</div>
+	</div>
+	<script>hljs.highlightAll();</script>
 
 
 		<h2 class="mt-4">Sensor Update Behavior</h2>

@@ -64,32 +64,133 @@ layout: list
 	</div>
 
 	<div class="container col-xl-12 px-3 py-1">
+		<h3 class="fw-bold px-0 mb-3">Demo Applications</h3>
+		<div class="album py-2">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/music-spatial-spectrum.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">MUSIC Spatial Spectrum</a></b></p>
+								<p class="card-text">Use the MUSIC algorithm for angle of arrival estimation: Visualize spatial spectrum.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/music-spectrum">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/combined-array.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Combined Antenna Array</a></b></p>
+								<p class="card-text">Combine multiple 2 &times; 4 ESPARGOS antenna arrays into one large phase-synchronous array.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/combined-array">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/instantaneous-fdomain-csi.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Instantaneous Frequency-Domain CSI</a></b></p>
+								<p class="card-text">Visualize the frequency-domain channel state information captured by all antennas.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/instantaneous-csi">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/instantaneous-tdomain-csi.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Instantaneous Time-Domain CSI</a></b></p>
+								<p class="card-text">Visualize the time-domain channel state information captured by all antennas.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/instantaneous-csi">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/phases-over-space.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Phases by Antenna</a></b></p>
+								<p class="card-text">Visualize the received phase at each of the 2 &times; 4 antennas of the antenna array.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/phases-over-space">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video autoplay muted loop style="width: 100%;" onloadstart="this.playbackRate = 1;">
+										<source src="video/phases-over-time.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Received Phases over Time</a></b></p>
+								<p class="card-text">Monitor the average received phase at all antennas as it changes over time.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/phases-over-time">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="container col-xl-12 px-3 py-1">
 		<h2 class="fw-bold px-0 mb-3">Real-Time Indoor Localization Demo</h2>
 		<div class="row align-items-center justify-content-md-center py-3">
 			<div class="col col-12">
 				<p>
 					With ESPARGOS, existing WiFi devices like smartphones, robots and other machines can be localized in indoor environments without requiring any changes to those devices.
 					In line-of-sight environments, ESPARGOS can simply locate devices by triangulation. <a href="https://dichasus.inue.uni-stuttgart.de/tutorials/tutorial/dissimilarity-metric-channelcharting/">Channel Charting</a> allows the system to locate devices even if there is no line-of-sight path between ESPARGOS and the end device.
+					This application was publicly demonstrated at the Berlin 6G Conference 2024.
 				</p>
 			</div>
 			<div class="col col-12 col-lg-8 col-xl-7 mt-4">
 				<div width="100%" style="overflow: hidden; margin: 0 auto;">
-					<video autoplay muted loop style="width: 122%; margin-left: -11%;" onloadstart="this.playbackRate = 3;">
+					<video autoplay muted loop style="width: 122%; margin-left: -11%;" onloadstart="this.playbackRate = 1.5;">
 						<source src="video/realtime-localization.webm" type="video/webm">
 					</video>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container col-xl-12 px-3 py-1">
-		<h3 class="fw-bold px-0 mb-3">This website is still under construction</h3>
-		<div class="row align-items-center py-3">
-			<div class="col col-12">
-				<p>
-					More information on applications, resources, technical details coming soon.
-					If you are interested in working with ESPARGOS, please <a href="mailto:euchner@inue.uni-stuttgart.de">contact me</a>.
-				</p>
 			</div>
 		</div>
 	</div>
