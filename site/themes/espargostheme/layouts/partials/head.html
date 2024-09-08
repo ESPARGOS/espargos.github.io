@@ -15,7 +15,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon194.Permalink }}" />
 
 	{{ $sass := resources.Get "espargos.scss" }}
-	{{ $style := $sass | resources.ToCSS }}
+	{{ $style := $sass | css.Sass }}
 
 	<link rel="stylesheet" href="{{ $style.Permalink }}">
 

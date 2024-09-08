@@ -649,7 +649,7 @@ dataset = dataset.cache()</code></pre>
 {{ range $rowidx, $row := $combination.assignments }}	[{{ range $colidx, $ant := $row }}({{ delimit $ant ", " }}){{ if not (eq $colidx (sub (len $row) 1)) }}, {{ end }}{{ end }}]{{ if not (eq $rowidx (sub (len $combination.assignments) 1)) }},{{ end }}
 {{ end }}]
 
-dataset = dataset.map(lambda csi, *args : (tf.gather_nd(csi, assignments), *args))</code></pre>
+dataset = dataset.map(lambda csi, rssi, *args : (tf.gather_nd(csi, assignments), tf.gather_nd(rssi, assignments), *args))</code></pre>
 		{{ end }}
 
 		{{ end }}
