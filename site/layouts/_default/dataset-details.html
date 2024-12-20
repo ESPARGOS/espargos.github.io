@@ -893,6 +893,7 @@ dataset = dataset.map(lambda csi, rssi, *args : (tf.gather_nd(csi, assignments),
 		<ul>
 			{{ if (not (index $spec "time-synchronization")) }}<li><b>Lack of time synchronization:</b> While ESPARGOS ensures phase synchronization across antennas in the same array, due to an esp-idf software limitation at the time of creating this dataset, there is no sampling time synchronization.</li>{{ end }}
 			{{ if (not (index $spec "synchronization-across-arrays")) }}<li><b>No synchronization across arrays:</b> There is no phase or time synchronization across different antenna arrays.</li>{{ end }}
+			{{ if (and (index $spec "time-synchronization") (index $spec "synchronization-across-arrays")) }}<li><b>All ESPARGOS synchronized in phase and time:</b> All receive antennas in all ESPARGOS antenna arrays are synchronized in time and phase. The only unknown quantities are the time of transmission and the phase of transmission.</li>{{ end }}
 		</ul>
 
 		<h2 id="download">Download</h2>
