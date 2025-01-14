@@ -1,0 +1,560 @@
+{
+    "identifier": "espargos-0005",
+    "name": "Four phase- and time-synchronous ESPARGOS antenna arrays in a lab roob",
+    "shortDescription": "Four ESPARGOS arrays are placed in the corners of a lab room. Even though they are distributed in space, they are synchronized in both time and phase thanks to wired clock / phase distribution.",
+    "bandwidth": 36562500,
+    "frequency": 2462000000,
+    "outdoor": false,
+    "year": 2024,
+    "time-synchronization": true,
+    "synchronization-across-arrays": true,
+    "wifi-standard": "802.11n",
+    "authors": [
+        {
+            "firstname": "Florian",
+            "lastname": "Euchner",
+            "orcid": "0000-0002-8090-1188",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "David",
+            "lastname": "Kellner",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Phillip",
+            "lastname": "Stephan",
+            "orcid": "0009-0007-4036-668X",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Stephan",
+            "lastname": "ten Brink",
+            "orcid": "0000-0003-1502-2571",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        }
+    ],
+    "configuration": {
+        "pointcloud": {
+            "download": "pointcloud/espargos-0005-pointcloud.zip",
+            "descriptionFile": "pointcloud/description.txt"
+        },
+        "variants": {
+            "standard": {
+                "name": "Standard",
+                "description": "There is only one configuration variant called the \"Standard\" configuration.",
+                "potree": {
+                    "folder": "potree/euchnerlab",
+                    "position": {
+                        "x": -3.2,
+                        "y": 2.3,
+                        "z": -1.2
+                    },
+                    "pitch": 0,
+                    "yaw": -0.3,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
+                "plots": {
+                    "csiTensors": [
+                        "plots/standard-csi-0.png",
+                        "plots/standard-csi-1.png",
+                        "plots/standard-csi-2.png",
+                        "plots/standard-csi-3.png",
+                        "plots/standard-csi-4.png",
+                        "plots/standard-csi-5.png",
+                        "plots/standard-csi-6.png",
+                        "plots/standard-csi-7.png",
+                        "plots/standard-csi-8.png",
+                        "plots/standard-csi-9.png",
+                        "plots/standard-csi-10.png",
+                        "plots/standard-csi-11.png"
+                    ],
+                    "rssiByPosition": "plots/standard-rssi-position.png",
+                    "rssiBoxplot": "plots/standard-rssi-boxplot.png",
+                    "rssiByPositionAndArray": {
+                        "espargosnorth": "plots/standard-rssi-position-array-0.png",
+                        "espargoswest": "plots/standard-rssi-position-array-1.png",
+                        "espargossouth": "plots/standard-rssi-position-array-2.png",
+                        "espargoseast": "plots/standard-rssi-position-array-3.png"
+                    }
+                },
+                "gpx": ""
+            }
+        }
+    },
+    "antennas": [
+        {
+            "name": "espargosnorth",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -6.4943,
+                2.2004,
+                -1.2641
+            ],
+            "upvector": [
+                0.2041,
+                0.0,
+                0.9789
+            ],
+            "rightvector": [
+                -0.1483,
+                0.9886,
+                0.0267
+            ],
+            "normalvector": [
+                0.9678,
+                0.1506,
+                -0.2018
+            ]
+        },
+        {
+            "name": "espargoswest",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -3.3731,
+                -0.7048,
+                -1.2308
+            ],
+            "upvector": [
+                0.0518,
+                0.2078,
+                0.9768
+            ],
+            "rightvector": [
+                -0.9771,
+                0.2128,
+                0.0083
+            ],
+            "normalvector": [
+                0.2061,
+                0.9548,
+                -0.2141
+            ]
+        },
+        {
+            "name": "espargossouth",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                0.2717,
+                1.5834,
+                -1.2658
+            ],
+            "upvector": [
+                -0.2382,
+                0.0933,
+                0.9667
+            ],
+            "rightvector": [
+                -0.4193,
+                -0.9077,
+                -0.0153
+            ],
+            "normalvector": [
+                -0.8761,
+                0.409,
+                -0.2553
+            ]
+        },
+        {
+            "name": "espargoseast",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -2.3776,
+                6.4792,
+                -1.132
+            ],
+            "upvector": [
+                0.025,
+                -0.2056,
+                0.9783
+            ],
+            "rightvector": [
+                0.9992,
+                -0.0261,
+                -0.0302
+            ],
+            "normalvector": [
+                -0.0317,
+                -0.9783,
+                -0.2048
+            ]
+        }
+    ],
+    "format": {
+        "csi": {
+            "description": "Channel coefficients for all antennas, over all subcarriers, complex-valued",
+            "type": "tensorcomplex64",
+            "dimension": [
+                4,
+                2,
+                4,
+                117
+            ]
+        },
+        "rssi": {
+            "description": "Received signal strength indicator (in dB) for all antennas",
+            "type": "tensor",
+            "dimension": [
+                4,
+                2,
+                4
+            ]
+        },
+        "pos": {
+            "description": "Position of transmitter determined by a tachymeter pointed at a prism mounted on top of the antenna, in meters (X / Y / Z coordinates)",
+            "type": "tensor64",
+            "dimension": [
+                3
+            ]
+        },
+        "time": {
+            "description": "Timestamp of measurement, seconds since UNIX epoch",
+            "type": "tensor64",
+            "dimension": []
+        }
+    },
+    "tfrecords": [
+        {
+            "filename": "tfrecords/espargos-0005-meanders-nw-se.tfrecords",
+            "description": "Robots follows a northwest-southeast meander pattern (relative to the north / east / south / west array naming scheme)",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-meanders-nw-se",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-meanders-nw-se-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-meanders-nw-se-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-meanders-nw-se-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-meanders-nw-se-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-meanders-nw-se-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-meanders-nw-se-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-meanders-nw-se-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 186879,
+            "duration": 1913.5813946723938,
+            "totalSize": 5659069878
+        },
+        {
+            "filename": "tfrecords/espargos-0005-meanders-ne-sw-1.tfrecords",
+            "description": "Robots follows a northeast-southwest meander pattern (relative to the north / east / south / west array naming scheme), only parts of the measurement area",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-meanders-ne-sw-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-meanders-ne-sw-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-meanders-ne-sw-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-meanders-ne-sw-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-meanders-ne-sw-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-meanders-ne-sw-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-meanders-ne-sw-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-meanders-ne-sw-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 172100,
+            "duration": 1615.2247321605682,
+            "totalSize": 5211532200
+        },
+        {
+            "filename": "tfrecords/espargos-0005-meanders-ne-sw-2.tfrecords",
+            "description": "Robots follows a northeast-southwest meander pattern (relative to the north / east / south / west array naming scheme), complete measurement area",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-meanders-ne-sw-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-meanders-ne-sw-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-meanders-ne-sw-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-meanders-ne-sw-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-meanders-ne-sw-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-meanders-ne-sw-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-meanders-ne-sw-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-meanders-ne-sw-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 232965,
+            "duration": 2208.613096475601,
+            "totalSize": 7054646130
+        },
+        {
+            "filename": "tfrecords/espargos-0005-radial-1.tfrecords",
+            "description": "Robots follows a pattern of radial trajectories, from middle of measurement area to walls, first part",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-radial-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-radial-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-radial-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-radial-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-radial-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-radial-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-radial-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-radial-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 124980,
+            "duration": 1418.7660608291626,
+            "totalSize": 3784644360
+        },
+        {
+            "filename": "tfrecords/espargos-0005-radial-2.tfrecords",
+            "description": "Robots follows a pattern of radial trajectories, from middle of measurement area to walls and back, second part",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-radial-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-radial-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-radial-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-radial-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-radial-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-radial-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-radial-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-radial-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 103654,
+            "duration": 1107.1239149570465,
+            "totalSize": 3138850428
+        },
+        {
+            "filename": "tfrecords/espargos-0005-spiral.tfrecords",
+            "description": "Robots follows an anti-clockwise spiral trajectory, starting in the center and moving towards the perimeter, slow robot speed",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-spiral",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-spiral-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-spiral-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-spiral-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-spiral-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-spiral-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-spiral-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-spiral-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 340681,
+            "duration": 3527.7567131519318,
+            "totalSize": 10316502042
+        },
+        {
+            "filename": "tfrecords/espargos-0005-randomwalk-1.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory inside the measurement area, with robot speed a bit higher than otherwise",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-randomwalk-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-randomwalk-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-randomwalk-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-randomwalk-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-randomwalk-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-randomwalk-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 247190,
+            "duration": 2372.319409608841,
+            "totalSize": 7485407580
+        },
+        {
+            "filename": "tfrecords/espargos-0005-randomwalk-2.tfrecords",
+            "description": "Robot follows a short pseudorandom trajectory inside the measurement area, robot speed back to normal (slow)",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-randomwalk-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-randomwalk-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-randomwalk-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-randomwalk-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-randomwalk-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-randomwalk-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-randomwalk-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-randomwalk-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 85168,
+            "duration": 968.1131610870361,
+            "totalSize": 2579057376
+        },
+        {
+            "filename": "tfrecords/espargos-0005-randomwalk-3.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory inside the measurement area, robot speed back to normal (slow)",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-randomwalk-3",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-randomwalk-3-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-randomwalk-3-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-randomwalk-3-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-randomwalk-3-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-randomwalk-3-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-randomwalk-3-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-randomwalk-3-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 238996,
+            "duration": 2432.112577199936,
+            "totalSize": 7237276872
+        },
+        {
+            "filename": "tfrecords/espargos-0005-randomwalk-4.tfrecords",
+            "description": "Robot follows a pseudorandom trajectory inside the measurement area, robot speed back to normal (slow)",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-randomwalk-4",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-randomwalk-4-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-randomwalk-4-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-randomwalk-4-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-randomwalk-4-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-randomwalk-4-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-randomwalk-4-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-randomwalk-4-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 233308,
+            "duration": 2260.1461844444275,
+            "totalSize": 7065032856
+        },
+        {
+            "filename": "tfrecords/espargos-0005-heartshape-1.tfrecords",
+            "description": "Robot follows a heart-shaped trajectory inside the measurement area, robot speed is very slow",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-heartshape-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-heartshape-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-heartshape-1-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-heartshape-1-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-heartshape-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-heartshape-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-heartshape-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-heartshape-1-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 27228,
+            "duration": 264.58200764656067,
+            "totalSize": 824518296
+        },
+        {
+            "filename": "tfrecords/espargos-0005-heartshape-2.tfrecords",
+            "description": "Robot follows another heart-shaped trajectory inside the measurement area (rotated by 90 degrees), robot speed is very slow",
+            "configurationVariant": "standard",
+            "name": "espargos-0005-heartshape-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0005-heartshape-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0005-heartshape-2-rssi-position.png",
+                "rssiBoxplot": "plots/espargos-0005-heartshape-2-rssi-boxplot.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0005-heartshape-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0005-heartshape-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0005-heartshape-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0005-heartshape-2-rssi-position-array-3.png"
+                }
+            },
+            "gpx": "",
+            "datapoints": 29965,
+            "duration": 291.9794690608978,
+            "totalSize": 907400130
+        }
+    ],
+    "photos": [
+        {
+            "filename": "photosAll/measurement-area-1.jpg",
+            "description": "The measurement area with all four ESPARGOS arrays visible in the corner and the transmitter robot moving around."
+        },
+        {
+            "filename": "photosAll/measurement-area-1-names.jpg",
+            "description": "Explanation of the north / west / south / east naming scheme. These names do not correspond to the true cardinal directions."
+        },
+        {
+            "filename": "photosAll/measurement-area-2.jpg",
+            "description": "The measurement setup with the tachymeter and the computer running the software that controls the robot and captures the dataset."
+        },
+        {
+            "filename": "photosAll/robot-1.jpg",
+            "description": "Robot with antenna and prism for tracking, and two ESPARGOS arrays in the background."
+        },
+        {
+            "filename": "photosAll/robot-2.jpg",
+            "description": "Robot with antenna and prism for tracking, ESPARGOS array and door in the background."
+        },
+        {
+            "filename": "photosAll/tachymeter.jpg",
+            "description": "Tachymeter that precisely tracks the prism on top of the robot."
+        },
+        {
+            "filename": "photosAll/espargos-array.jpg",
+            "description": "One of the ESPARGOS antenna arrays (the one called ``west'')."
+        }
+    ],
+    "thumbnail": "photosAll/thumbnail.jpg",
+    "plots": {
+        "csiTensors": [
+            "plots/overall-csi-0.png",
+            "plots/overall-csi-1.png",
+            "plots/overall-csi-2.png",
+            "plots/overall-csi-3.png",
+            "plots/overall-csi-4.png",
+            "plots/overall-csi-5.png",
+            "plots/overall-csi-6.png",
+            "plots/overall-csi-7.png",
+            "plots/overall-csi-8.png",
+            "plots/overall-csi-9.png",
+            "plots/overall-csi-10.png",
+            "plots/overall-csi-11.png"
+        ],
+        "rssiByPosition": "plots/overall-rssi-position.png",
+        "rssiBoxplot": "plots/overall-rssi-boxplot.png",
+        "rssiByPositionAndArray": {
+            "espargosnorth": "plots/overall-rssi-position-array-0.png",
+            "espargoswest": "plots/overall-rssi-position-array-1.png",
+            "espargossouth": "plots/overall-rssi-position-array-2.png",
+            "espargoseast": "plots/overall-rssi-position-array-3.png"
+        }
+    },
+    "gpx": "",
+    "datapoints": 2023114,
+    "duration": 20380.318721294403,
+    "antennaCount": 32,
+    "subcarriers": 117,
+    "totalSize": 61263938148
+}
