@@ -9,6 +9,9 @@
     "time-synchronization": false,
     "synchronization-across-arrays": true,
     "wifi-standard": "802.11n",
+    "warnings": [
+        "The ground truth positions in this dataset were found to be inaccurate due to a software bug. They should be accurate to a few millimiters, but in this dataset, they are off by several tens of centimeters (time synchronization between reference positioning system and ESPARGOS was broken)."
+    ],
     "authors": [
         {
             "firstname": "Florian",
@@ -200,7 +203,7 @@
     ],
     "configuration": {
         "pointcloud": {
-            "download": "pointcloud/espargos-0002-pointcloud.zip",
+            "download": "pointcloud/espargos-0002-pointcloud.tar.xz",
             "descriptionFile": "pointcloud/description.txt"
         },
         "variants": {
