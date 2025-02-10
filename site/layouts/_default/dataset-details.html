@@ -614,14 +614,14 @@ import tensorflow as tf
 raw_dataset = tf.data.TFRecordDataset(["{{delimit $tffilenames "\", \""}}"])
 
 feature_description = {
-{{ range $name, $desc := $spec.format }}	"{{ $name }}": tf.io.FixedLenFeature([], {{ if eq $desc.type "tensor" }}tf.string, default_value = ''{{ else if eq $desc.type "tensorcomplex64" }}tf.string, default_value = ''{{ else if eq $desc.type "tensor64" }}tf.string, default_value = ''{{ else if eq $desc.type "float32" }}tf.float32, default_value = 0{{end}}),
+{{ range $name, $desc := $spec.format }}	"{{ $name }}": tf.io.FixedLenFeature([], {{ if eq $desc.type "tensor" }}tf.string, default_value = ''{{ else if eq $desc.type "tensorcomplex64" }}tf.string, default_value = ''{{ else if eq $desc.type "tensor64" }}tf.string, default_value = ''{{ else if eq $desc.type "string" }}tf.string, default_value = ''{{ else if eq $desc.type "float32" }}tf.float32, default_value = 0{{end}}),
 {{ end }}}
 			
 def record_parse_function(proto):
 	record = tf.io.parse_single_example(proto, feature_description)
 {{ range $name, $desc := $spec.format }}
 	# {{ $desc.description }}
-	{{ strings.Replace $name "-" "_" }} = {{ if eq $desc.type "tensor" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float32), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensorcomplex64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.complex64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensor64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "float32" }}tf.ensure_shape(record["{{ $name }}"], ()){{ end }}
+	{{ strings.Replace $name "-" "_" }} = {{ if eq $desc.type "tensor" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float32), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensorcomplex64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.complex64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "tensor64" }}tf.ensure_shape(tf.io.parse_tensor(record["{{ $name }}"], out_type = tf.float64), ({{ delimit $desc.dimension ", " }})){{ else if eq $desc.type "float32" }}tf.ensure_shape(record["{{ $name }}"], ()){{ else if eq $desc.type "string" }}record["{{ $name }}"].numpy(){{ end }}
 {{ end }}
 	return {{ delimit $formatkeys ", " }}
 			

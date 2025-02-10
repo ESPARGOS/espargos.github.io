@@ -1,6 +1,6 @@
 {
     "identifier": "espargos-0005",
-    "name": "Four phase- and time-synchronous ESPARGOS antenna arrays in a lab roob",
+    "name": "Four phase- and time-synchronous ESPARGOS antenna arrays in a lab room",
     "shortDescription": "Four ESPARGOS arrays are placed in the corners of a lab room. Even though they are distributed in space, they are synchronized in both time and phase thanks to wired clock / phase distribution.",
     "bandwidth": 36562500,
     "frequency": 2462000000,
@@ -19,6 +19,7 @@
         {
             "firstname": "David",
             "lastname": "Kellner",
+            "orcid": "0009-0009-5054-582X",
             "affiliation": "Institute of Telecommunications, University of Stuttgart"
         },
         {
@@ -216,6 +217,11 @@
             "description": "Timestamp of measurement, seconds since UNIX epoch",
             "type": "tensor64",
             "dimension": []
+        },
+        "mac": {
+            "description": "MAC address of transmitter",
+            "type": "string",
+            "dimension": []
         }
     },
     "tfrecords": [
@@ -240,7 +246,9 @@
             "gpx": "",
             "datapoints": 186879,
             "duration": 1913.5813946723938,
-            "totalSize": 5659069878
+            "totalSize": 5659069878,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361210",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361210"
         },
         {
             "filename": "tfrecords/espargos-0005-meanders-ne-sw-1.tfrecords",
@@ -263,7 +271,9 @@
             "gpx": "",
             "datapoints": 172100,
             "duration": 1615.2247321605682,
-            "totalSize": 5211532200
+            "totalSize": 5211532200,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361211",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361211"
         },
         {
             "filename": "tfrecords/espargos-0005-meanders-ne-sw-2.tfrecords",
@@ -286,7 +296,9 @@
             "gpx": "",
             "datapoints": 232965,
             "duration": 2208.613096475601,
-            "totalSize": 7054646130
+            "totalSize": 7054646130,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361212",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361212"
         },
         {
             "filename": "tfrecords/espargos-0005-radial-1.tfrecords",
@@ -309,7 +321,9 @@
             "gpx": "",
             "datapoints": 124980,
             "duration": 1418.7660608291626,
-            "totalSize": 3784644360
+            "totalSize": 3784644360,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361213",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361213"
         },
         {
             "filename": "tfrecords/espargos-0005-radial-2.tfrecords",
@@ -332,7 +346,9 @@
             "gpx": "",
             "datapoints": 103654,
             "duration": 1107.1239149570465,
-            "totalSize": 3138850428
+            "totalSize": 3138850428,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361214",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361214"
         },
         {
             "filename": "tfrecords/espargos-0005-spiral.tfrecords",
@@ -355,7 +371,9 @@
             "gpx": "",
             "datapoints": 340681,
             "duration": 3527.7567131519318,
-            "totalSize": 10316502042
+            "totalSize": 10316502042,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361215",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361215"
         },
         {
             "filename": "tfrecords/espargos-0005-randomwalk-1.tfrecords",
@@ -378,7 +396,9 @@
             "gpx": "",
             "datapoints": 247190,
             "duration": 2372.319409608841,
-            "totalSize": 7485407580
+            "totalSize": 7485407580,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361216",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361216"
         },
         {
             "filename": "tfrecords/espargos-0005-randomwalk-2.tfrecords",
@@ -401,7 +421,9 @@
             "gpx": "",
             "datapoints": 85168,
             "duration": 968.1131610870361,
-            "totalSize": 2579057376
+            "totalSize": 2579057376,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361217",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361217"
         },
         {
             "filename": "tfrecords/espargos-0005-randomwalk-3.tfrecords",
@@ -424,7 +446,9 @@
             "gpx": "",
             "datapoints": 238996,
             "duration": 2432.112577199936,
-            "totalSize": 7237276872
+            "totalSize": 7237276872,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361218",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361218"
         },
         {
             "filename": "tfrecords/espargos-0005-randomwalk-4.tfrecords",
@@ -447,7 +471,9 @@
             "gpx": "",
             "datapoints": 233308,
             "duration": 2260.1461844444275,
-            "totalSize": 7065032856
+            "totalSize": 7065032856,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361219",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361219"
         },
         {
             "filename": "tfrecords/espargos-0005-heartshape-1.tfrecords",
@@ -470,7 +496,9 @@
             "gpx": "",
             "datapoints": 27228,
             "duration": 264.58200764656067,
-            "totalSize": 824518296
+            "totalSize": 824518296,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361220",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361220"
         },
         {
             "filename": "tfrecords/espargos-0005-heartshape-2.tfrecords",
@@ -493,7 +521,9 @@
             "gpx": "",
             "datapoints": 29965,
             "duration": 291.9794690608978,
-            "totalSize": 907400130
+            "totalSize": 907400130,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=361221",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/361221"
         }
     ],
     "photos": [
@@ -527,6 +557,7 @@
         }
     ],
     "thumbnail": "photosAll/thumbnail.jpg",
+    "doi": "doi:10.18419/DARUS-4754",
     "plots": {
         "csiTensors": [
             "plots/overall-csi-0.png",
