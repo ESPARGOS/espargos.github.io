@@ -8,16 +8,17 @@ layout: list
 <div class="container col-xxl-8 px-4 py-1">
 	<div class="row flex-lg-row-reverse align-items-center g-5 py-3">
 		<div class="col-10 col-sm-10 col-md-10 col-lg-6">
-			<img src="/img/pcb-render.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" width="500"
-				height="500" loading="lazy">
+			<img src="/img/pcb-render.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" width="550"
+				height="550" loading="lazy">
 		</div>
 		<div class="col-lg-6">
 			<h1 class="display-5 fw-bold lh-1 mb-3">ESPARGOS: ESP32-based WiFi sensing array</h1>
 			<p class="lead">
-				Develop and deploy WiFi sensing applications effortlessly: ESPARGOS combines phase-synchronized ESP32 chips into a 2 &times; 4 antenna array.
+				Develop and deploy WiFi sensing applications effortlessly: ESPARGOS is a phase-coherent ESP32 antenna array.
 			</p>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-				<a href="/setup/" type="button" class="btn btn-dark btn-lg px-4 me-md-2">Get Started</a>
+				<a class="btn btn-dark btn-lg rm-open-popup">Sign up for Updates</a>
+				<a href="/setup/" type="button" class="btn text-white btn-outline-secondary btn-lg px-4 me-md-2">Get Started</a>
 				<a href="/docs/" type="button" class="btn text-white btn-outline-secondary btn-lg px-4">Documentation</a>
 			</div>
 		</div>
@@ -26,7 +27,7 @@ layout: list
 
 <main class="flex-shrink-0">
 	<div class="container">
-		<div class="row g-4 py-5 row-cols-1 row-cols-md-3">
+		<div class="row g-4 py-3 row-cols-1 row-cols-md-3">
 			<div class="feature col">
 				<div class="feature-icon mb-3">
 					<img style="height: 100px; max-width: 100%;" src="/img/csi.svg">
@@ -229,5 +230,20 @@ layout: list
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="container col-xl-12 px-3 py-1">
+		<h2 id="obtain" class="fw-bold px-0 mb-3">How to obtain ESPARGOS?</h2>
+		<p>
+			At the <a href="https://www.inue.uni-stuttgart.de/">Institute of Telecommunications at the University of Stuttgart</a>, we have manufactured a small batch of ESPARGOS devices and have already provided some boards to partners for evaluation, primarily research project members and other research institutions.
+			We still have a very small (single-digit) number of boards available that we can provide to interested parties, but we kindly ask for your understanding that we must prioritize requests.
+			Please <a href="mailto:euchner@inue.uni-stuttgart.de">contact me</a> if you would like to receive an ESPARGOS board, or in case you have any questions or ideas to share about use cases, research ideas, open sourcing, manufacturing, or other topics.
+		</p>
+		<p>
+			We are still evaluating how to proceed, if we can (and should) make ESPARGOS available to a wider audience.
+			The hardware design and firmware files of ESPARGOS are currently not open source, but the <a href="https://github.com/ESPARGOS/pyespargos"><code>pyespargos</code></a> library including the demo applications are free software.
+			If you would like to receive updates about future developments regarding ESPARGOS, you can sign up to receive updates.
+		</p>
+		<a class="btn btn-dark btn-lg rm-open-popup">Sign up for Updates</a>
 	</div>
 </main>
