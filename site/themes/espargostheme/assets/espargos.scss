@@ -62,3 +62,7 @@ pre {
 .screenshot {
 	border: 2px solid white;
 }
+
+main {
+	min-height: calc(100vh - 104px - 96px);
+}
