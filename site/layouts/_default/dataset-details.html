@@ -251,7 +251,7 @@
 									</div>
 									<div class="text-end">
 										<h3>{{ if (index $spec "synchronization-across-arrays") }} Global {{ else }} Array-Wise {{ end }}</h3>
-										<p class="mb-0">Synchronization</p>
+										<p class="mb-0">Phase Synchronization</p>
 									</div>
 								</div>
 							</div>
@@ -419,6 +419,26 @@
 						</div>
 					</div>
 					{{ end }}
+
+					{{ if isset $spec "targetType" }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between px-md-1">
+									<div class="align-self-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-radar" viewBox="0 0 16 16">
+											<path d="M6.634 1.135A7 7 0 0 1 15 8a.5.5 0 0 1-1 0 6 6 0 1 0-6.5 5.98v-1.005A5 5 0 1 1 13 8a.5.5 0 0 1-1 0 4 4 0 1 0-4.5 3.969v-1.011A2.999 2.999 0 1 1 11 8a.5.5 0 0 1-1 0 2 2 0 1 0-2.5 1.936v-1.07a1 1 0 1 1 1 0V15.5a.5.5 0 0 1-1 0v-.518a7 7 0 0 1-.866-13.847"/>
+										</svg>
+									</div>
+									<div class="text-end">
+										<h3>{{ index $spec "targetType" | title }}</h3>
+										<p class="mb-0">Target Type</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{ end }}
 				</div>
 			</section>
 		</div>
@@ -468,8 +488,10 @@
 								{{ $plotsList := slice }}
 								{{ if isset $spec "configuration" }}
 									{{ range $variant := $spec.configuration.variants }}
-										{{ $plotsDict := dict "plots" $variant.plots "variant" $variant.name }}
-										{{ $plotsList = $plotsList | append $plotsDict }}
+										{{ if isset $variant "plots" }}
+											{{ $plotsDict := dict "plots" $variant.plots "variant" $variant.name }}
+											{{ $plotsList = $plotsList | append $plotsDict }}
+										{{ end }}
 									{{ end }}
 								{{ else }}
 									{{ $plotsDict := dict "plots" $spec.plots }}
@@ -477,12 +499,14 @@
 								{{ end }}
 
 								{{ range $index, $plotsDict := $plotsList }}
-									<div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
-										<img src="{{ $plotsDict.plots.rssiByPosition }}" class="d-block w-100" alt="">
-										<div class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
-											Mean received signal-to-noise ratio by position{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+									{{ if isset $plotsDict.plots "rssiByPosition" }}
+										<div class="carousel-item {{ if (eq $index 0) }}active{{ end }}">
+											<img src="{{ $plotsDict.plots.rssiByPosition }}" class="d-block w-100" alt="">
+											<div class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+												Mean received signal-to-noise ratio by position{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+											</div>
 										</div>
-									</div>
+									{{ end }}
 
 									{{ if isset $plotsDict.plots "rssiByPositionAndArray" }}
 										{{ range $name, $filename := $plotsDict.plots.rssiByPositionAndArray }}
@@ -496,13 +520,15 @@
 										{{ end }}
 									{{ end }}
 
-									<div class="carousel-item">
-										<img src="{{ $plotsDict.plots.rssiBoxplot }}" class="d-block w-100" alt="">
-										<div
-											class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
-											RSSI by receive antenna index{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+									{{ if isset $plotsDict.plots "rssiBoxplot" }}
+										<div class="carousel-item">
+											<img src="{{ $plotsDict.plots.rssiBoxplot }}" class="d-block w-100" alt="">
+											<div
+												class="carousel-caption d-none d-md-block bg-secondary text-white p-3 bg-opacity-50">
+												RSSI by receive antenna index{{ if isset $plotsDict "variant" }} for configuration variant "{{ $plotsDict.variant }}" {{ end }}
+											</div>
 										</div>
-									</div>
+									{{ end }}
 
 									{{/*{{ range $index, $filename := $plotsDict.plots.csiTensors }}
 									<div class="carousel-item">
@@ -560,7 +586,7 @@
 		</script>
 		{{ end }}
 
-		<h2 id="antenna">Antenna Configuration</h2>
+		<h2 id="antenna">Receiver Array Setup</h2>
 		<div class="container-fluid">
 			<section>
 				<div class="row">
@@ -601,6 +627,27 @@
 				</div>
 			</section>
 		</div>
+
+		{{ if isset $spec "transmitters" }}
+		<h2 id="antenna">Transmitters</h2>
+		<div class="container-fluid">
+			<section>
+				<div class="row">
+					{{ range $index, $tx := $spec.transmitters }}
+					<div class="col-xl-3 col-sm-6 col-12 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-title"><b>{{ $tx.name }}</b>: {{ $tx.description }}</div>
+								The transmit antenna is located at {{ $tx.location }} and the transmitter uses MAC address <code>{{ $tx.mac }}</code>.
+							</div>
+						</div>
+					</div>
+					{{ end }}
+				</div>
+			</section>
+		</div>
+		{{ end }}
+
 
 		<h2 id="import">Python: Import with TensorFlow</h2>
 		{{ $formatkeys := slice }}
@@ -883,9 +930,9 @@ dataset = dataset.map(lambda csi, rssi, *args : (tf.gather_nd(csi, assignments),
 			WiFi has a concept of "guard" subcarriers, which act as guard bands that protect against interference with systems on neighboring WiFi channels.
 			This means that not all subcarriers get driven (i.e., not all subcarriers contain useful QAM symbols), some subcarriers simply carry zeroes.
 			If these subcarriers are at the edge of the considered spectrum, CSI from these guard subcarriers is simply not included in the dataset.
-			This explains the odd (non-power of two) number of subcarriers and the strange OFDM signal bandwidth.
-			Otherwise, if the guard subcarriers are not at the edges of the spectrum, linear interpolation is used to assign realistic values to these guard subcarriers.
-			This case occurs when using channel bandwidths greater than 40MHz.
+			This explains the odd (non-power of two) number of subcarriers.
+			Therefore, even if we colloquially refer to WiFi bandwidths as "20MHz" or "40MHz", the bandwidth that is really occupied by the active OFDM subcarriers is lower.
+			For "missing" subcarriers in the center of the bandwidth (DC subcarrier in the case of 20MHz bandwidth, guard subcarriers in the case of 40MHz bandwidth), linear interpolation is used to assign realistic values to them.
 		</p>
 
 		<h2 id="interpolation">A Note on Synchronization</h2>
@@ -1027,6 +1074,8 @@ dataset = dataset.map(lambda csi, rssi, *args : (tf.gather_nd(csi, assignments),
 												{{ range $name, $filename := $tfrecord.plots.rssiByPositionAndArray }}
 													<img src="{{ $filename }}" class="d-block w-100" alt="">
 												{{ end }}
+											{{ else if isset $tfrecord "noPosition" }}
+												<p class="text-center">No position information contained in this file.</p>
 											{{ end }}
 										</div>
 									</div>

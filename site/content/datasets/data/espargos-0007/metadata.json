@@ -1,0 +1,746 @@
+{
+    "identifier": "espargos-0007",
+    "name": "Passive target with four synchronized ESPARGOS antenna arrays in a lab room",
+    "shortDescription": "A passive target is moving in a lab room, with four time- and phase-synchronous ESPARGOS arrays in the corner of the room and four transmitters on the ceiling. Great for bistatic / passive Radar experiments.",
+    "bandwidth": 16562500,
+    "frequency": 2472000000,
+    "outdoor": false,
+    "year": 2024,
+    "time-synchronization": true,
+    "synchronization-across-arrays": true,
+    "wifi-standard": "802.11n",
+    "targetType": "passive",
+    "authors": [
+        {
+            "firstname": "Florian",
+            "lastname": "Euchner",
+            "orcid": "0000-0002-8090-1188",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "David",
+            "lastname": "Kellner",
+            "orcid": "0009-0009-5054-582X",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Phillip",
+            "lastname": "Stephan",
+            "orcid": "0009-0007-4036-668X",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        },
+        {
+            "firstname": "Stephan",
+            "lastname": "ten Brink",
+            "orcid": "0000-0003-1502-2571",
+            "affiliation": "Institute of Telecommunications, University of Stuttgart"
+        }
+    ],
+    "configuration": {
+        "pointcloud": {
+            "download": "pointcloud/espargos-0007-pointcloud.zip",
+            "descriptionFile": "pointcloud/description.txt"
+        },
+        "variants": {
+            "robot": {
+                "name": "Robot as Target",
+                "description": "The passive target is a large trashcan (height around 0.68m, diameter around 0.43m) wrapped in aluminium foil on top of a robot. The recorded position is the position of the retroreflector on the pole (compare to photos).",
+                "potree": {
+                    "folder": "potree/euchnerlab",
+                    "position": {
+                        "x": 0.5,
+                        "y": 3.2,
+                        "z": -1
+                    },
+                    "pitch": 0,
+                    "yaw": 0.5,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
+                "plots": {
+                    "csiTensors": [
+                        "plots/robot-csi-0.png",
+                        "plots/robot-csi-1.png",
+                        "plots/robot-csi-2.png",
+                        "plots/robot-csi-3.png",
+                        "plots/robot-csi-4.png",
+                        "plots/robot-csi-5.png",
+                        "plots/robot-csi-6.png",
+                        "plots/robot-csi-7.png",
+                        "plots/robot-csi-8.png"
+                    ],
+                    "rssiByPosition": "plots/robot-rssi-position.png",
+                    "rssiByPositionAndArray": {
+                        "espargosnorth": "plots/robot-rssi-position-array-0.png",
+                        "espargoswest": "plots/robot-rssi-position-array-1.png",
+                        "espargossouth": "plots/robot-rssi-position-array-2.png",
+                        "espargoseast": "plots/robot-rssi-position-array-3.png"
+                    },
+                    "rssiBoxplot": "plots/robot-rssi-boxplot.png"
+                },
+                "gpx": ""
+            },
+            "person": {
+                "name": "Person as Target",
+                "description": "The passive target is a walking person. The recorded position is the position of the retroreflector mounted to a helmet the person is wearing.",
+                "potree": {
+                    "folder": "potree/euchnerlab",
+                    "position": {
+                        "x": 0.5,
+                        "y": 3.2,
+                        "z": -1
+                    },
+                    "pitch": 0,
+                    "yaw": 0.5,
+                    "fov": 70,
+                    "moveSpeed": 1
+                },
+                "plots": {
+                    "csiTensors": [
+                        "plots/person-csi-0.png",
+                        "plots/person-csi-1.png",
+                        "plots/person-csi-2.png",
+                        "plots/person-csi-3.png",
+                        "plots/person-csi-4.png",
+                        "plots/person-csi-5.png"
+                    ],
+                    "rssiByPosition": "plots/person-rssi-position.png",
+                    "rssiByPositionAndArray": {
+                        "espargosnorth": "plots/person-rssi-position-array-0.png",
+                        "espargoswest": "plots/person-rssi-position-array-1.png",
+                        "espargossouth": "plots/person-rssi-position-array-2.png",
+                        "espargoseast": "plots/person-rssi-position-array-3.png"
+                    },
+                    "rssiBoxplot": "plots/person-rssi-boxplot.png"
+                },
+                "gpx": ""
+            },
+            "empty": {
+                "name": "Empty Room",
+                "description": "The room is empty, no passive target and no human inside the room.",
+                "potree": {
+                    "folder": "potree/euchnerlab",
+                    "position": {
+                        "x": 0.5,
+                        "y": 3.2,
+                        "z": -1
+                    },
+                    "pitch": 0,
+                    "yaw": 0.5,
+                    "fov": 70,
+                    "moveSpeed": 1
+                }
+            }
+        }
+    },
+    "antennas": [
+        {
+            "name": "espargosnorth",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -0.009,
+                6.7896,
+                -1.0058
+            ],
+            "upvector": [
+                0.0571,
+                -0.3641,
+                0.9296
+            ],
+            "rightvector": [
+                0.9892,
+                0.1464,
+                -0.0039
+            ],
+            "normalvector": [
+                0.1346,
+                -0.9198,
+                -0.3686
+            ]
+        },
+        {
+            "name": "espargoswest",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -2.5101,
+                3.6108,
+                -1.0331
+            ],
+            "upvector": [
+                0.2173,
+                0.0018,
+                0.9761
+            ],
+            "rightvector": [
+                -0.0472,
+                0.9989,
+                0.0075
+            ],
+            "normalvector": [
+                0.975,
+                0.0477,
+                -0.2172
+            ]
+        },
+        {
+            "name": "espargossouth",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                -0.9266,
+                0.4876,
+                -1.0233
+            ],
+            "upvector": [
+                0.0968,
+                0.3639,
+                0.9264
+            ],
+            "rightvector": [
+                -0.9509,
+                0.3086,
+                -0.0219
+            ],
+            "normalvector": [
+                0.2939,
+                0.8788,
+                -0.3759
+            ]
+        },
+        {
+            "name": "espargoseast",
+            "spacingX": 0.06,
+            "spacingY": 0.06,
+            "location": [
+                4.4188,
+                2.8471,
+                -1.0134
+            ],
+            "upvector": [
+                -0.1797,
+                0.0213,
+                0.9835
+            ],
+            "rightvector": [
+                -0.1077,
+                -0.9942,
+                0.0008
+            ],
+            "normalvector": [
+                -0.9778,
+                0.1058,
+                -0.181
+            ]
+        }
+    ],
+    "transmitters": [
+        {
+            "name": "TX 1",
+            "description": "First transmitter (LILYGO T-Dongle-S3), mounted to the ceiling.",
+            "mac": "0a:ee:f5:00:00:01",
+            "location": [
+                0.2708,
+                6.4101,
+                0.5188
+            ]
+        },
+        {
+            "name": "TX 2",
+            "description": "Second transmitter (LILYGO T-Dongle-S3), mounted to the ceiling.",
+            "mac": "0a:ee:f5:00:00:02",
+            "location": [
+                3.9133,
+                4.1573,
+                0.5219
+            ]
+        },
+        {
+            "name": "TX 3",
+            "description": "Third transmitter (LILYGO T-Dongle-S3), mounted to the ceiling.",
+            "mac": "0a:ee:f5:00:00:03",
+            "location": [
+                1.8529,
+                2.2096,
+                0.5162
+            ]
+        },
+        {
+            "name": "TX 4",
+            "description": "Fourth transmitter (LILYGO T-Dongle-S3), mounted to the ceiling.",
+            "mac": "0a:ee:f5:00:00:04",
+            "location": [
+                -1.0005,
+                1.0467,
+                0.5219
+            ]
+        }
+    ],
+    "format": {
+        "csi": {
+            "description": "Channel coefficients for all antennas, over all subcarriers, complex-valued",
+            "type": "tensorcomplex64",
+            "dimension": [
+                4,
+                2,
+                4,
+                53
+            ]
+        },
+        "rssi": {
+            "description": "Received signal strength indicator (in dB) for all antennas",
+            "type": "tensor",
+            "dimension": [
+                4,
+                2,
+                4
+            ]
+        },
+        "pos": {
+            "description": "Position of transmitter determined by a tachymeter pointed at a prism mounted on top of the antenna, in meters (X / Y / Z coordinates)",
+            "type": "tensor64",
+            "dimension": [
+                3
+            ]
+        },
+        "time": {
+            "description": "Timestamp of measurement, seconds since UNIX epoch",
+            "type": "tensor64",
+            "dimension": []
+        },
+        "mac": {
+            "description": "MAC address of transmitter",
+            "type": "string",
+            "dimension": []
+        }
+    },
+    "tfrecords": [
+        {
+            "filename": "tfrecords/espargos-0007-empty-room.tfrecords",
+            "description": "The transmitters are sending packets, the ESPARGOS arrays are recording CSI, but there is no movement inside the room (except for the first few and last few seconds, while the measurement is started / stopped). The measurement area is empty, no humans inside the room, no passive target. Please note that this file does NOT contain position data, so you will need to adapt the source code for importing this file.",
+            "configurationVariant": "empty",
+            "noPosition": true,
+            "name": "espargos-0007-empty-room",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-empty-room-csi-0.png"
+                ],
+                "rssiBoxplot": "plots/espargos-0007-empty-room-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 194287,
+            "duration": 3135.759795665741,
+            "totalSize": 2689903515
+        },
+        {
+            "filename": "tfrecords/espargos-0007-spiral-ccw-1-part1.tfrecords",
+            "description": "The robot with the passive target follows a trajectory that is the shape of a counterclockwise spiral, first part.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-spiral-ccw-1-part1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-spiral-ccw-1-part1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-spiral-ccw-1-part1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-spiral-ccw-1-part1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-spiral-ccw-1-part1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-spiral-ccw-1-part1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-spiral-ccw-1-part1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-spiral-ccw-1-part1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 62695,
+            "duration": 1036.1036252975464,
+            "totalSize": 870958940
+        },
+        {
+            "filename": "tfrecords/espargos-0007-spiral-ccw-1-part2.tfrecords",
+            "description": "The robot with the passive target follows a trajectory that is the shape of a counterclockwise spiral, second part.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-spiral-ccw-1-part2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-spiral-ccw-1-part2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-spiral-ccw-1-part2-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-spiral-ccw-1-part2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-spiral-ccw-1-part2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-spiral-ccw-1-part2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-spiral-ccw-1-part2-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-spiral-ccw-1-part2-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 92903,
+            "duration": 1522.4377636909485,
+            "totalSize": 1290608476
+        },
+        {
+            "filename": "tfrecords/espargos-0007-randomwalk-1.tfrecords",
+            "description": "The robot with the passive target follows a pseudorandom trajectory inside the measurement area.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-randomwalk-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-randomwalk-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-randomwalk-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-randomwalk-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-randomwalk-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-randomwalk-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 103527,
+            "duration": 1696.9590265750885,
+            "totalSize": 1438197084
+        },
+        {
+            "filename": "tfrecords/espargos-0007-meanders-nw-se-1.tfrecords",
+            "description": "The robot with the passive target follows a northwest-southeast meander pattern (relative to the north / east / south / west array naming scheme).",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-meanders-nw-se-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-meanders-nw-se-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-meanders-nw-se-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-meanders-nw-se-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-meanders-nw-se-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-meanders-nw-se-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-meanders-nw-se-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-meanders-nw-se-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 174658,
+            "duration": 2886.72856426239,
+            "totalSize": 2426348936
+        },
+        {
+            "filename": "tfrecords/espargos-0007-meanders-sw-ne-1.tfrecords",
+            "description": "The robot with the passive target follows a southwest-northeast meander pattern (relative to the north / east / south / west array naming scheme).",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-meanders-sw-ne-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-meanders-sw-ne-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-meanders-sw-ne-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-meanders-sw-ne-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-meanders-sw-ne-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-meanders-sw-ne-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-meanders-sw-ne-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-meanders-sw-ne-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 204719,
+            "duration": 3499.4783821105957,
+            "totalSize": 2843956348
+        },
+        {
+            "filename": "tfrecords/espargos-0007-radial-1.tfrecords",
+            "description": "The robot with the passive target follows radial pattern, continuously moving from the center of the measurement area to its border and back to the center again.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-radial-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-radial-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-radial-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-radial-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-radial-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-radial-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-radial-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-radial-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 85995,
+            "duration": 1441.7236695289612,
+            "totalSize": 1194642540
+        },
+        {
+            "filename": "tfrecords/espargos-0007-randomwalk-2.tfrecords",
+            "description": "The robot with the passive target follows a pseudorandom trajectory inside the measurement area.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-randomwalk-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-randomwalk-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-randomwalk-2-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-randomwalk-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-randomwalk-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-randomwalk-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-randomwalk-2-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-randomwalk-2-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 139427,
+            "duration": 2354.856546640396,
+            "totalSize": 1936919884
+        },
+        {
+            "filename": "tfrecords/espargos-0007-meanders-e-w-1.tfrecords",
+            "description": "The robot with the passive target follows a east-west meander pattern (relative to the north / east / south / west array naming scheme).",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-meanders-e-w-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-meanders-e-w-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-meanders-e-w-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-meanders-e-w-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-meanders-e-w-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-meanders-e-w-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-meanders-e-w-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-meanders-e-w-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 151679,
+            "duration": 2579.137122631073,
+            "totalSize": 2107124668
+        },
+        {
+            "filename": "tfrecords/espargos-0007-spiral-ccw-2.tfrecords",
+            "description": "The robot with the passive target follows a trajectory that is the shape of a complete counterclockwise spiral.",
+            "configurationVariant": "robot",
+            "name": "espargos-0007-spiral-ccw-2",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-spiral-ccw-2-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-spiral-ccw-2-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-spiral-ccw-2-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-spiral-ccw-2-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-spiral-ccw-2-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-spiral-ccw-2-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-spiral-ccw-2-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 92521,
+            "duration": 1564.89169216156,
+            "totalSize": 1285301732
+        },
+        {
+            "filename": "tfrecords/espargos-0007-human-helmet-meanders-nw-se-1.tfrecords",
+            "description": "A person is walking around, following a trajectory of northwest-southeast meanders inside the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-human-helmet-meanders-nw-se-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-human-helmet-meanders-nw-se-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-human-helmet-meanders-nw-se-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 9257,
+            "duration": 156.7287633419037,
+            "totalSize": 128598244
+        },
+        {
+            "filename": "tfrecords/espargos-0007-human-helmet-meanders-sw-ne-1.tfrecords",
+            "description": "A person is walking around, following a trajectory of southwest-northeast meanders inside the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-human-helmet-meanders-sw-ne-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-human-helmet-meanders-sw-ne-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-human-helmet-meanders-sw-ne-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 17144,
+            "duration": 288.9369373321533,
+            "totalSize": 238164448
+        },
+        {
+            "filename": "tfrecords/espargos-0007-human-helmet-randomwalk-1.tfrecords",
+            "description": "A person is walking around, following a pseudorandom trajectory inside the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-human-helmet-randomwalk-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-human-helmet-randomwalk-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-human-helmet-randomwalk-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 33011,
+            "duration": 560.0021221637726,
+            "totalSize": 458588812
+        },
+        {
+            "filename": "tfrecords/espargos-0007-human-helmet-standing-center-1.tfrecords",
+            "description": "A person is standing still in the middle of the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-human-helmet-standing-center-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-human-helmet-standing-center-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-human-helmet-standing-center-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-human-helmet-standing-center-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-human-helmet-standing-center-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-human-helmet-standing-center-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-human-helmet-standing-center-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-human-helmet-standing-center-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 5041,
+            "duration": 82.90513467788696,
+            "totalSize": 70029572
+        },
+        {
+            "filename": "tfrecords/espargos-0007-human-helmet-circle-1.tfrecords",
+            "description": "A person is walking in circles inside the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-human-helmet-circle-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-human-helmet-circle-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-human-helmet-circle-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-human-helmet-circle-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-human-helmet-circle-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-human-helmet-circle-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-human-helmet-circle-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-human-helmet-circle-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 6024,
+            "duration": 99.90519857406616,
+            "totalSize": 83685408
+        },
+        {
+            "filename": "tfrecords/espargos-0007-circle-1.tfrecords",
+            "description": "The robot with the passive target is driving in circles inside the measurement area.",
+            "configurationVariant": "person",
+            "name": "espargos-0007-circle-1",
+            "plots": {
+                "csiTensors": [
+                    "plots/espargos-0007-circle-1-csi-0.png"
+                ],
+                "rssiByPosition": "plots/espargos-0007-circle-1-rssi-position.png",
+                "rssiByPositionAndArray": {
+                    "espargosnorth": "plots/espargos-0007-circle-1-rssi-position-array-0.png",
+                    "espargoswest": "plots/espargos-0007-circle-1-rssi-position-array-1.png",
+                    "espargossouth": "plots/espargos-0007-circle-1-rssi-position-array-2.png",
+                    "espargoseast": "plots/espargos-0007-circle-1-rssi-position-array-3.png"
+                },
+                "rssiBoxplot": "plots/espargos-0007-circle-1-rssi-boxplot.png"
+            },
+            "gpx": "",
+            "datapoints": 77076,
+            "duration": 1290.2283174991608,
+            "totalSize": 1070739792
+        }
+    ],
+    "photos": [
+        {
+            "filename": "photosAll/measurement-area-from-west-labelled.jpg",
+            "description": "The measurement area with all four ESPARGOS arrays and all four transmitters labelled with their names."
+        },
+        {
+            "filename": "photosAll/measurement-area-from-west.jpg",
+            "description": "The measurement area seen from behind the antenna array called \"West\"."
+        },
+        {
+            "filename": "photosAll/measurement-area-from-south.jpg",
+            "description": "The measurement area seen from behind the antenna array called \"South\"."
+        },
+        {
+            "filename": "photosAll/passive-target-robot.jpg",
+            "description": "The passive target (trashcan wrapped in aluminium foil) on top of the robot."
+        },
+        {
+            "filename": "photosAll/ceiling-transmitter.jpg",
+            "description": "Close-up view of one of the transmitters on the ceiling."
+        },
+        {
+            "filename": "photosAll/espargos-west.jpg",
+            "description": "The ESPARGOS antenna array called \"West\" seen from the front."
+        },
+        {
+            "filename": "photosAll/helmet.jpg",
+            "description": "This is how the retroreflector is mounted to the helmet for tracking a person."
+        }
+    ],
+    "thumbnail": "photosAll/thumbnail.jpg",
+    "plots": {
+        "csiTensors": [
+            "plots/overall-csi-0.png",
+            "plots/overall-csi-1.png",
+            "plots/overall-csi-2.png",
+            "plots/overall-csi-3.png",
+            "plots/overall-csi-4.png",
+            "plots/overall-csi-5.png",
+            "plots/overall-csi-6.png",
+            "plots/overall-csi-7.png",
+            "plots/overall-csi-8.png",
+            "plots/overall-csi-9.png",
+            "plots/overall-csi-10.png",
+            "plots/overall-csi-11.png",
+            "plots/overall-csi-12.png",
+            "plots/overall-csi-13.png",
+            "plots/overall-csi-14.png"
+        ],
+        "rssiByPosition": "plots/overall-rssi-position.png",
+        "rssiByPositionAndArray": {
+            "espargosnorth": "plots/overall-rssi-position-array-0.png",
+            "espargoswest": "plots/overall-rssi-position-array-1.png",
+            "espargossouth": "plots/overall-rssi-position-array-2.png",
+            "espargoseast": "plots/overall-rssi-position-array-3.png"
+        },
+        "rssiBoxplot": "plots/overall-rssi-boxplot.png"
+    },
+    "gpx": "",
+    "datapoints": 1255677,
+    "duration": 21061.022866487503,
+    "antennaCount": 32,
+    "subcarriers": 53,
+    "totalSize": 17443864884
+}
