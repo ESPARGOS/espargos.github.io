@@ -1,7 +1,7 @@
 {
     "identifier": "espargos-0007",
     "name": "Passive target with four synchronized ESPARGOS antenna arrays in a lab room",
-    "shortDescription": "A passive target is moving in a lab room, with four time- and phase-synchronous ESPARGOS arrays in the corner of the room and four transmitters on the ceiling. Great for bistatic / passive Radar experiments.",
+    "shortDescription": "A passive target is moving in a lab room, with four time- and phase-synchronous ESPARGOS arrays in the corner and four transmitters on the ceiling. Great for bistatic / passive radar experiments.",
     "bandwidth": 16562500,
     "frequency": 2472000000,
     "outdoor": false,
@@ -331,7 +331,9 @@
             "gpx": "",
             "datapoints": 194287,
             "duration": 3135.759795665741,
-            "totalSize": 2689903515
+            "totalSize": 2689903515,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378511",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378511"
         },
         {
             "filename": "tfrecords/espargos-0007-spiral-ccw-1-part1.tfrecords",
@@ -354,7 +356,9 @@
             "gpx": "",
             "datapoints": 62695,
             "duration": 1036.1036252975464,
-            "totalSize": 870958940
+            "totalSize": 870958940,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378512",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378512"
         },
         {
             "filename": "tfrecords/espargos-0007-spiral-ccw-1-part2.tfrecords",
@@ -377,7 +381,9 @@
             "gpx": "",
             "datapoints": 92903,
             "duration": 1522.4377636909485,
-            "totalSize": 1290608476
+            "totalSize": 1290608476,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378513",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378513"
         },
         {
             "filename": "tfrecords/espargos-0007-randomwalk-1.tfrecords",
@@ -400,7 +406,9 @@
             "gpx": "",
             "datapoints": 103527,
             "duration": 1696.9590265750885,
-            "totalSize": 1438197084
+            "totalSize": 1438197084,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378514",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378514"
         },
         {
             "filename": "tfrecords/espargos-0007-meanders-nw-se-1.tfrecords",
@@ -423,7 +431,9 @@
             "gpx": "",
             "datapoints": 174658,
             "duration": 2886.72856426239,
-            "totalSize": 2426348936
+            "totalSize": 2426348936,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378515",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378515"
         },
         {
             "filename": "tfrecords/espargos-0007-meanders-sw-ne-1.tfrecords",
@@ -446,7 +456,9 @@
             "gpx": "",
             "datapoints": 204719,
             "duration": 3499.4783821105957,
-            "totalSize": 2843956348
+            "totalSize": 2843956348,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378516",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378516"
         },
         {
             "filename": "tfrecords/espargos-0007-radial-1.tfrecords",
@@ -469,7 +481,9 @@
             "gpx": "",
             "datapoints": 85995,
             "duration": 1441.7236695289612,
-            "totalSize": 1194642540
+            "totalSize": 1194642540,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378517",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378517"
         },
         {
             "filename": "tfrecords/espargos-0007-randomwalk-2.tfrecords",
@@ -492,7 +506,9 @@
             "gpx": "",
             "datapoints": 139427,
             "duration": 2354.856546640396,
-            "totalSize": 1936919884
+            "totalSize": 1936919884,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378518",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378518"
         },
         {
             "filename": "tfrecords/espargos-0007-meanders-e-w-1.tfrecords",
@@ -515,7 +531,9 @@
             "gpx": "",
             "datapoints": 151679,
             "duration": 2579.137122631073,
-            "totalSize": 2107124668
+            "totalSize": 2107124668,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378519",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378519"
         },
         {
             "filename": "tfrecords/espargos-0007-spiral-ccw-2.tfrecords",
@@ -538,7 +556,9 @@
             "gpx": "",
             "datapoints": 92521,
             "duration": 1564.89169216156,
-            "totalSize": 1285301732
+            "totalSize": 1285301732,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378520",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378520"
         },
         {
             "filename": "tfrecords/espargos-0007-human-helmet-meanders-nw-se-1.tfrecords",
@@ -561,7 +581,9 @@
             "gpx": "",
             "datapoints": 9257,
             "duration": 156.7287633419037,
-            "totalSize": 128598244
+            "totalSize": 128598244,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378521",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378521"
         },
         {
             "filename": "tfrecords/espargos-0007-human-helmet-meanders-sw-ne-1.tfrecords",
@@ -584,7 +606,9 @@
             "gpx": "",
             "datapoints": 17144,
             "duration": 288.9369373321533,
-            "totalSize": 238164448
+            "totalSize": 238164448,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378522",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378522"
         },
         {
             "filename": "tfrecords/espargos-0007-human-helmet-randomwalk-1.tfrecords",
@@ -607,7 +631,9 @@
             "gpx": "",
             "datapoints": 33011,
             "duration": 560.0021221637726,
-            "totalSize": 458588812
+            "totalSize": 458588812,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378523",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378523"
         },
         {
             "filename": "tfrecords/espargos-0007-human-helmet-standing-center-1.tfrecords",
@@ -630,7 +656,9 @@
             "gpx": "",
             "datapoints": 5041,
             "duration": 82.90513467788696,
-            "totalSize": 70029572
+            "totalSize": 70029572,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378524",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378524"
         },
         {
             "filename": "tfrecords/espargos-0007-human-helmet-circle-1.tfrecords",
@@ -653,7 +681,9 @@
             "gpx": "",
             "datapoints": 6024,
             "duration": 99.90519857406616,
-            "totalSize": 83685408
+            "totalSize": 83685408,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378525",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378525"
         },
         {
             "filename": "tfrecords/espargos-0007-circle-1.tfrecords",
@@ -676,7 +706,9 @@
             "gpx": "",
             "datapoints": 77076,
             "duration": 1290.2283174991608,
-            "totalSize": 1070739792
+            "totalSize": 1070739792,
+            "darusViewURL": "https://darus.uni-stuttgart.de/file.xhtml?fileId=378526",
+            "darusDownloadURL": "https://darus.uni-stuttgart.de/api/access/datafile/378526"
         }
     ],
     "photos": [
@@ -710,6 +742,7 @@
         }
     ],
     "thumbnail": "photosAll/thumbnail.jpg",
+    "doi": "doi:10.18419/DARUS-4973",
     "plots": {
         "csiTensors": [
             "plots/overall-csi-0.png",
