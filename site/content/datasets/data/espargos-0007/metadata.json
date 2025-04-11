@@ -5,7 +5,7 @@
     "bandwidth": 16562500,
     "frequency": 2472000000,
     "outdoor": false,
-    "year": 2024,
+    "year": 2025,
     "time-synchronization": true,
     "synchronization-across-arrays": true,
     "wifi-standard": "802.11n",
