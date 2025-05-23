@@ -62,13 +62,13 @@ jobs:
       - name: Build controller-firmware
         uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: v5.2
+          esp_idf_version: latest
           target: esp32
           path: 'controller-firmware'
       - name: Build sensor-firmware
         uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: v5.3
+          esp_idf_version: latest
           target: esp32s2
           path: 'sensor-firmware'
       - name: Install Hugo CLI
