@@ -15,181 +15,167 @@ menu:
 		<div class="row py-3 cols-12">
 			<h1 class="px-0">Firmware</h1>
 		</div>
-		<div class="accordion" id="firmwareAccordion">
-			<!-- Downlodas for latest Hardware (visible by default) -->
-			<div class="accordion-item">
-				<h2 class="accordion-header" id="headingLatestHardware">
-					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLatestHardware" aria-expanded="true" aria-controls="collapseLatestHardware">
-						Latest Firmware for Current ESPARGOS Hardware
-					</button>
-				</h2>
-				<div id="collapseLatestHardware" class="accordion-collapse collapse show" aria-labelledby="headingLatestHardware" data-bs-parent="#firmwareAccordion">
-					<div class="accordion-body">
-						<div class="row py-5 cols-12 justify-content-center">
-							<div class="col col-12 col-sm-8 col-md-6 col-lg-6 col-xl-3">
-								<img src="/img/espargos-next.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" loading="lazy">
+
+		<div class="row py-2 cols-12 justify-content-center">
+			<div class="col mb-2 col-8 col-sm-8 col-md-3 col-lg-3 col-xl-2">
+				<img src="/img/espargos-next.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" loading="lazy">
+			</div>
+			<div class="col mt-3 col-11 col-md-9 col-lg-7 col-xl-7">
+				<p>
+					Below, you can download the firmware for the current hardware revision of ESPARGOS (device looks as shown in picture).
+					Firmware is regularly updated!
+				</p>
+			</div>
+		</div>
+
+		<div class="row py-4 justify-content-center pb-4">
+			<div class="col col-12 col-lg-10 col-xl-9">
+				<div class="border rounded-3 overflow-hidden">
+					<div class="px-3 py-2 border-bottom" style="background: rgba(255,255,255,0.03);">
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="fw-bold">Downloads</div>
+						</div>
+					</div>
+
+					<!-- Sensor firmware -->
+					<div class="px-3 py-3 border-bottom">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-6">
+								<a class="text-decoration-none" href="espargos-sensor-firmware.bin">
+									<div class="d-flex align-items-center">
+										<div class="me-3 flex-shrink-0">
+											<img width="44" height="44" src="img/sensor-board-icon.svg" alt="Sensor board icon">
+										</div>
+										<div>
+											<div class="fw-bold">Sensor Firmware App</div>
+											<div class="text-muted small">Update first. Distributed to all sensor MCUs by the controller.</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="small text-muted">
+									<div><span class="fw-semibold">File:</span> <code>espargos-sensor-firmware.bin</code></div>
+									<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
+								</div>
 							</div>
 						</div>
-						<div class="row cols-12 justify-content-center">
-							<div class="col col-12 col-lg-8 col-xl-8 text-center">
-								<p>
-									This is the firmware for the latest hardware revision of ESPARGOS.
-									If you have one of these current ESPARGOS devices (shown above), please use the firmware files below.
-									Firmware is regularly updated!
-								</p>
+					</div>
+
+					<!-- Controller firmware -->
+					<div class="px-3 py-3 border-bottom">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-6">
+								<a class="text-decoration-none" href="espargos-controller-firmware.bin">
+									<div class="d-flex align-items-center">
+										<div class="me-3 flex-shrink-0">
+											<img src="img/controller-icon.svg" width="44" height="44">
+										</div>
+										<div>
+											<div class="fw-bold">Controller Firmware App</div>
+											<div class="text-muted small">Update second. Reboots the controller after flashing.</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="small text-muted">
+									<div><span class="fw-semibold">File:</span> <code>espargos-controller-firmware.bin</code></div>
+									<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
+								</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="row justify-content-center pb-4">
-							<div class="col col-12 col-lg-10 col-xl-9">
-								<div class="border rounded-3 overflow-hidden">
-									<div class="px-3 py-2 border-bottom" style="background: rgba(255,255,255,0.03);">
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="fw-bold">Downloads</div>
+					<!-- Web assets -->
+					<div class="px-3 py-3 border-bottom">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-6">
+								<a class="text-decoration-none" href="espargos-controller-assets.bin">
+									<div class="d-flex align-items-center">
+										<div class="me-3 flex-shrink-0">
+											<img src="img/web-assets.svg" width="44" height="44">
+										</div>
+										<div>
+											<div class="fw-bold">Web Assets</div>
+											<div class="text-muted small">Update third. Contains the web UI served by the controller.</div>
 										</div>
 									</div>
+								</a>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="small text-muted">
+									<div><span class="fw-semibold">File:</span> <code>espargos-controller-assets.bin</code></div>
+									<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-									<!-- Sensor firmware -->
-									<div class="px-3 py-3 border-bottom">
-										<div class="row g-3 align-items-center">
-											<div class="col-12 col-lg-6">
-												<a class="text-decoration-none" href="espargos-sensor-firmware.bin">
-													<div class="d-flex align-items-center">
-														<div class="me-3 flex-shrink-0">
-															<img width="44" height="44" src="img/sensor-board-icon.svg" alt="Sensor board icon">
-														</div>
-														<div>
-															<div class="fw-bold">Sensor Firmware App</div>
-															<div class="text-muted small">Update first. Distributed to all sensor MCUs by the controller.</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="small text-muted">
-													<div><span class="fw-semibold">File:</span> <code>espargos-sensor-firmware.bin</code></div>
-													<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
-												</div>
-											</div>
+					<!-- Sensor recovery partition -->
+					<div class="px-3 py-3 border-bottom">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-6">
+								<a class="text-decoration-none" onclick="alert('Sensor recovery image is not publicly available yet.'); return false;" href="#">
+									<div class="d-flex align-items-center">
+										<div class="me-3 flex-shrink-0">
+											<img width="44" height="44" src="img/sensor-recovery-icon.svg" alt="Sensor board icon">
+										</div>
+										<div>
+											<div class="fw-bold">Sensor Recovery Partition</div>
+											<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
 										</div>
 									</div>
+								</a>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="small text-muted">
+									<div><span class="fw-semibold">File:</span> <code>espargos-sensor-recovery.bin</code></div>
+									<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-									<!-- Controller firmware -->
-									<div class="px-3 py-3 border-bottom">
-										<div class="row g-3 align-items-center">
-											<div class="col-12 col-lg-6">
-												<a class="text-decoration-none" href="espargos-controller-firmware.bin">
-													<div class="d-flex align-items-center">
-														<div class="me-3 flex-shrink-0">
-															<img src="img/controller-icon.svg" width="44" height="44">
-														</div>
-														<div>
-															<div class="fw-bold">Controller Firmware App</div>
-															<div class="text-muted small">Update second. Reboots the controller after flashing.</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="small text-muted">
-													<div><span class="fw-semibold">File:</span> <code>espargos-controller-firmware.bin</code></div>
-													<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
-												</div>
-											</div>
+					<!-- Controller recovery image -->
+					<div class="px-3 py-3">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-6">
+								<a class="text-decoration-none" onclick="alert('Controller recovery image is not publicly available yet.'); return false;" href="#">
+									<div class="d-flex align-items-center">
+										<div class="me-3 flex-shrink-0">
+											<img src="img/controller-recovery-icon.svg" width="44" height="44">
+										</div>
+										<div>
+											<div class="fw-bold">Controller Recovery Image</div>
+											<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
 										</div>
 									</div>
-
-									<!-- Web assets -->
-									<div class="px-3 py-3 border-bottom">
-										<div class="row g-3 align-items-center">
-											<div class="col-12 col-lg-6">
-												<a class="text-decoration-none" href="espargos-controller-assets.bin">
-													<div class="d-flex align-items-center">
-														<div class="me-3 flex-shrink-0">
-															<img src="img/web-assets.svg" width="44" height="44">
-														</div>
-														<div>
-															<div class="fw-bold">Web Assets</div>
-															<div class="text-muted small">Update third. Contains the web UI served by the controller.</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="small text-muted">
-													<div><span class="fw-semibold">File:</span> <code>espargos-controller-assets.bin</code></div>
-													<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<!-- Sensor recovery partition -->
-									<div class="px-3 py-3 border-bottom">
-										<div class="row g-3 align-items-center">
-											<div class="col-12 col-lg-6">
-												<a class="text-decoration-none" onclick="alert('Sensor recovery image is not publicly available yet.'); return false;" href="#">
-													<div class="d-flex align-items-center">
-														<div class="me-3 flex-shrink-0">
-															<img width="44" height="44" src="img/sensor-recovery-icon.svg" alt="Sensor board icon">
-														</div>
-														<div>
-															<div class="fw-bold">Sensor Recovery Partition</div>
-															<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="small text-muted">
-													<div><span class="fw-semibold">File:</span> <code>espargos-sensor-recovery.bin</code></div>
-													<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<!-- Controller recovery image -->
-									<div class="px-3 py-3">
-										<div class="row g-3 align-items-center">
-											<div class="col-12 col-lg-6">
-												<a class="text-decoration-none" onclick="alert('Controller recovery image is not publicly available yet.'); return false;" href="#">
-													<div class="d-flex align-items-center">
-														<div class="me-3 flex-shrink-0">
-															<img src="img/controller-recovery-icon.svg" width="44" height="44">
-														</div>
-														<div>
-															<div class="fw-bold">Controller Recovery Image</div>
-															<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
-														</div>
-													</div>
-												</a>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="small text-muted">
-													<div><span class="fw-semibold">File:</span> <code>espargos-controller-recovery.bin</code></div>
-													<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
-													<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
-												</div>
-											</div>
-										</div>
-									</div>
+								</a>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="small text-muted">
+									<div><span class="fw-semibold">File:</span> <code>espargos-controller-recovery.bin</code></div>
+									<div><span class="fw-semibold">Build date:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">Version:</span> <span class="text-muted">TBD</span></div>
+									<div><span class="fw-semibold">SHA-256:</span> <span class="text-muted">TBD</span></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
+		<div class="accordion" id="firmwareAccordion">
 			<!-- Downloads for prototype Hardware (collapsed by default) -->
 			<div class="accordion-item mb-4">
 				<h2 class="accordion-header" id="headingPrototypeHardware">
@@ -207,8 +193,8 @@ menu:
 						<div class="row cols-12 justify-content-center">
 							<div class="col col-12 col-lg-8 col-xl-8 text-center">
 								<p>
-									This is the firmware for the prototype version of ESPARGOS.
-									If you have one of these early ESPARGOS devices (shown above), please use the firmware files below.
+									If you still have an older prototype version of ESPARGOS, please note that this hardware is no longer supported.
+									You can, however, still download the last available firmware versions for this prototype hardware below.
 									Prototype firmware is not updated anymore!
 								</p>
 							</div>
@@ -456,7 +442,26 @@ curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: app
 		</div>
 
 		<h2>Recovery Instructions</h2>
-		<div class="alert alert-warning" role="alert"><b>Warning:</b> Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process.</div>
-		<i>Instructions coming soon. Recovery is only possible with the current hardware revision, prototype boards cannot be recovered.</i>
+		<div class="alert alert-info">Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process. You cannot "brick" ESPARGOS by due to firmware issues.</div>
+		<p>
+			<i>Recovery is only possible with the current hardware revision, prototype boards do not support this recovery method!</i>
+		</p>
+		<h4>Controller Firmware Recovery</h4>
+		<p>
+			<ul>
+				<li>Make sure to install <a href="https://github.com/espressif/esptool">esptool</a>. It is included in <a href="https://github.com/espressif/esp-idf">ESP-IDF</a>, but full installation of ESP-IDF is not required.</li>
+				<li>Connect ESPARGOS to your computer via USB. It will appear as a USB serial device, assumed to be named <code>/dev/ttyUSB0</code> in the following.</li>
+				<li>Execute the following command to flash the recovery image. This will reset ESPARGOS to factory settings:</li>
+				<pre class="m-0"><code class="language-bash" style="background: black;">esptool --chip esp32 -b 2000000 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-size 16MB --flash-freq 40m 0x0000 espargos-controller-recovery.bin</code></pre>
+			</ul>
+		</p>
+
+		<h4>Sensor Firmware Recovery</h4>
+		<p>
+			<ul>
+				<li>Download the sensor recovery partition from the link above, and upload it to ESPARGOS using the web interface.</li>
+				<li>Click the "Provision All Sensors" button on the web interface. Be very patient, this will take up to ten minutes.</li>
+			</ul>
+		</p>
 	</div>
 </main>
