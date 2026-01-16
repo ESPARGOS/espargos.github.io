@@ -36,9 +36,85 @@ menu:
 							<div class="fw-bold">Downloads</div>
 						</div>
 					</div>
+
 					<div class="px-3 py-2 border-bottom">
 						<div class="row g-2 align-items-center">
-							<div class="col-12 col-lg-5 text-muted small">Controller channel</div>
+							<div class="col-12 col-lg-5 text-muted small">Sensor Firmware: Channels</div>
+							<div class="d-none d-lg-block col-lg-2"></div>
+							<div class="col-12 col-lg-5">
+								<div class="row g-2 text-center">
+									<div class="col-12 col-md-6">
+										<div class="fw-semibold">Latest</div>
+										<div class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="fw-semibold">Stable</div>
+										<div class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Sensor firmware -->
+					<div class="px-3 py-3 border-bottom">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-5">
+								<div class="d-flex align-items-center">
+									<div class="me-3 flex-shrink-0">
+										<img width="44" height="44" src="img/sensor-board-icon.svg" alt="Sensor board icon">
+									</div>
+									<div>
+										<div class="fw-bold">Sensor Firmware App</div>
+										<div class="text-muted small">Update first. Distributed to all sensor MCUs by the controller.</div>
+									</div>
+								</div>
+							</div>
+							<div class="d-none d-lg-block col-lg-2"></div>
+							<div class="col-12 col-lg-5">
+								<div class="row g-3">
+									<div class="col-12 col-md-6">
+										<a class="btn btn-outline-light w-100" href="latest/espargos-sensor-firmware.bin">Latest</a>
+									</div>
+									<div class="col-12 col-md-6">
+										<a class="btn btn-outline-light w-100" href="stable/espargos-sensor-firmware.bin">Stable</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Sensor recovery partition -->
+					<div class="px-3 py-3">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-5">
+								<div class="d-flex align-items-center">
+									<div class="me-3 flex-shrink-0">
+										<img width="44" height="44" src="img/sensor-recovery-icon.svg" alt="Sensor board icon">
+									</div>
+									<div>
+										<div class="fw-bold">Sensor Recovery Partition</div>
+										<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
+									</div>
+								</div>
+							</div>
+							<div class="d-none d-lg-block col-lg-2"></div>
+							<div class="col-12 col-lg-5">
+								<div class="row g-3">
+									<div class="col-12 col-md-6">
+										<a class="btn btn-outline-light w-100" href="latest/sensor-firmware-partition.bin">Latest</a>
+									</div>
+									<div class="col-12 col-md-6">
+										<a class="btn btn-outline-light w-100" href="stable/sensor-firmware-partition.bin">Stable</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="px-3 py-2 border-top border-bottom">
+						<div class="row g-2 align-items-center">
+							<div class="col-12 col-lg-5 text-muted small">Controller Firmware: Channels</div>
 							<div class="d-none d-lg-block col-lg-2"></div>
 							<div class="col-12 col-lg-5">
 								<div class="row g-2 text-center">
@@ -65,7 +141,7 @@ menu:
 									</div>
 									<div>
 										<div class="fw-bold">Controller Firmware App</div>
-										<div class="text-muted small">Update second. Reboots the controller after flashing.</div>
+										<div class="text-muted small">Update second (after sensors). Implements controller functionality.</div>
 									</div>
 								</div>
 							</div>
@@ -133,81 +209,6 @@ menu:
 									</div>
 									<div class="col-12 col-md-6">
 										<a class="btn btn-outline-light w-100" href="stable/espargos-controller-recovery.bin">Stable</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="px-3 py-2 border-bottom">
-						<div class="row g-2 align-items-center">
-							<div class="col-12 col-lg-5 text-muted small">Sensor channel</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
-								<div class="row g-2 text-center">
-									<div class="col-12 col-md-6">
-										<div class="fw-semibold">Latest</div>
-										<div class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
-									</div>
-									<div class="col-12 col-md-6">
-										<div class="fw-semibold">Stable</div>
-										<div class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Sensor firmware -->
-					<div class="px-3 py-3 border-bottom">
-						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
-								<div class="d-flex align-items-center">
-									<div class="me-3 flex-shrink-0">
-										<img width="44" height="44" src="img/sensor-board-icon.svg" alt="Sensor board icon">
-									</div>
-									<div>
-										<div class="fw-bold">Sensor Firmware App</div>
-										<div class="text-muted small">Update first. Distributed to all sensor MCUs by the controller.</div>
-									</div>
-								</div>
-							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
-								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/espargos-sensor-firmware.bin">Latest</a>
-									</div>
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="stable/espargos-sensor-firmware.bin">Stable</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Sensor recovery partition -->
-					<div class="px-3 py-3">
-						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
-								<div class="d-flex align-items-center">
-									<div class="me-3 flex-shrink-0">
-										<img width="44" height="44" src="img/sensor-recovery-icon.svg" alt="Sensor board icon">
-									</div>
-									<div>
-										<div class="fw-bold">Sensor Recovery Partition</div>
-										<div class="text-muted small">Only needed for recovery / factory reflashing.</div>
-									</div>
-								</div>
-							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
-								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/sensor-firmware-partition.bin">Latest</a>
-									</div>
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="stable/sensor-firmware-partition.bin">Stable</a>
 									</div>
 								</div>
 							</div>
