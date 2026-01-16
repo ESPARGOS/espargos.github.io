@@ -323,7 +323,7 @@ wget https://espargos.net/firmware/latest/espargos-controller-assets.bin
 ESPARGOS_HOST=192.168.1.2
 curl -# "http://$ESPARGOS_HOST/update_sensor_application" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-firmware.bin | tee /dev/null
-curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
+curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
 	</div>
 	<script>hljs.highlightAll();</script>
 
