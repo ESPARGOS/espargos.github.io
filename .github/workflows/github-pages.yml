@@ -50,8 +50,8 @@ jobs:
 
       - name: Download firmware artifacts (latest + stable)
         env:
-          CONTROLLER_FIRMWARE_DEPLOY_KEY: ${{ secrets.CONTROLLER_FIRMWARE_DEPLOY_KEY }}
-          SENSOR_FIRMWARE_DEPLOY_KEY: ${{ secrets.SENSOR_FIRMWARE_DEPLOY_KEY }}
+          CONTROLLER_FIRMWARE_TOKEN: ${{ secrets.CONTROLLER_FIRMWARE_TOKEN }}
+          SENSOR_FIRMWARE_TOKEN: ${{ secrets.SENSOR_FIRMWARE_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p ./espargos.github.io/site/content/firmware/latest
@@ -59,11 +59,16 @@ jobs:
 
           for repo in controller-firmware sensor-firmware; do
             if [[ "$repo" == "controller-firmware" ]]; then
-              token="$CONTROLLER_FIRMWARE_DEPLOY_KEY"
+              token="$CONTROLLER_FIRMWARE_TOKEN"
               artifact="controller-firmware-build-artifact"
             else
-              token="$SENSOR_FIRMWARE_DEPLOY_KEY"
+              token="$SENSOR_FIRMWARE_TOKEN"
               artifact="sensor-firmware-build-artifact"
+            fi
+
+            if [[ -z "${token}" ]]; then
+              echo "Missing token for $repo. Set CONTROLLER_FIRMWARE_TOKEN / SENSOR_FIRMWARE_TOKEN secrets." >&2
+              exit 1
             fi
 
             for branch in main stable; do
