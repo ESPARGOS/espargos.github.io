@@ -1,0 +1,12 @@
+{{ $channel := .Get "channel" | default "latest" }}
+{{ $field := .Get "field" | default "build_version" }}
+{{ $artifact := .Get "artifact" | default (printf "content/firmware/%s/espargos-controller-artifact.json" $channel) }}
+{{ $raw := readFile $artifact }}
+{{ $data := $raw | transform.Unmarshal }}
+{{ if and $data (eq $field "build_date") }}
+	{{ with $data.build_date }}{{ dateFormat "2006-01-02 15:04 MST" . }}{{ else }}TBD{{ end }}
+{{ else if and $data (eq $field "build_version") }}
+	{{ with $data.build_version }}{{ . }}{{ else }}TBD{{ end }}
+{{ else }}
+	TBD
+{{ end }}

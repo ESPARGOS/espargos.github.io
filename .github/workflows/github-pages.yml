@@ -45,32 +45,48 @@ jobs:
         run: cd pyespargos && pip install -r requirements.txt
       - name: Build sphinx docs
         run: make -C ./pyespargos/docs/ html
-      - name: Clone controller-firmware repo
-        uses: actions/checkout@v4
-        with:
-          ssh-key: ${{ secrets.CONTROLLER_FIRMWARE_DEPLOY_KEY }}
-          repository: ESPARGOS/controller-firmware
-          submodules: recursive
-          path: controller-firmware
-      - name: Clone sensor-firmware repo
-        uses: actions/checkout@v4
-        with:
-          ssh-key: ${{ secrets.SENSOR_FIRMWARE_DEPLOY_KEY }}
-          repository: ESPARGOS/sensor-firmware
-          submodules: recursive
-          path: sensor-firmware
-      - name: Build controller-firmware
-        uses: espressif/esp-idf-ci-action@v1
-        with:
-          esp_idf_version: latest
-          target: esp32
-          path: 'controller-firmware'
-      - name: Build sensor-firmware
-        uses: espressif/esp-idf-ci-action@v1
-        with:
-          esp_idf_version: latest
-          target: esp32s2
-          path: 'sensor-firmware'
+
+      - uses: actions/checkout@v4
+
+      - name: Download firmware artifacts (latest + stable)
+        env:
+          CONTROLLER_FIRMWARE_DEPLOY_KEY: ${{ secrets.CONTROLLER_FIRMWARE_DEPLOY_KEY }}
+          SENSOR_FIRMWARE_DEPLOY_KEY: ${{ secrets.SENSOR_FIRMWARE_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p ./espargos.github.io/site/content/firmware/latest
+          mkdir -p ./espargos.github.io/site/content/firmware/stable
+
+          for repo in controller-firmware sensor-firmware; do
+            if [[ "$repo" == "controller-firmware" ]]; then
+              token="$CONTROLLER_FIRMWARE_DEPLOY_KEY"
+              artifact="controller-firmware-build-artifact"
+            else
+              token="$SENSOR_FIRMWARE_DEPLOY_KEY"
+              artifact="sensor-firmware-build-artifact"
+            fi
+
+            for branch in main stable; do
+              channel="latest"
+              if [[ "$branch" == "stable" ]]; then
+                channel="stable"
+              fi
+
+              run_id=$(GH_TOKEN="$token" gh api \
+                repos/ESPARGOS/$repo/actions/workflows/build.yml/runs \
+                -f branch="$branch" \
+                -f status=completed \
+                -f conclusion=success \
+                -X GET \
+                --jq '.workflow_runs[0].id')
+
+              GH_TOKEN="$token" gh run download "$run_id" \
+                -R ESPARGOS/$repo \
+                -n "$artifact" \
+                -D "./espargos.github.io/site/content/firmware/$channel"
+            done
+          done
+
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
