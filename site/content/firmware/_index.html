@@ -321,7 +321,7 @@ wget https://espargos.net/firmware/latest/espargos-controller-assets.bin
 # * Change ESPARGOS_HOST to the IP address / hostname of your ESPARGOS device.
 # * Make sure the update succeeded after every step. Otherwise, reboot ESPARGOS.
 ESPARGOS_HOST=192.168.1.2
-curl -# "http://$ESPARGOS_HOST/update_sensor_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
+curl -# "http://$ESPARGOS_HOST/update_sensor_application" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-sensor-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_firmware" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-firmware.bin | tee /dev/null
 curl -# "http://$ESPARGOS_HOST/update_assets" --compressed -H "Content-Type: application/octet-stream" --data-binary @espargos-controller-assets.bin | tee /dev/null</pre></code>
 	</div>
