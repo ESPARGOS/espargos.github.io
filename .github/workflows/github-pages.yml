@@ -119,12 +119,6 @@ jobs:
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Copy sphinx docs to hugo site
         run: cp -r pyespargos/docs/_build/html/* ./espargos.github.io/site/public/docs
-      - name: Copy controller assets file
-        run: cp controller-firmware/build/web.bin ./espargos.github.io/site/public/firmware/espargos-controller-assets.bin
-      - name: Copy controller firmware file
-        run: cp controller-firmware/build/espargos-controller-firmware.bin ./espargos.github.io/site/public/firmware/espargos-controller-firmware.bin
-      - name: Copy sensor firmware file
-        run: cp sensor-firmware/build/espargos-sensor-firmware.bin ./espargos.github.io/site/public/firmware/espargos-sensor-firmware.bin
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
