@@ -80,6 +80,8 @@ jobs:
             fi
 
             for branch in main stable; do
+              echo "Finding artifacts for $repo, branch $branch"
+
               channel="latest"
               if [[ "$branch" == "stable" ]]; then
                 channel="stable"
