@@ -31,6 +31,10 @@
 
 	<script src="{{ $copycode.Permalink }}"></script>
 
+	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" }}
+
+	<script src="{{ $minimalVideoControls.Permalink }}"></script>
+
 	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" }}
 
 	<link rel="stylesheet" href="{{ $highlightTheme.Permalink }}">

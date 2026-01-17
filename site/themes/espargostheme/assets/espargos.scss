@@ -73,3 +73,55 @@ main {
 	border-color: $primary;
 	color: white;
 }
+
+/* Minimal video UI: we remove native controls (via JS) and show our own overlay. */
+video.minimal-controls { outline: none; }
+
+.video-minimal-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.video-minimal-wrapper > video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.video-minimal-play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 72px;
+	height: 72px;
+	border-radius: 999px;
+	border: 2px solid rgba(255, 255, 255, 0.9);
+	background: rgba(0, 0, 0, 0.45);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+	padding: 0;
+	cursor: pointer;
+	transition: opacity 120ms ease, transform 120ms ease, background 120ms ease;
+}
+
+.video-minimal-play:hover,
+.video-minimal-play:focus-visible {
+	background: rgba(0, 0, 0, 0.65);
+	transform: translate(-50%, -50%) scale(1.03);
+	outline: none;
+}
+
+.video-minimal-play-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-35%, -50%);
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 14px solid transparent;
+	border-bottom: 14px solid transparent;
+	border-left: 22px solid rgba(255, 255, 255, 0.95);
+}
