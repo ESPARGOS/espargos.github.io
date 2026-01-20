@@ -511,12 +511,12 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 								<tr>
 									<td class="fw-semibold">Latest</td>
 									<td class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="controller-recovery-latest-manifest.json"></esp-web-install-button></td>
+									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-latest-manifest.json"></esp-web-install-button></td>
 								</tr>
 								<tr>
 									<td class="fw-semibold">Stable</td>
 									<td class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="controller-recovery-stable-manifest.json"></esp-web-install-button></td>
+									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-stable-manifest.json"></esp-web-install-button></td>
 								</tr>
 							</tbody>
 						</table>
