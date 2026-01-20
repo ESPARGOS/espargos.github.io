@@ -24,7 +24,6 @@
 		let index = 0;
 
 		function update() {
-			console.log(index, sequence, sequence.length);
 			img.src = sequence[index].image;
 			setTimeout(update, sequence[index].duration);
 			index = (index + 1) % sequence.length;
