@@ -490,10 +490,40 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 			<i>Recovery is only possible with the current hardware revision, prototype boards do not support this recovery method!</i>
 		</p>
 		<h4>Controller Firmware Recovery</h4>
-		<h5>Use ESP Launchpad</h5>
+		<h5>From a WebUSB-enabled Browser</h5>
 		<p>
-			With a WebUSB-enabled browser (e.g., Google Chrome), you can use the <a href="https://espressif.github.io/esp-launchpad/?flashConfigURL=https://espargos.net/firmware/controller-firmware-launchpad.toml">ESP Launchpad</a> to flash the recovery image to ESPARGOS.
+			With a WebUSB-enabled browser (e.g., Google Chrome), connect ESPARGOS to your computer via USB and click the appropriate button for your chosen channel to flash the recovery firmware directly from your browser:
 		</p>
+		<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+		<div class="row justify-content-center my-3">
+			<div class="col-12 col-lg-9 col-xl-8">
+				<div class="border rounded-3 overflow-hidden">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover align-middle mb-0" id="recovery-install-table" style="--bs-table-bg: transparent; --bs-table-striped-bg: rgba(255, 255, 255, 0.06); --bs-table-hover-bg: rgba(255, 255, 255, 0.08);">
+							<thead>
+								<tr>
+									<th>Channel</th>
+									<th>Build</th>
+									<th class="text-end">Install</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="fw-semibold">Latest</td>
+									<td class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
+									<td class="text-end"><esp-web-install-button manifest="controller-recovery-latest-manifest.json"></esp-web-install-button></td>
+								</tr>
+								<tr>
+									<td class="fw-semibold">Stable</td>
+									<td class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
+									<td class="text-end"><esp-web-install-button manifest="controller-recovery-stable-manifest.json"></esp-web-install-button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 		<h5>Manual Recovery with esptool</h5>
 		<p>
 			<ul>
