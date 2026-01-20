@@ -1,0 +1,21 @@
+# ============================================================================
+# COMPLETE EXAMPLE: Single Merged Binary for ESP32
+# ============================================================================
+esp_toml_version = 1.0
+multipart = true
+chip = "esp32"
+supported_apps = ["controller-firmware-latest", "controller-firmware-stable"]
+
+[controller-firmware-latest]
+icon = "https://espargos.net/firmware/img/controller-recovery-icon.svg"
+readme.text = "https://espargos.net/firmware/launchpad-readme.md"
+image.esp32.parts = ["http://localhost:1313/firmware/latest/espargos-controller-recovery.bin"]
+image.esp32.addresses = ["0x0"]
+console_baudrate = 1000000
+
+[controller-firmware-stable]
+icon = "https://espargos.net/firmware/img/controller-recovery-icon.svg"
+readme.text = "https://espargos.net/firmware/launchpad-readme.md"
+image.esp32.parts = ["http://localhost:1313/firmware/stable/espargos-controller-recovery.bin"]
+image.esp32.addresses = ["0x0"]
+console_baudrate = 1000000

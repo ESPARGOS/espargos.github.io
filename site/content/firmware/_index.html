@@ -1,5 +1,5 @@
 ---
-title: "Setup"
+title: "Firmware"
 draft: false
 type: page
 layout: article
@@ -490,6 +490,11 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 			<i>Recovery is only possible with the current hardware revision, prototype boards do not support this recovery method!</i>
 		</p>
 		<h4>Controller Firmware Recovery</h4>
+		<h5>Use ESP Launchpad</h5>
+		<p>
+			With a WebUSB-enabled browser (e.g., Google Chrome), you can use the <a href="https://espressif.github.io/esp-launchpad/?flashConfigURL=https://espargos.net/firmware/controller-firmware-launchpad.toml">ESP Launchpad</a> to flash the recovery image to ESPARGOS.
+		</p>
+		<h5>Manual Recovery with esptool</h5>
 		<p>
 			<ul>
 				<li>Make sure to install <a href="https://github.com/espressif/esptool">esptool</a>. It is included in <a href="https://github.com/espressif/esp-idf">ESP-IDF</a>, but full installation of ESP-IDF is not required.</li>
