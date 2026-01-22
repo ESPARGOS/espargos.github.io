@@ -531,7 +531,8 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 				<li>Make sure to install <a href="https://github.com/espressif/esptool">esptool</a>. It is included in <a href="https://github.com/espressif/esp-idf">ESP-IDF</a>, but full installation of ESP-IDF is not required.</li>
 				<li>Connect ESPARGOS to your computer via USB. It will appear as a USB serial device, assumed to be named <code>/dev/ttyUSB0</code> in the following.</li>
 				<li>Execute the following command to flash the recovery image. This will reset ESPARGOS to factory settings:</li>
-				<pre class="m-0"><code class="language-bash" style="background: black;">esptool --chip esp32 -b 2000000 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-size 16MB --flash-freq 40m 0x0000 espargos-controller-recovery.bin</code></pre>
+				<pre class="m-0"><code class="language-bash" style="background: black;">wget https://espargos.net/firmware/latest/espargos-controller-recovery.bin
+esptool --chip esp32 -b 2000000 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-size 16MB --flash-freq 40m 0x0000 espargos-controller-recovery.bin</code></pre>
 			</ul>
 		</p>
 
