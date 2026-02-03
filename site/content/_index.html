@@ -75,6 +75,42 @@ layout: list
 		<div class="album py-2">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<div width="100%" style="display: flex; flex-direction: column; justify-content: space-around; background: black; aspect-ratio: 8 / 5;">
+											<video class="minimal-controls" muted style="width: 100%;" onloadstart="this.playbackRate = 1.5;">
+											<source src="video/camera.webm" type="video/webm">
+										</video>
+									</div>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Camera Overlay</a></b></p>
+								<p class="card-text">Show received WiFi signal power and delay as an overlay on top of a camera image.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/camera">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video class="minimal-controls" muted style="width: 100%;" preload="metadata">
+										<source src="video/azimuth-delay.webm" type="video/webm">
+									</video>
+								</div>
+							</div>
+		
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Azimuth-Delay Diagram</a></b></p>
+								<p class="card-text">Visualize the azimuth and delay characteristics of incoming WiFi signals in real time.</p>
+								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/azimuth-delay">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
 					<div class="col">
 						<div class="card shadow-sm position-relative">
 							<div class="text-center">
@@ -191,25 +227,6 @@ layout: list
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Time of Arrival</a></b></p>
 								<p class="card-text">Monitor the precise time of arrival of WiFi packets at each antenna array.</p>
 								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/tdoas-over-time">View Demo on GitHub</a>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm position-relative">
-							<div class="text-center">
-								<div width="100%" style="overflow: hidden; margin: 0 auto;">
-									<div width="100%" style="display: flex; flex-direction: column; justify-content: space-around; background: black; aspect-ratio: 8 / 5;">
-											<video class="minimal-controls" muted style="width: 100%;" onloadstart="this.playbackRate = 1.5;">
-											<source src="video/camera.webm" type="video/webm">
-										</video>
-									</div>
-								</div>
-							</div>
-		
-							<div class="card-body">
-								<p class="card-title"><b><a class="text-white text-underline-hover" href="/">Camera Overlay</a></b></p>
-								<p class="card-text">Show received WiFi signal power and delay as an overlay on top of a camera image.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/camera">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
