@@ -28,9 +28,27 @@ menu:
 			</div>
 		</div>
 
-		<div class="row py-4 justify-content-center pb-4">
-			<div class="col col-12 col-lg-10 col-xl-9">
-				<div class="border rounded-3 overflow-hidden">
+		<style>
+			@media (min-width: 1200px) {
+				.firmware-main-grid .downloads-card [class*="py-3"] {
+					padding-top: 0.8rem !important;
+					padding-bottom: 0.8rem !important;
+				}
+
+				.firmware-main-grid .downloads-card .row.g-3 {
+					--bs-gutter-y: 0.75rem;
+				}
+
+				.firmware-main-grid .downloads-card .btn {
+					padding-top: 0.3rem;
+					padding-bottom: 0.3rem;
+				}
+			}
+		</style>
+
+		<div class="row py-4 justify-content-center pb-4 g-4 align-items-start firmware-main-grid">
+			<div class="col-12 col-xl-7">
+				<div class="border rounded-3 overflow-hidden downloads-card">
 					<div class="px-3 py-2 border-bottom" style="background: rgba(255,255,255,0.03);">
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="fw-bold">Downloads</div>
@@ -39,15 +57,18 @@ menu:
 
 					<div class="px-3 py-2 border-bottom">
 						<div class="row g-2 align-items-center">
-							<div class="col-12 col-lg-5 text-muted small">Sensor Firmware: Channels</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4 text-muted small">Sensor Firmware: Channels</div>
+							<div class="col-12 col-lg-8">
 								<div class="row g-2 text-center">
-									<div class="col-12 col-md-6">
-										<div class="fw-semibold">Latest</div>
-										<div class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
+									<div class="col-12 col-md-4">
+										<div class="fw-semibold">Dev</div>
+										<div class="small text-muted">{{< firmware-meta channel="dev" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="dev" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<div class="fw-semibold">Testing</div>
+										<div class="small text-muted">{{< firmware-meta channel="testing" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="testing" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
+									</div>
+									<div class="col-12 col-md-4">
 										<div class="fw-semibold">Stable</div>
 										<div class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-sensor-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-sensor-artifact.json" >}}</div>
 									</div>
@@ -59,7 +80,7 @@ menu:
 					<!-- Sensor firmware -->
 					<div class="px-3 py-3 border-bottom">
 						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4">
 								<div class="d-flex align-items-center">
 									<div class="me-3 flex-shrink-0">
 										<img width="44" height="44" src="img/sensor-board-icon.svg" alt="Sensor board icon">
@@ -70,13 +91,15 @@ menu:
 									</div>
 								</div>
 							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-8">
 								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/espargos-sensor-firmware.bin">Latest</a>
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="dev/espargos-sensor-firmware.bin">Dev</a>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="testing/espargos-sensor-firmware.bin">Testing</a>
+									</div>
+									<div class="col-12 col-md-4">
 										<a class="btn btn-outline-light w-100" href="stable/espargos-sensor-firmware.bin">Stable</a>
 									</div>
 								</div>
@@ -87,7 +110,7 @@ menu:
 					<!-- Sensor recovery partition -->
 					<div class="px-3 py-3">
 						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4">
 								<div class="d-flex align-items-center">
 									<div class="me-3 flex-shrink-0">
 										<img width="44" height="44" src="img/sensor-recovery-icon.svg" alt="Sensor board icon">
@@ -98,13 +121,15 @@ menu:
 									</div>
 								</div>
 							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-8">
 								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/sensor-firmware-partition.bin">Latest</a>
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="dev/sensor-firmware-partition.bin">Dev</a>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="testing/sensor-firmware-partition.bin">Testing</a>
+									</div>
+									<div class="col-12 col-md-4">
 										<a class="btn btn-outline-light w-100" href="stable/sensor-firmware-partition.bin">Stable</a>
 									</div>
 								</div>
@@ -114,15 +139,18 @@ menu:
 
 					<div class="px-3 py-2 border-top border-bottom">
 						<div class="row g-2 align-items-center">
-							<div class="col-12 col-lg-5 text-muted small">Controller Firmware: Channels</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4 text-muted small">Controller Firmware: Channels</div>
+							<div class="col-12 col-lg-8">
 								<div class="row g-2 text-center">
-									<div class="col-12 col-md-6">
-										<div class="fw-semibold">Latest</div>
-										<div class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-controller-artifact.json" >}}</div>
+									<div class="col-12 col-md-4">
+										<div class="fw-semibold">Dev</div>
+										<div class="small text-muted">{{< firmware-meta channel="dev" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="dev" field="build_version" artifact="espargos-controller-artifact.json" >}}</div>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<div class="fw-semibold">Testing</div>
+										<div class="small text-muted">{{< firmware-meta channel="testing" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="testing" field="build_version" artifact="espargos-controller-artifact.json" >}}</div>
+									</div>
+									<div class="col-12 col-md-4">
 										<div class="fw-semibold">Stable</div>
 										<div class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-controller-artifact.json" >}}</div>
 									</div>
@@ -134,7 +162,7 @@ menu:
 					<!-- Controller firmware -->
 					<div class="px-3 py-3 border-bottom">
 						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4">
 								<div class="d-flex align-items-center">
 									<div class="me-3 flex-shrink-0">
 										<img src="img/controller-icon.svg" width="44" height="44">
@@ -145,13 +173,15 @@ menu:
 									</div>
 								</div>
 							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-8">
 								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/espargos-controller-firmware.bin">Latest</a>
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="dev/espargos-controller-firmware.bin">Dev</a>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="testing/espargos-controller-firmware.bin">Testing</a>
+									</div>
+									<div class="col-12 col-md-4">
 										<a class="btn btn-outline-light w-100" href="stable/espargos-controller-firmware.bin">Stable</a>
 									</div>
 								</div>
@@ -162,7 +192,7 @@ menu:
 					<!-- Web assets -->
 					<div class="px-3 py-3 border-bottom">
 						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4">
 								<div class="d-flex align-items-center">
 									<div class="me-3 flex-shrink-0">
 										<img src="img/web-assets.svg" width="44" height="44">
@@ -173,13 +203,15 @@ menu:
 									</div>
 								</div>
 							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-8">
 								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/espargos-controller-assets.bin">Latest</a>
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="dev/espargos-controller-assets.bin">Dev</a>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="testing/espargos-controller-assets.bin">Testing</a>
+									</div>
+									<div class="col-12 col-md-4">
 										<a class="btn btn-outline-light w-100" href="stable/espargos-controller-assets.bin">Stable</a>
 									</div>
 								</div>
@@ -190,7 +222,7 @@ menu:
 					<!-- Controller recovery image -->
 					<div class="px-3 py-3 border-bottom">
 						<div class="row g-3 align-items-center">
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-4">
 								<div class="d-flex align-items-center">
 									<div class="me-3 flex-shrink-0">
 										<img src="img/controller-recovery-icon.svg" width="44" height="44">
@@ -201,15 +233,78 @@ menu:
 									</div>
 								</div>
 							</div>
-							<div class="d-none d-lg-block col-lg-2"></div>
-							<div class="col-12 col-lg-5">
+							<div class="col-12 col-lg-8">
 								<div class="row g-3">
-									<div class="col-12 col-md-6">
-										<a class="btn btn-outline-light w-100" href="latest/espargos-controller-recovery.bin">Latest</a>
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="dev/espargos-controller-recovery.bin">Dev</a>
 									</div>
-									<div class="col-12 col-md-6">
+									<div class="col-12 col-md-4">
+										<a class="btn btn-outline-light w-100" href="testing/espargos-controller-recovery.bin">Testing</a>
+									</div>
+									<div class="col-12 col-md-4">
 										<a class="btn btn-outline-light w-100" href="stable/espargos-controller-recovery.bin">Stable</a>
 									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 col-xl-5">
+				<div class="border rounded-3 overflow-hidden h-100">
+					<div class="px-3 py-2 border-bottom" style="background: rgba(255,255,255,0.03);">
+						<div class="fw-bold">Firmware News</div>
+					</div>
+					<div class="px-3 px-md-4 py-3 py-md-4">
+						<div class="position-relative pb-1">
+							<div class="position-absolute top-0 bottom-0" style="left: 10px; width: 2px; background: rgba(255, 255, 255, 0.45);"></div>
+
+							<!-- News item -->
+							<div class="d-grid mb-4" style="grid-template-columns: 22px 1fr; column-gap: 14px; row-gap: 4px;">
+								<div class="d-flex justify-content-center align-items-start" style="padding-top: 5px;">
+									<div class="rounded-circle" style="width: 10px; height: 10px; background: #ffffff;"></div>
+								</div>
+								<div class="fw-semibold">Controller update requires manual flashing</div>
+								<div></div>
+								<div>
+									<div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+										<span class="badge border" style="background: rgba(217, 164, 65, 0.2); color: #f3cb79; border-color: rgba(217, 164, 65, 0.45) !important;">Manual Action</span>
+										<span class="small text-muted">2026-02-24</span>
+									</div>
+									<div class="small text-muted">If your controller is running a firmware with build date older than 2026-02-24 and you want to update to a version with build date newer than 2026-02-24, you must manually flash the new firmware using one of the recovery options (WebUSB or <code>esptool</code>). The reason for this change is a new partition table that is incompatible with older firmware versions.</div>
+								</div>
+							</div>
+
+							<!-- News item -->
+							<div class="d-grid mb-4" style="grid-template-columns: 22px 1fr; column-gap: 14px; row-gap: 4px;">
+								<div class="d-flex justify-content-center align-items-start" style="padding-top: 5px;">
+									<div class="rounded-circle" style="width: 10px; height: 10px; background: #ffffff;"></div>
+								</div>
+								<div class="fw-semibold">New naming scheme for firmware channels</div>
+								<div></div>
+								<div>
+									<div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+										<span class="badge border" style="background: rgba(79, 148, 212, 0.2); color: #9acbf7; border-color: rgba(79, 148, 212, 0.45) !important;">Notice</span>
+										<span class="small text-muted">2026-02-24</span>
+									</div>
+									<div class="small text-muted">Firmware channels were previously named <code>latest</code> and <code>stable</code>. The new naming scheme is <code>dev</code> (replaces <code>latest</code>), <code>testing</code> (replaces <code>stable</code>) and <code>stable</code> (new). The stable channel only contains firmware that has undergone manual testing, whereas <code>dev</code> and <code>testing</code> are outputs of the CI/CD pipeline.</div>
+								</div>
+							</div>
+
+							<!-- News item -->
+							<div class="d-grid" style="grid-template-columns: 22px 1fr; column-gap: 14px; row-gap: 4px;">
+								<div class="d-flex justify-content-center align-items-start" style="padding-top: 5px;">
+									<div class="rounded-circle" style="width: 10px; height: 10px; background: #ffffff;"></div>
+								</div>
+								<div class="fw-semibold">Firmware publicly available</div>
+								<div></div>
+								<div>
+									<div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+										<span class="badge border" style="background: rgba(55, 201, 100, 0.2); color: #8ee7a8; border-color: rgba(55, 201, 100, 0.45) !important;">Done</span>
+										<span class="small text-muted">2026-01-16</span>
+									</div>
+									<div class="small text-muted">Firmware updates for ESPARGOS are now publicly available from this website, and are automatically updated using our CI/CD pipeline.</div>
 								</div>
 							</div>
 						</div>
@@ -311,11 +406,11 @@ menu:
 
 		<h5>Command Line</h5>
 		<div class="p-2">
-			<pre class="m-0"><code class="language-bash" style="background: black;"># Download latest firmware files from espargos.net
+			<pre class="m-0"><code class="language-bash" style="background: black;"># Download dev firmware files from espargos.net
 cd /tmp
-wget https://espargos.net/firmware/latest/espargos-sensor-firmware.bin
-wget https://espargos.net/firmware/latest/espargos-controller-firmware.bin
-wget https://espargos.net/firmware/latest/espargos-controller-assets.bin
+wget https://espargos.net/firmware/dev/espargos-sensor-firmware.bin
+wget https://espargos.net/firmware/dev/espargos-controller-firmware.bin
+wget https://espargos.net/firmware/dev/espargos-controller-assets.bin
 
 # Upload firmware to ESPARGOS:
 # * Change ESPARGOS_HOST to the IP address / hostname of your ESPARGOS device.
@@ -510,9 +605,14 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 							</thead>
 							<tbody>
 								<tr>
-									<td class="fw-semibold">Latest</td>
-									<td class="small text-muted">{{< firmware-meta channel="latest" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="latest" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-latest-manifest.json"></esp-web-install-button></td>
+									<td class="fw-semibold">Dev</td>
+									<td class="small text-muted">{{< firmware-meta channel="dev" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="dev" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
+									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-dev-manifest.json"></esp-web-install-button></td>
+								</tr>
+								<tr>
+									<td class="fw-semibold">Testing</td>
+									<td class="small text-muted">{{< firmware-meta channel="testing" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="testing" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
+									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-testing-manifest.json"></esp-web-install-button></td>
 								</tr>
 								<tr>
 									<td class="fw-semibold">Stable</td>
@@ -531,7 +631,7 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 				<li>Make sure to install <a href="https://github.com/espressif/esptool">esptool</a>. It is included in <a href="https://github.com/espressif/esp-idf">ESP-IDF</a>, but full installation of ESP-IDF is not required.</li>
 				<li>Connect ESPARGOS to your computer via USB. It will appear as a USB serial device, assumed to be named <code>/dev/ttyUSB0</code> in the following.</li>
 				<li>Execute the following command to flash the recovery image. This will reset ESPARGOS to factory settings:</li>
-				<pre class="m-0"><code class="language-bash" style="background: black;">wget https://espargos.net/firmware/latest/espargos-controller-recovery.bin
+				<pre class="m-0"><code class="language-bash" style="background: black;">wget https://espargos.net/firmware/dev/espargos-controller-recovery.bin
 esptool --chip esp32 -b 2000000 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-size 16MB --flash-freq 40m 0x0000 espargos-controller-recovery.bin</code></pre>
 			</ul>
 		</p>

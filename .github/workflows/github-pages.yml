@@ -56,14 +56,14 @@ jobs:
           submodules: recursive
           path: espargos.github.io
 
-      - name: Download firmware artifacts (latest + stable)
+      - name: Download firmware artifacts (dev + testing)
         env:
           CONTROLLER_FIRMWARE_TOKEN: ${{ secrets.CONTROLLER_FIRMWARE_TOKEN }}
           SENSOR_FIRMWARE_TOKEN: ${{ secrets.SENSOR_FIRMWARE_TOKEN }}
         run: |
           set -euo pipefail
-          mkdir -p ./espargos.github.io/site/content/firmware/latest
-          mkdir -p ./espargos.github.io/site/content/firmware/stable
+          mkdir -p ./espargos.github.io/site/content/firmware/dev
+          mkdir -p ./espargos.github.io/site/content/firmware/testing
 
           for repo in controller-firmware sensor-firmware; do
             if [[ "$repo" == "controller-firmware" ]]; then
@@ -79,12 +79,12 @@ jobs:
               exit 1
             fi
 
-            for branch in main stable; do
+            for branch in main testing; do
               echo "Finding artifacts for $repo, branch $branch"
 
-              channel="latest"
-              if [[ "$branch" == "stable" ]]; then
-                channel="stable"
+              channel="dev"
+              if [[ "$branch" == "testing" ]]; then
+                channel="testing"
               fi
 
               run_id=$(GH_TOKEN="$token" gh api \

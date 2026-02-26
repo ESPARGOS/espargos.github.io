@@ -1,0 +1,13 @@
+{
+  "name": "espargos-controller-firmware",
+  "version": "testing",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "testing/espargos-controller-recovery.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
