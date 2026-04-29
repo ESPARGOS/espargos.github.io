@@ -66,6 +66,43 @@ pre {
 	border: 2px solid white;
 }
 
+.setup-step {
+	border-color: rgba($primary, 0.45) !important;
+	border-left: 6px solid $primary !important;
+	background: rgba($primary, 0.035);
+}
+
+.setup-step-heading {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+}
+
+.setup-step-number {
+	display: inline-flex;
+	flex: 0 0 2.6rem;
+	align-items: center;
+	justify-content: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 50%;
+	background: $primary;
+	box-shadow: 0 0 0 0.35rem rgba($primary, 0.16);
+	color: $body-bg-dark;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.setup-step-kicker {
+	display: block;
+	color: $primary;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
 main {
 	min-height: calc(100vh - 104px - 96px);
 }
