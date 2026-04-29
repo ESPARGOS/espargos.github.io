@@ -39,58 +39,120 @@ menu:
 			</div>
 		</div>
 
-		<h2>Power Supply</h2>
-		<div class="row py-4 cols-12 justify-content-md-center">
-			<div class="col col-12 col-lg-9 col-xl-7 text-center">
-				<img src="connectors.png" width="100%" loading="lazy">
+		<section class="border rounded p-4 my-4">
+			<h2 class="mt-0"><span class="badge bg-primary me-2">1</span>Power on ESPARGOS</h2>
+			<div class="row py-4 cols-12 justify-content-md-center">
+				<div class="col col-12 col-lg-9 col-xl-7 text-center">
+					<img src="connectors.png" width="100%" loading="lazy">
+				</div>
 			</div>
-		</div>
-		<p>
-			You have two options to power ESPARGOS:
+			<p>You have two options to power ESPARGOS:</p>
 			<ul>
 				<li><b>Power over Ethernet (PoE)</b>: Connect an IEEE 802.3at Type 1 compliant PoE injector or switch to the Ethernet port of ESPARGOS.
 					ESPARGOS will automatically detect the PoE power and use it to power both the controller and sensor boards.
 					This is the most convenient way to power ESPARGOS, as it requires only a single cable for both power and data.</li>
-				<li><b>USB-C</b>: Connect a USB-C power supply to ESPARGOS. Make sure it can provide at least 1A of current at 5V.</li>
+				<li><b>USB-C</b>: Connect a USB-C power supply to ESPARGOS (or just connect it to your computer). Make sure it can provide at least 1A of current at 5V.</li>
 			</ul>
-		</p>
+		</section>
 
-		<h2 class="mt-4">Web Interface</h2>
-		<div class="row py-4 cols-12 justify-content-md-center">
-			<div class="col col-12 col-lg 10 col-xl-5">
-				The ESPARGOS controller runs a web server, which provides a WebSocket / HTTP API for controlling ESPARGOS and streaming CSI data, as well as a user-friendly web interface to configure ESPARGOS.
-				The default IP address of ESPARGOS is <code>192.168.1.2/16</code>.
-				You can access the ESPARGOS web interface by following these steps:
-				<ul>
-					<li>Connect your computer to ESPARGOS. Make sure there is no other device in the network using IP address <code>192.168.1.2</code>.</li>
-					<li>Change your computer's IP address settings to:</li>
+		<section id="connect" class="border rounded p-4 my-4">
+			<h2 class="mt-0"><span class="badge bg-primary me-2">2</span>Connect to ESPARGOS</h2>
+			<p>Choose one of the following connection methods before opening the web interface:</p>
+			<div class="row mt-3">
+				<div class="col col-12 col-md-6">
+					<div class="h-100 border rounded p-3">
+						<h3 class="h5 mt-0">Over Ethernet</h3>
+						<p>The default IP address of ESPARGOS is <code>192.168.1.2/16</code>.</p>
+						<ul>
+							<li>Connect your computer to ESPARGOS. Make sure there is no other device in the network using IP address <code>192.168.1.2</code>.</li>
+							<li>Change your computer's IP address settings to:</li>
+							<ul>
+								<li>IP address: <code>192.168.1.100</code></li>
+								<li>Subnet Mask: <code>255.255.0.0</code></li>
+							</ul>
+							<li>Open <a href="http://192.168.1.2">http://192.168.1.2</a></li>
+						</ul>
+						<div class="alert alert-info">If you can't connect to ESPARGOS, try to perform a factory reset (see below) to change the network settings of ESPARGOS back to their default values.</div>
+					</div>
+				</div>
+				<div class="col col-12 col-md-6 mt-3 mt-md-0">
+					<div class="h-100 border rounded p-3">
+						<h3 class="h5 mt-0">Over USB</h3>
+						<p>Use the UART router script from <a href="https://github.com/ESPARGOS/pyespargos">pyespargos</a>. If you do not have pyespargos installed yet, jump forward to <a href="#pyespargos">step 4</a> first.</p>
+						<ul>
+							<li>Connect ESPARGOS to your computer via USB-C.</li>
+							<li>ESPARGOS will appear as a serial (UART) device on your computer. By default, this serial device will only show debug output, but ESPARGOS can be put in a special mode that tunnels traffic through UART.</li>
+							<li>For this, run the UART router:</li>
+						</ul>
+						<div class="d-flex justify-content-center mb-3 mt-0">
+							<pre><code>python tools/espargos-uart-router.py uart:/dev/ttyUSB0</code></pre>
+						</div>
+						<ul>
+							<li>Replace <code>/dev/ttyUSB0</code> with the serial device used by ESPARGOS on your computer (could also be e.g. <code>/dev/ttyACM0</code>, or <code>COM3</code>).</li>
+							<li>Open <a href="http://127.0.0.1:8400">http://127.0.0.1:8400</a> (the IP / port displayed by the UART router).</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="border rounded p-4 my-4">
+			<h2 class="mt-0"><span class="badge bg-primary me-2">3</span>Access Web Interface</h2>
+			<div class="row py-4 cols-12 justify-content-md-center">
+				<div class="col col-12 col-lg-10 col-xl-5">
+					<p>
+						The ESPARGOS controller runs a web server, which provides a WebSocket / HTTP API for controlling ESPARGOS and streaming CSI data, as well as a user-friendly web interface to configure ESPARGOS.
+					</p>
+					<p>Open the address matching the connection method you chose:</p>
 					<ul>
-						<li>IP address: <code>192.168.1.100</code></li>
-						<li>Subnet Mask: <code>255.255.0.0</code></li>
+						<li><b>Ethernet:</b> <a href="http://192.168.1.2">http://192.168.1.2</a></li>
+						<li><b>USB UART router:</b> <a href="http://127.0.0.1:8400">http://127.0.0.1:8400</a></li>
 					</ul>
-					<li>Open a web browser and navigate to <a href="http://192.168.1.2">http://192.168.1.2</a></li>
-				</ul>
-				<div class="alert alert-info">If you can't connect to ESPARGOS, try to perform a factory reset (see below) to change the network settings of ESPARGOS back to their default values.</div>
+				</div>
+				<div class="col col-12 col-lg-10 col-xl-7 text-center">
+					<img class="screenshot" src="interface-livecsi.png" width="100%">
+				</div>
 			</div>
-			<div class="col col-12 col-lg-10 col-xl-7 text-center">
-				<img class="screenshot" src="interface-livecsi.png" width="100%">
+			<div class="row py-4 cols-12 justify-content-md-center">
+				<div class="col col-12 col-lg-10 col-xl-7 text-center">
+					<img class="screenshot" src="interface-settings.png" width="100%">
+				</div>
+				<div class="col col-12 col-lg-10 col-xl-5 mt-3">
+					The web interface allows you to view live CSI data and change settings like:
+					<ul>
+						<li>Network configuration and hostname (ESPARGOS supports mDNS)</li>
+						<li>WiFi settings (channel, power) and calibration behavior</li>
+						<li>Perform a factory reset</li>
+						<li>Upload or automatically download <a href="/firmware">firmware updates</a> (only available via Ethernet connection)</li>
+					</ul>
+					<div class="alert alert-warning">You must make sure to select a country code that matches your location. Please note that not all channels will work depending on the country code.</div>
+				</div>
 			</div>
-		</div>
-		<div class="row py-4 cols-12 justify-content-md-center">
-			<div class="col col-12 col-lg-10 col-xl-7 text-center">
-				<img class="screenshot" src="interface-settings.png" width="100%">
+		</section>
+
+		<section id="pyespargos" class="border rounded p-4 my-4">
+			<h2 class="mt-0"><span class="badge bg-primary me-2">4</span>Install and use pyespargos</h2>
+			<div class="row py-3 cols-12 align-items-center justify-content-md-center">
+				<div class="col col-12 col-md-3 col-xl-2 text-center mb-4">
+					<img src="/img/python-logo-green.svg" width="80%" loading="lazy" alt="pyespargos">
+				</div>
+				<div class="col col-12 col-md-12 col-xl-10 mt-3 mt-md-0">
+					<p>
+						Use <a href="https://github.com/ESPARGOS/pyespargos">pyespargos</a> to capture CSI data from Python, combine multiple ESPARGOS arrays, calibrate measurements and run the included demo applications.
+					</p>
+					<p>
+						Installation instructions, examples and demos are maintained in the <a href="https://github.com/ESPARGOS/pyespargos#installation">pyespargos README</a>.
+					</p>
+					<p>
+						pyespargos supports both the Ethernet and USB connection methods described above:
+						<ul>
+							<li><b>Ethernet:</b> pyespargos can connect directly to the IP address of ESPARGOS (e.g., <code>./demos/instantaneous-csi/instantaneous-csi.py 192.168.1.2</code>).</li>
+							<li><b>USB UART router:</b> pyespargos can connect to the serial device used by ESPARGOS (e.g., <code>./demos/instantaneous-csi/instantaneous-csi.py uart:/dev/ttyUSB0</code>). The UART router must not run simultaneously.</li>
+						</ul>
+					</p>
+				</div>
 			</div>
-			<div class="col col-12 col-lg-10 col-xl-5 mt-3">
-				The web interface allows you to view live CSI data and change settings like:
-				<ul>
-					<li>Network configuration and hostname (ESPARGOS supports mDNS)</li>
-					<li>WiFi settings (channel, power) and calibration behavior</li>
-					<li>Perform a factory reset</li>
-					<li>Upload <a href="/firmware">firmware updates</a></li>
-				</ul>
-				<div class="alert alert-warning">You must make sure to select a country code that matches your location. Please note that not all channels will work depending on the country code.</div>
-			</div>
-		</div>
+		</section>
 
 		<h2 class="mt-4">Reboot and Factory Reset</h2>
 		<div class="row py-4 cols-12 justify-content-md-center gap-3">
