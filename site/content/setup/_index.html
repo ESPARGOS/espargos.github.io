@@ -67,8 +67,8 @@ menu:
 			<div class="row mt-3">
 				<div class="col col-12 col-md-6">
 					<div class="h-100 border rounded p-3">
-						<h3 class="h5 mt-0">Over Ethernet</h3>
-						<p>The default IP address of ESPARGOS is <code>192.168.1.2/16</code>.</p>
+						<h3 class="h5 mt-0">Over Ethernet (Recommended)</h3>
+						<p>The default IPv4 address configuration of ESPARGOS is <code>192.168.1.2/16</code>.</p>
 						<ul>
 							<li>Connect your computer to ESPARGOS. Make sure there is no other device in the network using IP address <code>192.168.1.2</code>.</li>
 							<li>Change your computer's IP address settings to:</li>
@@ -76,14 +76,17 @@ menu:
 								<li>IP address: <code>192.168.1.100</code></li>
 								<li>Subnet Mask: <code>255.255.0.0</code></li>
 							</ul>
+							<li>Other IP address settings will also work, as long as your computer is in the <code>192.168.1.0/16</code> subnet.</li>
 							<li>Open <a href="http://192.168.1.2">http://192.168.1.2</a></li>
+							<li>ESPARGOS also supports IPv6, both link-local and global addresses (addresses shown on web interface).</li>
 						</ul>
 						<div class="alert alert-info">If you can't connect to ESPARGOS, try to perform a factory reset (see below) to change the network settings of ESPARGOS back to their default values.</div>
 					</div>
 				</div>
 				<div class="col col-12 col-md-6 mt-3 mt-md-0">
 					<div class="h-100 border rounded p-3">
-						<h3 class="h5 mt-0">Over USB</h3>
+						<h3 class="h5 mt-0">Over USB (Limited Throughput)</h3>
+						<p>The USB interface of ESPARGOS is actually connected to a USB-to-serial converter, so it has limited throughput compared to the Ethernet interface. For demanding real-time applications, we recommend using the Ethernet interface.</p>
 						<p>Use the UART router script from <a href="https://github.com/ESPARGOS/pyespargos">pyespargos</a>. If you do not have pyespargos installed yet, jump forward to <a href="#pyespargos">step 4</a> first.</p>
 						<ul>
 							<li>Connect ESPARGOS to your computer via USB-C.</li>
@@ -112,7 +115,7 @@ menu:
 					<p>
 						The ESPARGOS controller runs a web server, which provides a WebSocket / HTTP API for controlling ESPARGOS and streaming CSI data, as well as a user-friendly web interface to configure ESPARGOS.
 					</p>
-					<p>Open the address matching the connection method you chose:</p>
+					<p>Open the address matching the connection method you chose (these are only the default addresses, may vary if you configured a different IP address / port):</p>
 					<ul>
 						<li><b>Ethernet:</b> <a href="http://192.168.1.2">http://192.168.1.2</a></li>
 						<li><b>USB UART router:</b> <a href="http://127.0.0.1:8400">http://127.0.0.1:8400</a></li>
