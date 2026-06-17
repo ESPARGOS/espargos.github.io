@@ -4,3 +4,8 @@ title = 'ESPARGOS Website'
 theme = 'espargostheme'
 relativeURLs = true
 
+# Hugo v0.158+ blocks text/html content files by default via security.allowContent.
+# This site uses .html files in content/, so allow that media type.
+[security]
+  allowContent = ['.*']
+
