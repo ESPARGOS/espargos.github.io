@@ -236,13 +236,13 @@ layout: list
 	</div>
 
 	<div class="container col-xl-12 px-3 py-1">
-		<h2 class="fw-bold px-0 mb-3">Real-Time Indoor Localization Demo</h2>
+		<h2 class="fw-bold px-0 mb-3">Research Application: Real-Time Indoor Localization</h2>
 		<div class="row align-items-center justify-content-md-center py-3">
 			<div class="col col-12">
 				<p>
-					With ESPARGOS, existing WiFi devices like smartphones, robots and other machines can be localized in indoor environments without requiring any changes to those devices.
-					In line-of-sight environments, ESPARGOS can simply locate devices by triangulation. <a href="https://dichasus.inue.uni-stuttgart.de/tutorials/tutorial/dissimilarity-metric-channelcharting/">Channel Charting</a> allows the system to locate devices even if there is no line-of-sight path between ESPARGOS and the end device.
-					This application was publicly demonstrated at the Berlin 6G Conference 2024.
+					ESPARGOS passively measures the phase-coherent CSI of signals from existing WiFi devices like smartphones, robots and other machines, without requiring any changes to those devices.
+					From these measurements, host-side algorithms can estimate where a device is: in line-of-sight environments by triangulation, or, even without a line-of-sight path, using <a href="https://dichasus.inue.uni-stuttgart.de/tutorials/tutorial/dissimilarity-metric-channelcharting/">Channel Charting</a>.
+					Localization is a research application built on top of the ESPARGOS measurement data (e.g. with <code>pyespargos</code>), not a function of the device itself; it was publicly demonstrated at the Berlin 6G Conference 2024.
 				</p>
 			</div>
 			<div class="col col-12 col-lg-8 col-xl-7 mt-4">

@@ -118,7 +118,7 @@ jobs:
           mkdir -p ./espargos.github.io/site/content/ce
 
           # Latest successful "Build manual" run on main produces the "pdfs"
-          # artifact containing manual.pdf and ce-declaration.pdf.
+          # artifact containing manual.pdf, ce-declaration.pdf and datasheet.pdf.
           run_id=$(GH_TOKEN="$MANUAL_TOKEN" gh api \
             repos/ESPARGOS/espargos-one-manual/actions/workflows/build-manual.yml/runs \
             -f branch=main \
@@ -134,6 +134,7 @@ jobs:
             -D "$tmp"
 
           cp "$tmp/manual.pdf"         ./espargos.github.io/site/content/setup/espargos-one-manual.pdf
+          cp "$tmp/datasheet.pdf"      ./espargos.github.io/site/content/setup/espargos-one-datasheet.pdf
           cp "$tmp/ce-declaration.pdf" ./espargos.github.io/site/content/ce/espargos-one-ce-declaration.pdf
 
       - name: Install Hugo CLI
