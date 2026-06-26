@@ -3,27 +3,21 @@ title: "Firmware"
 draft: false
 type: page
 layout: article
-
-menu:
-  main:
-    identifier: "firmware"
-    name: "Firmware"
 ---
 
 <main class="flex-shrink-0">
 	<div class="container">
 		<div class="row py-3 cols-12">
-			<h1 class="px-0">Firmware</h1>
+			<h1 class="px-0">ESPARGOS One Firmware</h1>
 		</div>
 
 		<div class="row py-2 cols-12 justify-content-center">
-			<div class="col mb-2 col-8 col-sm-8 col-md-3 col-lg-3 col-xl-2">
-				<img src="/img/espargos-next.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" loading="lazy">
+			<div class="col mb-2 col-8 col-sm-8 col-md-3 col-lg-3 col-xl-1">
+				<img src="/img/espargos-next-enhanced.png" class="d-block mx-lg-auto img-fluid" alt="Photo of ESPARGOS" loading="lazy">
 			</div>
-			<div class="col mt-3 col-11 col-md-9 col-lg-7 col-xl-7">
+			<div class="col mt-3 col-11 col-md-9 col-lg-7 col-xl-6">
 				<p>
-					Below, you can download the firmware for the current hardware revision of ESPARGOS (device looks as shown in picture).
-					Firmware is regularly updated!
+					Below, you can download the firmware for ESPARGOS One (device looks as shown in picture).
 				</p>
 			</div>
 		</div>
@@ -439,7 +433,7 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 	<script>hljs.highlightAll();</script>
 
 
-	<h2 class="mt-4">Sensor Update Behavior</h2>
+	<!--<h2 class="mt-4">Sensor Update Behavior</h2>
 		<div class="row cols-12 justify-content-md-center">
 			<div class="col col-12 col-lg-8 col-xl-5 text-center">
 				<img id="espargos-sensorupdate" src="../setup/lowres/espargos-render-sensors-red.png" style="width: 100%; transform: scale(1.2);">
@@ -593,13 +587,11 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 					<li>In the end, the sensors will flash both red and green LEDs simultaneously to indicate that the update was succesful.</li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 
 		<h2 id="recovery">Recovery Instructions</h2>
-		<div class="alert alert-info">Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process. You cannot "brick" ESPARGOS by due to firmware issues.</div>
-		<p>
-			<i>Recovery is only possible with the current hardware revision, prototype boards do not support this recovery method!</i>
-		</p>
+		<div class="alert alert-info">Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process. A failed firmware update cannot "brick" ESPARGOS.</div>
+
 		<h4>Controller Firmware Recovery</h4>
 		<h5>From a WebUSB-enabled Browser</h5>
 		<p>

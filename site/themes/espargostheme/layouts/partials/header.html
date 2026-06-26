@@ -10,7 +10,7 @@
 				{{ $currentPage := . }}
 				{{ range .Site.Menus.main }}
 				<li class="nav-item">
-					<a href="{{ .Page.Permalink }}" title="{{ .Title }}" class="nav-link text-white fw-bold {{if (in $currentPage.Permalink .Page.Permalink) }} active{{end}}" aria-current="page">{{ .Name }}</a>
+					<a href="{{ .Page.RelPermalink }}" title="{{ .Title }}" class="nav-link text-white fw-bold {{if (in $currentPage.Permalink .Page.Permalink) }} active{{end}}" aria-current="page">{{ .Name }}</a>
 				</li>
 				{{ end }}
 			</ul>

@@ -8,70 +8,33 @@ layout: list
 <div class="container col-xxl-8 px-4 py-1">
 	<div class="alert alert-info d-flex p-3 align-items-center" role="alert">
 		<div class="mx-2">
-			<b>Update December 2025</b>: We have finished the redesign of ESPARGOS for manufacturing. Please subscribe to <a class="alert-link text-white text-underline-hover" href="#" onclick="document.querySelector('.rm-open-popup').click(); return false;">email updates</a> to be notified about our next steps in 2026!
+			<b>Update June 2026</b>: We are setting up online shop / payment infrastructure and will soon make ESPARGOS One available to EU-based professionals. Sign up for <a class="alert-link text-white text-underline-hover" href="#" onclick="document.querySelector('.rm-open-popup').click(); return false;">email updates</a> to be notified when that happens!
 		</div>
 	</div>
 
 	<div class="row flex-lg-row-reverse align-items-center g-5 py-3">
 		<div class="col-10 col-sm-10 col-md-10 col-lg-4">
-			<img src="/img/espargos-next.png" class="d-block mx-lg-auto img-fluid p-4" alt="Photo of ESPARGOS" width="550"
+			<img src="/img/espargos-next-enhanced.png" class="d-block mx-lg-auto img-fluid p-4" alt="Photo of ESPARGOS" width="550"
 				height="550" loading="lazy" style="transform: rotateY(180deg);">
 		</div>
 		<div class="col-lg-8">
-			<h1 class="display-5 fw-bold lh-1 mb-3">ESPARGOS: ESP32-based WiFi sensing array</h1>
+			<h1 class="display-5 fw-bold lh-1 mb-3">Digital <span class="text-gradient">Phased Arrays</span>, Made <span class="text-gradient">Affordable</span></h1>
 			<p class="lead">
-				Develop and deploy WiFi sensing applications effortlessly: ESPARGOS is a phase-coherent ESP32 antenna array.
+				ESPARGOS builds low-cost digital phased arrays for wireless sensing from commercial off-the-shelf wireless communications chips.
+				<a href="/espargos-one/">ESPARGOS One</a> is our first 2 &times; 4 antenna dual-polarized 2.4 GHz Wi-Fi antenna array, built from phase-synchronized ESP32 chips.
 			</p>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-				<a href="/datasets/" type="button" class="btn btn-dark btn-lg px-4 me-md-1">Datasets</a>
+				<a class="btn btn-dark text-white btn-lg rm-open-popup me-md-1">Sign up for Updates</a>
+				<a href="/espargos-one/" type="button" class="btn text-white btn-outline-secondary btn-lg px-4 me-md-1">ESPARGOS One</a>
 				<a href="/docs/" type="button" class="btn text-white btn-outline-secondary btn-lg px-4 me-md-1">Documentation</a>
-				<a class="btn text-white btn-outline-secondary btn-lg rm-open-popup me-md-1">Sign up for Updates</a>
 			</div>
 		</div>
 	</div>
 </div>
 
 <main class="flex-shrink-0">
-	<div class="container">
-		<div class="row g-4 py-3 row-cols-1 row-cols-md-3">
-			<div class="feature col">
-				<div class="feature-icon mb-3">
-					<img style="height: 100px; max-width: 100%;" src="/img/csi.svg">
-				</div>
-				<h2>Channel State Information</h2>
-				<p>
-					ESPARGOS provides <b>Channel State Information (CSI)</b> estimated from the L-LTF and HT-LTF pilot symbols in real time.
-					Viewed in frequency domain, CSI contains information about the phase shift and attenuation experienced by the OFDM subcarriers.
-					After a fourier transform, CSI can be interpreted as a channel impulse response.
-					ESPARGOS supports channel bonding, achieving a bandwidth of up to 40 MHz.
-				</p>
-			</div>
-			<div class="feature col">
-				<div class="feature-icon mb-3">
-					<img style="height: 100px; max-width: 100%;" src="/img/poe.svg">
-				</div>
-				<h2>Power over Ethernet</h2>
-				<p>
-					Avoid the hassle of running separate data, power and signalling cables: ESPARGOS is <b>controlled over Ethernet</b>, provides a simple web interface for configuration and can be powered from a power over ethernet (PoE) switch / injector.
-					This makes ESPARGOS easy to use and deployments are quick to set up.
-				</p>
-			</div>
-			<div class="feature col">
-				<div class="feature-icon mb-3">
-					<img style="height: 100px; max-width: 100%;" src="/img/python-logo-green.svg">
-				</div>
-				<h2>Python Library</h2>
-				<p>
-					With <a href="https://github.com/ESPARGOS/pyespargos"><code>pyespargos</code></a>, there is an easy-to-use library to control one or multiple ESPARGOS devices.
-					Configure ESPARGOS with the built-in web interface, and then easily stream channel state information to your application in real time.
-					The python library comes with a collection of demo applications to get you started.
-				</p>
-			</div>
-		</div>
-	</div>
-
 	<div class="container col-xl-12 px-3 py-1">
-		<h3 class="fw-bold px-0 mb-3">Demo Applications</h3>
+		<h2 class="fw-bold px-0 mb-3">Demo Applications</h2>
 		<div class="album py-2">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
@@ -236,32 +199,12 @@ layout: list
 	</div>
 
 	<div class="container col-xl-12 px-3 py-1">
-		<h2 class="fw-bold px-0 mb-3">Research Application: Real-Time Indoor Localization</h2>
-		<div class="row align-items-center justify-content-md-center py-3">
-			<div class="col col-12">
-				<p>
-					ESPARGOS passively measures the phase-coherent CSI of signals from existing WiFi devices like smartphones, robots and other machines, without requiring any changes to those devices.
-					From these measurements, host-side algorithms can estimate where a device is: in line-of-sight environments by triangulation, or, even without a line-of-sight path, using <a href="https://dichasus.inue.uni-stuttgart.de/tutorials/tutorial/dissimilarity-metric-channelcharting/">Channel Charting</a>.
-					Localization is a research application built on top of the ESPARGOS measurement data (e.g. with <code>pyespargos</code>), not a function of the device itself; it was publicly demonstrated at the Berlin 6G Conference 2024.
-				</p>
-			</div>
-			<div class="col col-12 col-lg-8 col-xl-7 mt-4">
-				<div width="100%" style="overflow: hidden; margin: 0 auto;">
-					<video class="minimal-controls" muted style="width: 122%; margin-left: -11%;" onloadstart="this.playbackRate = 1.5;">
-						<source src="video/realtime-localization.webm" type="video/webm">
-					</video>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container col-xl-12 px-3 py-1">
 		<h2 id="obtain" class="fw-bold px-0 mb-3">How to obtain ESPARGOS?</h2>
 		<p>
 			We have started to provide ESPARGOS devices to research groups and industry partners within the EU, but availability ist still extremely limited.
-			We are currently working on scaling up production in spring / summer 2026, but many legal and some technical challenges are still being sorted out.
+			We are currently working on scaling up production in summer 2026, but many legal and some technical challenges are still being sorted out.
 			If you would like to be notified when ESPARGOS becomes more widely available, please sign up for updates below.
-			In the meantime, check out our <a href="/datasets/">public datasets</a>!
+			In the meantime, check out our <a href="/research/">public datasets</a>!
 		</p>
 		<a class="btn btn-dark btn-lg rm-open-popup">Sign up for Updates</a>
 	</div>

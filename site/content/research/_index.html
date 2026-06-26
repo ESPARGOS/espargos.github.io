@@ -1,0 +1,185 @@
+---
+title: "Research"
+draft: false
+type: page
+layout: list
+
+menu:
+  main:
+    identifier: "research"
+    name: "Research"
+    weight: 20
+---
+
+<div class="container col-xxl-8 px-4 py-1">
+	<div class="row flex-lg-row-reverse align-items-center g-5 py-3">
+		<div class="col-12 col-lg-5">
+			<div class="rounded-3 overflow-hidden shadow-sm" style="background: black; font-size: 0; line-height: 0;">
+				<video class="minimal-controls" muted autoplay loop playsinline style="width: 100%; display: block;" onloadstart="this.playbackRate = 1.5;">
+					<source src="/video/realtime-localization.webm" type="video/webm">
+				</video>
+			</div>
+		</div>
+		<div class="col-lg-7">
+			<h1 class="display-5 fw-bold lh-1 mb-3"><span class="text-gradient">Research</span></h1>
+			<p class="lead">
+				ESPARGOS is built for wireless sensing research. Explore the public CSI datasets we have recorded with ESPARGOS, and the papers, talks and other resources that use it.
+			</p>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+				<a href="#datasets" type="button" class="btn btn-dark btn-lg px-4 me-md-1">Browse Datasets</a>
+				<a href="#publications" type="button" class="btn text-white btn-outline-secondary btn-lg px-4 me-md-1">Publications</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<main class="flex-shrink-0">
+	<div class="container">
+		<h2 id="publications" class="fw-bold px-0 mb-3 mt-4">Publications and Resources</h2>
+		<div class="album py-2">
+			<div class="container px-0">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://www.youtube.com/watch?v=9oFJe6pqWIo">
+								<img class="card-img-top" src="/publications/sdra2025-thumbnail.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://www.youtube.com/watch?v=9oFJe6pqWIo">Presentation at SDR Academy 2025</a></b></p>
+								<p class="card-text">This presentation, given at the SDR Academy during the HAM radio conference 2025 in Friedrichshafen, covers some additional technical details of ESPARGOS.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://www.youtube.com/watch?v=9oFJe6pqWIo">Watch on YouTube</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://arxiv.org/abs/2504.09924">
+								<img class="card-img-top" src="/publications/paper_pcc.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://arxiv.org/abs/2504.09924">Paper on Passive Channel Charting</a></b></p>
+								<p class="card-text">In this paper, we propose passive channel charting, a novel passive target localization
+									technique that is, like conventional channel charting, based on dimensionality reduction.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://arxiv.org/abs/2504.09924">Read on arXiv</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://github.com/Jeija/ESPARGOS-Passive-ChannelCharting">
+								<img class="card-img-top w-100" src="/publications/pcc_concept.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://github.com/Jeija/ESPARGOS-Passive-ChannelCharting">Passive Target Localization</a></b>
+								</p>
+								<p class="card-text">Localization of passive targets (human or robot) based on clasical triangulation or
+									based on two different neural network approaches (supervised or self-supervised "passive channel
+									charting").</p>
+
+								<a class="btn btn-outline-primary w-100"
+									href="https://github.com/Jeija/ESPARGOS-Passive-ChannelCharting">View on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center py-3" href="https://github.com/Jeija/ESPARGOS-WiFi-ChannelCharting">
+								<img class="card-img-top w-75" src="/publications/triplet_cc_transformed.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://github.com/Jeija/ESPARGOS-WiFi-ChannelCharting">Channel Charting with ESPARGOS</a></b>
+								</p>
+								<p class="card-text">Indoor localization with Siamese Neural Network-based and Triplet Neural Network-Based
+									Channel Charting. Also contains code for triangulation-based localization.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://github.com/Jeija/ESPARGOS-WiFi-ChannelCharting">View
+									on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://www.youtube.com/watch?v=sXwDrcd1t-E">
+								<img class="card-img-top" src="/publications/yt-see-wifi-thumbnail.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://www.youtube.com/watch?v=sXwDrcd1t-E">This ESP32 Antenna Array Can See WiFi</a></b></p>
+								<p class="card-text">A video introduction to ESPARGOS: how an array of ESP32 microcontrollers can be turned into a phase-coherent antenna array that "sees" WiFi signals for wireless sensing and localization.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://www.youtube.com/watch?v=sXwDrcd1t-E">Watch on YouTube</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://arxiv.org/abs/2408.16377">
+								<img class="card-img-top" src="/publications/paper_kleinheubach.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://arxiv.org/abs/2408.16377">Paper on ESPARGOS Datasets</a></b></p>
+								<p class="card-text">This research paper describes what goes into producing one of our ESPARGOS datasets. It
+									also briefly explains how to apply Channel Charting to one of the datasets.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://arxiv.org/abs/2408.16377">Read on arXiv</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative">
+							<a class="text-center" href="https://arxiv.org/abs/2502.09405">
+								<img class="card-img-top w-100" src="/publications/paper_wsa_2023.png">
+							</a>
+
+							<div class="card-body">
+								<p class="card-title"><b><a class="text-white text-underline-hover"
+											href="https://arxiv.org/abs/2502.09405">Paper on ESPARGOS Hardware Architecture</a></b></p>
+								<p class="card-text">This research paper explains how the hardware architecture of ESPARGOS achieves
+									phase-coherence. Despite describing an older hardware revision, the basic explanations and results still
+									apply.</p>
+
+								<a class="btn btn-outline-primary w-100" href="https://arxiv.org/abs/2502.09405">Read on arXiv</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<h2 id="datasets" class="fw-bold px-0 mb-3 mt-2">Datasets</h2>
+		<p>
+			Our datasets are collections of channel state information (CSI) measurements created with ESPARGOS for various interesting environments.
+			With our datasets, you can benchmark your CSI-based algorithms without the hassle of setting up experiments and collecting data.
+			Once your algorithms are verified to work on the datasets, you can easily switch over to a real-time implementation with actual ESPARGOS hardware.
+		</p>
+		<p>
+			ESPARGOS datasets build on extensive experience providing datasets with <a href="https://dichasus.inue.uni-stuttgart.de/">DICHASUS</a>, which you may want to consider if you need even higher-quality CSI datasets.
+		</p>
+
+		{{< dataset-list >}}
+
+		<h2 class="fw-bold px-0 mb-3 mt-5">Research Application: Real-Time Indoor Localization</h2>
+		<div class="row justify-content-md-center py-2">
+			<div class="col col-12">
+				<p>
+					ESPARGOS passively measures the phase-coherent CSI of signals from existing WiFi devices like smartphones, robots and other machines, without requiring any changes to those devices.
+					From these measurements, host-side algorithms can estimate where a device is: in line-of-sight environments by triangulation, or, even without a line-of-sight path, using <a href="https://dichasus.inue.uni-stuttgart.de/tutorials/tutorial/dissimilarity-metric-channelcharting/">Channel Charting</a>.
+					Localization is a research application built on top of the ESPARGOS measurement data (e.g. with <code>pyespargos</code>), not a function of the device itself; it was publicly demonstrated at the Berlin 6G Conference 2024.
+				</p>
+			</div>
+		</div>
+	</div>
+</main>

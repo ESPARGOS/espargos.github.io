@@ -165,3 +165,73 @@ video.minimal-controls { outline: none; }
 	border-bottom: 14px solid transparent;
 	border-left: 22px solid rgba(255, 255, 255, 0.95);
 }
+
+// Brand green gradient (from the company rollup design) for emphasising
+// individual words in headings, e.g. on the home page hero.
+.text-gradient {
+	background: linear-gradient(90deg, #5edf34 0%, #37c964 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+// Clickable "documentation / downloads" link cards (e.g. on the ESPARGOS One page):
+// whole card is a link, with an icon tile, hover lift and a green accent.
+.doc-link-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	height: 100%;
+	padding: 1.25rem 1.35rem;
+	border: 1px solid #2c3338;
+	border-radius: 0.75rem;
+	background: rgba(255, 255, 255, 0.02);
+	text-decoration: none;
+	color: inherit;
+	transition: transform 0.15s ease, border-color 0.15s ease,
+		box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.doc-link-card:hover,
+.doc-link-card:focus-visible {
+	transform: translateY(-3px);
+	border-color: #37c964;
+	background: rgba(55, 201, 100, 0.06);
+	box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.35);
+	outline: none;
+}
+
+.doc-link-icon {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 0.6rem;
+	background: linear-gradient(135deg, #5edf34 0%, #37c964 100%);
+	color: #fff;
+}
+
+.doc-link-icon svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.doc-link-body {
+	display: flex;
+	flex-direction: column;
+}
+
+.doc-link-title {
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: #fff;
+	margin-bottom: 0.25rem;
+}
+
+.doc-link-text {
+	color: #adb5bd;
+	font-size: 0.95rem;
+}

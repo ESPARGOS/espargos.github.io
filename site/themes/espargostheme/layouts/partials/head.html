@@ -10,9 +10,9 @@
 	{{ $favicon194 := resources.Get "favicon-194x194.png" }}
 
 
-	<link rel="icon" type="image/png" sizes="194x194" href="{{ $favicon16.Permalink }}" />
-	<link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.Permalink }}" />
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon194.Permalink }}" />
+	<link rel="icon" type="image/png" sizes="194x194" href="{{ $favicon16.RelPermalink }}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.RelPermalink }}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon194.RelPermalink }}" />
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,27 +21,27 @@
 	{{ $sass := resources.Get "espargos.scss" }}
 	{{ $style := $sass | css.Sass }}
 
-	<link rel="stylesheet" href="{{ $style.Permalink }}">
+	<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
 	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" }}
 
-	<script src="{{ $bootstrap.Permalink }}"></script>
+	<script src="{{ $bootstrap.RelPermalink }}"></script>
 
 	{{ $highlight := resources.Get "highlight.min.js" }}
 
-	<script src="{{ $highlight.Permalink }}"></script>
+	<script src="{{ $highlight.RelPermalink }}"></script>
 
 	{{ $copycode := resources.Get "copy-code.js" }}
 
-	<script src="{{ $copycode.Permalink }}"></script>
+	<script src="{{ $copycode.RelPermalink }}"></script>
 
 	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" }}
 
-	<script src="{{ $minimalVideoControls.Permalink }}"></script>
+	<script src="{{ $minimalVideoControls.RelPermalink }}"></script>
 
 	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" }}
 
-	<link rel="stylesheet" href="{{ $highlightTheme.Permalink }}">
+	<link rel="stylesheet" href="{{ $highlightTheme.RelPermalink }}">
 
 	<script src="https://t76eb400e.emailsys1a.net/form/290/526/7daafb4b48/popup.js?_g=1739457672" async></script>
 </head>

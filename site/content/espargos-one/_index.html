@@ -1,0 +1,117 @@
+---
+title: "ESPARGOS One"
+draft: false
+type: page
+layout: list
+
+menu:
+  main:
+    identifier: "espargos-one"
+    name: "ESPARGOS One"
+    weight: 10
+---
+
+<div class="container col-xxl-8 px-4 py-1">
+	<div class="row flex-lg-row-reverse align-items-center g-5 py-3">
+		<div class="col-8 col-sm-7 col-md-6 col-lg-4">
+			<img src="/img/espargos-next-enhanced.png" class="d-block mx-lg-auto img-fluid p-4" alt="Photo of ESPARGOS One" width="550"
+				height="550" loading="lazy" style="transform: rotateY(180deg);">
+		</div>
+		<div class="col-lg-8">
+			<h1 class="display-5 fw-bold lh-1 mb-3"><span class="text-gradient">ESPARGOS One</span></h1>
+			<p class="lead">
+				ESPARGOS One is our first phase-coherent ESP32 WiFi antenna array, and a powerful tool for wireless research: an 8-antenna sensing device controlled over Power-over-Ethernet that streams real-time channel state information to your application.
+			</p>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+				<a href="/espargos-one/espargos-one-datasheet.pdf" type="button" class="btn btn-dark btn-lg px-4 me-md-1" download>Datasheet (PDF)</a>
+				<a href="/espargos-one/espargos-one-manual.pdf" type="button" class="btn text-white btn-outline-secondary btn-lg px-4 me-md-1" download>Manual (PDF)</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<main class="flex-shrink-0">
+	<div class="container">
+		<div class="row g-4 py-3 row-cols-1 row-cols-md-3">
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/csi.svg">
+				</div>
+				<h2>Channel State Information</h2>
+				<p>
+					ESPARGOS provides <b>Channel State Information (CSI)</b> estimated from the L-LTF and HT-LTF pilot symbols in real time.
+					Viewed in frequency domain, CSI contains information about the phase shift and attenuation experienced by the OFDM subcarriers.
+					After a fourier transform, CSI can be interpreted as a channel impulse response.
+					ESPARGOS supports channel bonding, achieving a bandwidth of up to 40 MHz.
+				</p>
+			</div>
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/poe.svg">
+				</div>
+				<h2>Power over Ethernet</h2>
+				<p>
+					Avoid the hassle of running separate data, power and signalling cables: ESPARGOS is <b>controlled over Ethernet</b>, provides a simple web interface for configuration and can be powered from a power over ethernet (PoE) switch / injector.
+					This makes ESPARGOS easy to use and deployments are quick to set up.
+				</p>
+			</div>
+			<div class="feature col">
+				<div class="feature-icon mb-3">
+					<img style="height: 100px; max-width: 100%;" src="/img/python-logo-green.svg">
+				</div>
+				<h2>Python Library</h2>
+				<p>
+					With <a href="https://github.com/ESPARGOS/pyespargos"><code>pyespargos</code></a>, there is an easy-to-use library to control one or multiple ESPARGOS devices.
+					Configure ESPARGOS with the built-in web interface, and then easily stream channel state information to your application in real time.
+					The python library comes with a collection of demo applications to get you started.
+				</p>
+			</div>
+		</div>
+
+		<h2 class="fw-bold px-0 mb-3 mt-4">Technical Specifications</h2>
+		<div class="row g-4 align-items-center justify-content-center py-2">
+			<div class="col-12 col-lg-7">
+				<img src="/espargos-one/architecture.svg" class="img-fluid d-block mx-auto" alt="ESPARGOS One hardware block diagram" loading="lazy" style="max-height: 300px;">
+			</div>
+			<div class="col-12 col-lg-5">
+				<ul class="text-start mb-0">
+					<li>Provides phase-coherent CSI for 802.11g/n/ax packets</li>
+					<li>Bandwidth: 20 MHz, or 40 MHz for 802.11n channel bonding</li>
+					<li>100BASE-TX Ethernet with PoE for data / power</li>
+					<li>IEEE 802.3at Type 1 compliant PoE (class 3)</li>
+					<li>8&times; dual-polarized patch antennas (mixed linear / circular)</li>
+					<li>Reference signal input / output for coherent multi-array setups</li>
+					<li>&lambda; / 2 antenna spacing (60mm)</li>
+					<li>Power Consumption: ~3.5W</li>
+				</ul>
+				<p class="text-muted small mt-3 mb-0">Further details are available in the <a href="/espargos-one/espargos-one-datasheet.pdf">datasheet</a>.</p>
+			</div>
+		</div>
+
+		<h2 class="fw-bold px-0 mb-3 mt-5">Documentation &amp; Downloads</h2>
+		<div class="row row-cols-1 row-cols-md-2 g-4">
+			<div class="col">
+				<a href="/setup" class="doc-link-card">
+					<span class="doc-link-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 5.5 10.5v-5a.5.5 0 0 1 .771-.445z"/></svg>
+					</span>
+					<span class="doc-link-body">
+						<span class="doc-link-title">Setup &amp; Getting Started</span>
+						<span class="doc-link-text">Power up ESPARGOS One, connect to the web interface and stream CSI with <code>pyespargos</code>.</span>
+					</span>
+				</a>
+			</div>
+			<div class="col">
+				<a href="/firmware" class="doc-link-card">
+					<span class="doc-link-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+					</span>
+					<span class="doc-link-body">
+						<span class="doc-link-title">Firmware</span>
+						<span class="doc-link-text">Download and flash the latest sensor and controller firmware, or recover your device.</span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</main>

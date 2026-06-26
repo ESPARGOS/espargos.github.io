@@ -1,0 +1,16 @@
+{{- /* The datasets index has been merged into /research/. This section node only
+       exists to host the individual dataset bundles under /datasets/data/, so
+       redirect visitors of /datasets/ itself to the consolidated research page. */ -}}
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>Datasets — ESPARGOS</title>
+    <link rel="canonical" href="{{ "/research/" | absURL }}">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url={{ "/research/" | relURL }}">
+  </head>
+  <body>
+    <p>The datasets overview has moved to <a href="{{ "/research/" | relURL }}">Research</a>.</p>
+  </body>
+</html>
