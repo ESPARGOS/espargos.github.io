@@ -595,10 +595,13 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 		<h4>Controller Firmware Recovery</h4>
 		<h5>From a WebUSB-enabled Browser</h5>
 		<p>
-			With a WebUSB-enabled browser (e.g., Google Chrome), connect ESPARGOS to your computer via USB and click the appropriate button for your chosen channel to flash the recovery firmware directly from your browser.
+			With a WebUSB-enabled browser (e.g., Firefox, Google Chrome), connect ESPARGOS to your computer via USB and click the appropriate button for your chosen channel to flash the recovery firmware directly from your browser.
 			Note that this method is quite slow (can take around 10 minutes):
 		</p>
-		<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+		<!-- Self-hosted esp-web-tools built against a patched esptool-js that adds
+		     hardware-flow-control adapter support (e.g. CP2102C). This directory is
+		     generated (git-ignored) by site/scripts/build-esp-web-tools.sh. -->
+		<script type="module" src="/vendor/esp-web-tools/install-button.js"></script>
 		<div class="row justify-content-center my-3">
 			<div class="col-12 col-lg-9 col-xl-8">
 				<div class="border rounded-3 overflow-hidden">

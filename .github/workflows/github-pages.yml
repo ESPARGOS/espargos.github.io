@@ -146,8 +146,15 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Build self-hosted esp-web-tools (patched esptool-js)
+        working-directory: ./espargos.github.io/site
+        run: bash ./scripts/build-esp-web-tools.sh
       - name: Build with Hugo
         working-directory: ./espargos.github.io/site
         env:
