@@ -22,7 +22,7 @@ set -euo pipefail
 ESP_WEB_TOOLS_REPO="${ESP_WEB_TOOLS_REPO:-https://github.com/esphome/esp-web-tools.git}"
 ESP_WEB_TOOLS_REF="${ESP_WEB_TOOLS_REF:-10.2.1}"
 ESPTOOL_JS_REPO="${ESPTOOL_JS_REPO:-https://github.com/Jeija/esptool-js.git}"
-ESPTOOL_JS_REF="${ESPTOOL_JS_REF:-hardware-flow-control}"
+ESPTOOL_JS_REF="${ESPTOOL_JS_REF:-espargos}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SITE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
