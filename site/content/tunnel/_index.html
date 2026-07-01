@@ -1,0 +1,139 @@
+---
+title: "Web Tunnel"
+draft: false
+type: page
+layout: article
+---
+
+<main class="flex-shrink-0">
+	<div class="container">
+		<div class="row py-3 cols-12">
+			<h1 class="px-0">ESPARGOS Web Tunnel</h1>
+		</div>
+
+		<div class="row py-2 cols-12">
+			<div class="col px-0">
+				<p>
+					Connect to an ESPARGOS device over USB and use its built-in web interface right here in your
+					browser — no IP address, network cable or WiFi configuration required. This page opens the
+					device's USB serial port with the
+					<a href="https://developer.mozilla.org/docs/Web/API/Web_Serial_API" target="_blank" rel="noopener">Web Serial API</a>
+					and tunnels the device's web UI over that link, so you can view live status, inspect CSI and
+					change settings exactly as you would over the network.
+				</p>
+				<p class="text-muted small mb-0">
+					Requires a Chromium-based browser (Chrome, Edge or Opera) on desktop. Firmware updates are not
+					available over the tunnel — use the <a href="/firmware/">Firmware</a> page for that.
+				</p>
+			</div>
+		</div>
+
+		<div id="tunnel-unsupported" hidden class="row py-2 cols-12">
+			<div class="col px-0">
+				<div class="alert alert-warning mb-0" role="alert">
+					Your browser does not support the Web Serial API. Please use Chrome, Edge or another
+					Chromium-based desktop browser to use the Web Tunnel.
+				</div>
+			</div>
+		</div>
+
+		<div class="row py-3 align-items-center g-3">
+			<div class="col-auto">
+				<button id="tunnel-connect" class="btn btn-primary" type="button">Connect ESPARGOS via USB</button>
+				<button id="tunnel-disconnect" class="btn btn-outline-secondary" type="button" hidden>Disconnect</button>
+			</div>
+			<div class="col">
+				<span id="tunnel-status" class="text-muted small"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid px-3 px-lg-4">
+		<div id="tunnel-frame-wrap" hidden class="tunnel-frame-wrap pb-4">
+			<button id="tunnel-fullpage-toggle" class="tunnel-fullpage-toggle" type="button" title="Full page" aria-label="Toggle full page">
+				<svg class="tunnel-fp-icon tunnel-fp-enter" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+					<path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"/>
+				</svg>
+				<svg class="tunnel-fp-icon tunnel-fp-exit" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+					<path d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5m5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5M0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5m10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0z"/>
+				</svg>
+			</button>
+			<iframe id="tunnel-frame" class="tunnel-frame" title="ESPARGOS device web interface"></iframe>
+		</div>
+	</div>
+</main>
+
+<style>
+	.tunnel-frame-wrap {
+		position: relative;
+	}
+	.tunnel-frame {
+		width: 100%;
+		height: 82vh;
+		border: 1px solid var(--bs-border-color, #444);
+		border-radius: 0.5rem;
+		background: #111;
+		display: block;
+	}
+	/* semi-transparent overlay control sitting on the top-right corner of the device window */
+	.tunnel-fullpage-toggle {
+		position: absolute;
+		top: 0.6rem;
+		right: 0.6rem;
+		z-index: 5;
+		width: 2.3rem;
+		height: 2.3rem;
+		padding: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		background: rgba(0, 0, 0, 0.5);
+		border: 0;
+		border-radius: 0.4rem;
+		cursor: pointer;
+		opacity: 0.7;
+		transition: opacity 0.15s ease, background-color 0.15s ease;
+	}
+	.tunnel-fullpage-toggle:hover,
+	.tunnel-fullpage-toggle:focus-visible {
+		opacity: 1;
+		background: rgba(0, 0, 0, 0.78);
+	}
+	.tunnel-fp-icon {
+		display: block;
+	}
+	.tunnel-fp-exit {
+		display: none;
+	}
+	.tunnel-frame-wrap.tunnel-fullpage {
+		position: fixed;
+		inset: 0;
+		z-index: 2000;
+		margin: 0;
+		padding: 0;
+		background: #111;
+	}
+	.tunnel-frame-wrap.tunnel-fullpage .tunnel-frame {
+		height: 100vh;
+		border: 0;
+		border-radius: 0;
+	}
+	.tunnel-frame-wrap.tunnel-fullpage .tunnel-fullpage-toggle {
+		position: fixed;
+		top: 0.75rem;
+		right: 0.9rem;
+		z-index: 2001;
+	}
+	.tunnel-frame-wrap.tunnel-fullpage .tunnel-fp-enter {
+		display: none;
+	}
+	.tunnel-frame-wrap.tunnel-fullpage .tunnel-fp-exit {
+		display: block;
+	}
+	body.tunnel-fullpage-active {
+		overflow: hidden;
+	}
+</style>
+
+<script type="module" src="/tunnel/js/tunnel-app.js"></script>
