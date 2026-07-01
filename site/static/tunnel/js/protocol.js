@@ -1,5 +1,5 @@
-// ESPARGOS UART protocol — JS port of pyespargos/espargos/uart.py
-// Pure, transport-agnostic. Shared by the WebSerial client and the test simulator.
+// ESPARGOS UART protocol (host side). JS port of pyespargos/espargos/uart.py.
+// Pure and transport-agnostic: the client encodes requests and decodes the device's replies.
 
 export const UART_PROTOCOL_VERSION = 1;
 
@@ -15,7 +15,6 @@ export const FRAME = {
 
 export const STREAM_ID = { TRANSPORT: 0, CSI: 1 };
 export const RPC_METHOD = { GET: 0, POST: 1 };
-export const CSISTREAM_MAGIC = Uint8Array.from([0xe5, 0xa7, 0x60, 0x00]);
 
 const enc = new TextEncoder();
 const dec = new TextDecoder();
@@ -140,29 +139,6 @@ export function packRpcRequest(method, path, body) {
   return out;
 }
 
-export function parseRpcRequest(payload) {
-  const dv = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
-  const methodId = dv.getUint8(0);
-  const pathLen = dv.getUint16(1, true);
-  const bodyLen = dv.getUint32(3, true);
-  const path = dec.decode(payload.subarray(7, 7 + pathLen));
-  const body = payload.subarray(7 + pathLen, 7 + pathLen + bodyLen);
-  return { method: methodId === RPC_METHOD.GET ? "GET" : "POST", path, body };
-}
-
-export function packRpcResponse(status, contentType, body) {
-  const ctBytes = enc.encode(contentType || "");
-  const bodyBytes = body == null ? new Uint8Array(0) : body instanceof Uint8Array ? body : enc.encode(String(body));
-  const out = new Uint8Array(8 + ctBytes.length + bodyBytes.length);
-  const dv = new DataView(out.buffer);
-  dv.setUint16(0, status, true); // <HHI
-  dv.setUint16(2, ctBytes.length, true);
-  dv.setUint32(4, bodyBytes.length, true);
-  out.set(ctBytes, 8);
-  out.set(bodyBytes, 8 + ctBytes.length);
-  return out;
-}
-
 export function unpackRpcResponse(payload) {
   if (payload.length < 8) throw new Error("RPC response too short");
   const dv = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
@@ -178,21 +154,7 @@ export function unpackRpcResponse(payload) {
   };
 }
 
-// ---- HELLO pack/unpack ----
-
-export function packHello(device, revision, apiMajor, apiMinor) {
-  const d = enc.encode(device);
-  const r = enc.encode(revision);
-  const out = new Uint8Array(8 + d.length + r.length);
-  const dv = new DataView(out.buffer);
-  dv.setUint16(0, d.length, true);
-  dv.setUint16(2, r.length, true);
-  dv.setUint16(4, apiMajor, true);
-  dv.setUint16(6, apiMinor, true);
-  out.set(d, 8);
-  out.set(r, 8 + d.length);
-  return out;
-}
+// ---- HELLO unpack ----
 
 export function unpackHello(payload) {
   if (payload.length === 0) return {};
@@ -214,8 +176,4 @@ export function unpackHello(payload) {
 
 export function packStreamCtrl(streamId, enable) {
   return Uint8Array.from([streamId, enable ? 1 : 0]);
-}
-
-export function parseStreamCtrl(payload) {
-  return { streamId: payload[0], enable: payload[1] !== 0 };
 }

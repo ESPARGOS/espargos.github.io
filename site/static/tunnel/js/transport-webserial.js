@@ -26,7 +26,7 @@ const CONNECT_ATTEMPTS = 3;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Yield to the MACROTASK queue. Under heavy CSI the WebSerial readable stream always has buffered
-// chunks, so `reader.read()` resolves via microtasks and a tight read loop never lets tasks run —
+// chunks, so `reader.read()` resolves via microtasks and a tight read loop never lets tasks run,
 // starving the Service Worker's postMessage (which carries RPC requests) and timers, so commands
 // silently stop while CSI (handled inside the read loop) keeps flowing. A MessageChannel round-trip
 // is a real task with no setTimeout clamping, so this keeps throughput high while staying fair.
@@ -50,7 +50,6 @@ function yieldToTasks() {
 
 export class WebSerialTransport {
   constructor() {
-    this.kind = "webserial";
     this.port = null;
     this._reader = null;
     this._writer = null;
@@ -76,7 +75,6 @@ export class WebSerialTransport {
     const i = this.port && this.port.getInfo ? this.port.getInfo() : {};
     const pid = i.usbProductId;
     return {
-      pid,
       chip: CHIP_BY_PID[pid] || `USB ${(i.usbVendorId || 0).toString(16)}:${(pid || 0).toString(16)}`,
       baud: BAUD_BY_PID[pid] || SAFE_FALLBACK_BAUD,
     };

@@ -1,4 +1,4 @@
-// ESPARGOS Web Tunnel — owner page logic.
+// ESPARGOS Web Tunnel: owner page logic.
 // Holds the WebSerial link, drives the UART protocol client, registers the Service Worker
 // that serves the device UI at /tunnel/device/, answers the SW's tunnelled requests, and
 // bridges the device's CSI WebSocket over the same serial link via an injected page shim.
@@ -8,16 +8,17 @@ import { WebSerialTransport } from "./transport-webserial.js";
 
 const DEVICE_URL = "/tunnel/device/";
 const SW_URL = "/tunnel/sw.js";
+const FRAME_MIN_HEIGHT = 400; // px, floor so the device UI stays usable on short windows
 
 const $ = (id) => document.getElementById(id);
 const td = new TextDecoder();
 const te = new TextEncoder();
-const params = new URLSearchParams(location.search);
 
 let transport = null;
 let client = null;
 const csiSubs = new Set();
 let csiEnabled = false;
+let swKeepWarmTimer = null;
 
 function setStatus(msg, kind = "info") {
   const el = $("tunnel-status");
@@ -39,18 +40,6 @@ async function helloProbe(c) {
   } catch (e) {
     return false;
   }
-}
-
-async function chooseTransport() {
-  // Localhost-gated test hook: tunnel over a WebSocket bridge instead of WebSerial.
-  if (params.get("transport") === "ws") {
-    const url = params.get("wsurl") || "";
-    if (/^wss?:\/\/(127\.0\.0\.1|localhost)(:\d+)?\//.test(url)) {
-      const m = await import("./transport-ws-test.js");
-      return new m.WebSocketTestTransport(url);
-    }
-  }
-  return new WebSerialTransport();
 }
 
 // ---- CSI bridge exposed to the device iframe (same-origin) ----
@@ -96,6 +85,26 @@ async function setupServiceWorker() {
     navigator.serviceWorker.addEventListener("message", onMsg);
     ready.active.postMessage({ type: "register-owner" });
   });
+  startSwKeepWarm(ready);
+}
+
+// Keep the Service Worker from idle-terminating while connected. A terminated SW that restarts late
+// can miss an iframe navigation (e.g. the device UI reloading after a settings change), which would
+// fall through to the server's 404 ("Page Not Found") for the SW-virtual /tunnel/device/ path.
+function startSwKeepWarm(reg) {
+  stopSwKeepWarm();
+  swKeepWarmTimer = setInterval(() => {
+    try {
+      reg.active?.postMessage({ type: "keepalive" });
+    } catch (e) {}
+  }, 20000);
+}
+
+function stopSwKeepWarm() {
+  if (swKeepWarmTimer) {
+    clearInterval(swKeepWarmTimer);
+    swKeepWarmTimer = null;
+  }
 }
 
 async function onSwMessage(ev) {
@@ -114,9 +123,9 @@ async function onSwMessage(ev) {
 }
 
 // Inject a shim into the device index: (1) answer the endpoints the reference UART router
-// handles itself — get_transport -> "uart" (so the device UI shows its built-in "updates not
+// handles itself: get_transport -> "uart" (so the device UI shows its built-in "updates not
 // available over UART" warning and hides the update controls), plus 501 on the firmware-flash
-// endpoints — and (2) bridge the device's CSI WebSocket over the serial tunnel.
+// endpoints, and (2) bridge the device's CSI WebSocket over the serial tunnel.
 function injectDeviceShim(bodyBytes) {
   let html = td.decode(bodyBytes);
   if (html.includes("__espargosShim")) return bodyBytes;
@@ -161,7 +170,7 @@ const DEVICE_SHIM = `<script>/*__espargosShim*/(function () {
     this.readyState = 1;
     this._l = { message: [], open: [], close: [], error: [] };
     this._unsub = window.parent.__espargosTunnel.subscribeCsi(function (payload) {
-      // Copy into an ArrayBuffer created in THIS (iframe) realm — otherwise csi.js's
+      // Copy into an ArrayBuffer created in THIS (iframe) realm, otherwise csi.js's
       // \`ev.data instanceof ArrayBuffer\` is false across the owner/iframe realm boundary.
       self._emit("message", { data: new Uint8Array(payload).buffer });
     });
@@ -192,12 +201,11 @@ async function connect() {
   $("tunnel-connect").disabled = true;
   try {
     setStatus("Requesting serial port…");
-    transport = await chooseTransport();
+    transport = new WebSerialTransport();
     await transport.requestPort();
 
     client = new EspargosUartClient((bytes) => transport.write(bytes));
-    window.__espargosClient = client;
-    window.__espargosTunnel = makeTunnelApi();
+    window.__espargosTunnel = makeTunnelApi(); // same-origin bridge used by the injected CSI shim
 
     setStatus("Opening device…");
     const res = await transport.connect({
@@ -232,11 +240,14 @@ function showDevice() {
   $("tunnel-disconnect").hidden = false;
   $("tunnel-frame-wrap").hidden = false;
   $("tunnel-frame").src = DEVICE_URL;
+  requestAnimationFrame(sizeDeviceFrame);
 }
 
 function resetDeviceUI() {
+  stopSwKeepWarm();
   setFullPage(false);
   $("tunnel-frame").src = "about:blank";
+  $("tunnel-frame").style.height = "";
   $("tunnel-frame-wrap").hidden = true;
   $("tunnel-disconnect").hidden = true;
   $("tunnel-connect").hidden = false;
@@ -248,7 +259,7 @@ function onConnectionLost(err) {
   console.error("ESPARGOS tunnel connection lost:", err);
   try { client?.stopKeepalive(); } catch (e) {}
   resetDeviceUI();
-  setStatus("Connection lost: " + ((err && err.message) || err) + " — click Connect to reconnect.", "error");
+  setStatus("Connection lost: " + ((err && err.message) || err) + ". Click Connect to reconnect.", "error");
 }
 
 // ---- full-page (maximize within the page) toggle ----
@@ -259,10 +270,33 @@ function setFullPage(on) {
   document.body.classList.toggle("tunnel-fullpage-active", on);
   const btn = $("tunnel-fullpage-toggle"); // icon swaps via CSS on the wrap class
   if (btn) btn.title = on ? "Exit full page (Esc)" : "Full page";
+  if (on) $("tunnel-frame").style.height = ""; // let the full-page CSS (100vh) take over
+  else requestAnimationFrame(sizeDeviceFrame); // restore the fitted height
 }
 
 function toggleFullPage() {
   setFullPage(!$("tunnel-frame-wrap")?.classList.contains("tunnel-fullpage"));
+}
+
+// Size the device iframe to fill the space between its top and the footer, so the page fits the
+// viewport without scrolling (down to a reasonable minimum). Plain document flow, so making the
+// footer's bottom land at the viewport bottom is exact in one pass.
+function sizeDeviceFrame() {
+  const wrap = $("tunnel-frame-wrap");
+  const frame = $("tunnel-frame");
+  if (!wrap || !frame || wrap.hidden || wrap.classList.contains("tunnel-fullpage")) return;
+  const footer = document.querySelector("footer");
+  const contentBottom = footer
+    ? footer.getBoundingClientRect().bottom + window.scrollY
+    : document.documentElement.scrollHeight;
+  const target = frame.getBoundingClientRect().height + (window.innerHeight - contentBottom);
+  frame.style.height = Math.max(Math.round(target), FRAME_MIN_HEIGHT) + "px";
+}
+
+let resizeRaf = null;
+function onResize() {
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(sizeDeviceFrame);
 }
 
 async function disconnect() {
@@ -275,8 +309,7 @@ async function disconnect() {
 }
 
 function init() {
-  const testMode = params.get("transport") === "ws";
-  if (!WebSerialTransport.supported && !testMode) {
+  if (!WebSerialTransport.supported) {
     if ($("tunnel-unsupported")) $("tunnel-unsupported").hidden = false;
     if ($("tunnel-connect")) $("tunnel-connect").disabled = true;
     return;
@@ -285,7 +318,7 @@ function init() {
   $("tunnel-disconnect")?.addEventListener("click", disconnect);
   $("tunnel-fullpage-toggle")?.addEventListener("click", toggleFullPage);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setFullPage(false); });
-  if (testMode) connect(); // auto-connect for headless integration tests
+  window.addEventListener("resize", onResize);
 }
 
 init();

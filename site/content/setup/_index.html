@@ -59,7 +59,10 @@ layout: article
 					<div class="h-100 border rounded p-3">
 						<h3 class="h5 mt-0">Over USB (Limited Throughput)</h3>
 						<p>The USB interface of ESPARGOS is actually connected to a USB-to-serial converter, so it has limited throughput compared to the Ethernet interface. For demanding real-time applications, we recommend using the Ethernet interface.</p>
-						<p>Use the UART router script from <a href="https://github.com/ESPARGOS/pyespargos">pyespargos</a>. If you do not have pyespargos installed yet, jump forward to <a href="#pyespargos">step 4</a> first.</p>
+						<div class="alert alert-info">
+							<b>Easiest, no installation required:</b> open the <a href="/tunnel/">ESPARGOS Web Tunnel</a>, click <i>Open ESPARGOS Web Interface</i> and pick your ESPARGOS from the browser's serial-port dialog. The device's web interface then loads right inside that page, tunneled over the USB serial link. Note that firmware updates are not available over the tunnel.
+						</div>
+						<p>Alternatively, to use ESPARGOS over USB from <a href="https://github.com/ESPARGOS/pyespargos">pyespargos</a> (for CSI capture and the demos), or if your browser does not support WebSerial, use the UART router script. If you do not have pyespargos installed yet, jump forward to <a href="#pyespargos">step 4</a> first.</p>
 						<ul>
 							<li>Connect ESPARGOS to your computer via USB-C.</li>
 							<li>ESPARGOS will appear as a serial (UART) device on your computer. By default, this serial device will only show debug output, but ESPARGOS can be put in a special mode that tunnels traffic through UART.</li>
@@ -91,6 +94,7 @@ layout: article
 					<ul>
 						<li><b>Ethernet:</b> <a href="http://192.168.1.2">http://192.168.1.2</a></li>
 						<li><b>USB UART router:</b> <a href="http://127.0.0.1:8400">http://127.0.0.1:8400</a></li>
+						<li><b>USB Web Tunnel:</b> open the <a href="/tunnel/">ESPARGOS Web Tunnel</a> and click <i>Open ESPARGOS Web Interface</i>; the interface loads inside that page.</li>
 					</ul>
 				</div>
 				<div class="col col-12 col-lg-10 col-xl-7 text-center">

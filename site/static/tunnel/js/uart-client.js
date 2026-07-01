@@ -1,6 +1,7 @@
-// ESPARGOS UART client — JS port of pyespargos/espargos/uart.py UARTClient.
-// Transport-agnostic: constructed with a `send(Uint8Array)` sink; you call feed(bytes)
-// with whatever the byte transport (WebSerial / WebSocket / socket) delivers.
+// ESPARGOS UART client. JS port of pyespargos/espargos/uart.py UARTClient.
+// Transport-agnostic: constructed with a `send(Uint8Array)` sink; call feed(bytes) with whatever
+// the byte transport delivers. Multiplexes RPC requests/responses by request id and dispatches
+// CSI/log frames to registered callbacks.
 
 import {
   FRAME,
@@ -12,11 +13,6 @@ import {
   unpackHello,
   packStreamCtrl,
 } from "./protocol.js";
-
-const unref = (t) => {
-  if (t && typeof t.unref === "function") t.unref();
-  return t;
-};
 
 export class EspargosUartClient {
   constructor(send, { timeout = 5000 } = {}) {
@@ -44,12 +40,10 @@ export class EspargosUartClient {
   _request(frameType, payload, expectType) {
     const reqId = this._allocId();
     return new Promise((resolve, reject) => {
-      const timer = unref(
-        setTimeout(() => {
-          this._pending.delete(reqId);
-          reject(new Error(`UART request ${reqId} timed out`));
-        }, this.timeout)
-      );
+      const timer = setTimeout(() => {
+        this._pending.delete(reqId);
+        reject(new Error(`UART request ${reqId} timed out`));
+      }, this.timeout);
       this._pending.set(reqId, { resolve, reject, expectType, timer });
       this._send(buildFrame(frameType, reqId, payload));
     });
@@ -76,11 +70,9 @@ export class EspargosUartClient {
 
   startKeepalive(intervalMs = 1000) {
     this.stopKeepalive();
-    this._keepaliveTimer = unref(
-      setInterval(() => {
-        this._send(buildFrame(FRAME.STREAM_CTRL, 0, packStreamCtrl(STREAM_ID.TRANSPORT, true)));
-      }, intervalMs)
-    );
+    this._keepaliveTimer = setInterval(() => {
+      this._send(buildFrame(FRAME.STREAM_CTRL, 0, packStreamCtrl(STREAM_ID.TRANSPORT, true)));
+    }, intervalMs);
   }
 
   stopKeepalive() {

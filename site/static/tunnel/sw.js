@@ -11,7 +11,6 @@
 
 const DEVICE_PREFIX = "/tunnel/device";
 let ownerId = null;
-let rpcSeq = 0;
 
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (e) => e.waitUntil(self.clients.claim()));
@@ -38,7 +37,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 // The owner is the tunnel host window (the /tunnel/ page; the device UI lives under /tunnel/device/).
-// A Service Worker can be terminated when idle and restarted on the next event, wiping ownerId — so
+// A Service Worker can be terminated when idle and restarted on the next event, wiping ownerId, so
 // never rely on it alone: re-locate the host window via clients.matchAll() each time.
 async function getOwner() {
   if (ownerId) {
@@ -85,9 +84,10 @@ async function tunnel(request, devicePath) {
 }
 
 function rpc(owner, payload) {
+  // Each request gets its own MessageChannel, so the reply is matched by the channel itself.
   return new Promise((resolve) => {
     const ch = new MessageChannel();
     ch.port1.onmessage = (e) => resolve(e.data);
-    owner.postMessage({ type: "tunnel-request", id: ++rpcSeq, ...payload }, [ch.port2]);
+    owner.postMessage({ type: "tunnel-request", ...payload }, [ch.port2]);
   });
 }

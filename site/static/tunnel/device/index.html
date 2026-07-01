@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
+	<title>ESPARGOS tunnel: reconnecting…</title>
+	<style>
+		html, body { height: 100%; margin: 0; }
+		body {
+			background: #111; color: #eee; text-align: center;
+			font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+			display: flex; align-items: center; justify-content: center;
+		}
+		a { color: #6cf; }
+		p { max-width: 32rem; padding: 0 1rem; line-height: 1.5; }
+	</style>
+</head>
+<body>
+	<p id="msg">Reconnecting to the device…</p>
+
+	<!--
+		This is a FALLBACK page. The device web UI at /tunnel/device/ is normally served by the tunnel
+		Service Worker; this static file is only reached if a navigation escapes the SW (e.g. the device
+		UI reloading after a settings change while the SW was cold-starting). Without it the server would
+		return its 404 ("Page Not Found") and dead-end the user. Here we wait for the SW to be ready and
+		reload once so it can take over; if that still fails, we guide the user back to the tunnel page.
+	-->
+	<script>
+	(function () {
+		var KEY = "espargosTunnelDeviceReloadAt";
+		var now = Date.now();
+		var last = 0;
+		try { last = parseInt(sessionStorage.getItem(KEY) || "0", 10) || 0; } catch (e) {}
+
+		function giveUp() {
+			var m = document.getElementById("msg");
+			if (m) {
+				m.innerHTML = "The connection to the device was interrupted. Please " +
+					'<a href="/tunnel/">return to the ESPARGOS tunnel page</a> and reconnect.';
+			}
+		}
+		function reloadOnce() {
+			try { sessionStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+			location.reload();
+		}
+
+		// If we already tried a reload very recently, the SW isn't taking over, so don't loop.
+		if (now - last < 4000) { giveUp(); return; }
+
+		if (navigator.serviceWorker) {
+			var done = false;
+			var go = function () { if (!done) { done = true; reloadOnce(); } };
+			navigator.serviceWorker.ready.then(go);   // reload once the SW is active
+			setTimeout(go, 1500);                      // …or after a short wait if it never becomes ready
+		} else {
+			giveUp();
+		}
+	})();
+	</script>
+</body>
+</html>

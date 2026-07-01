@@ -7,23 +7,16 @@ layout: article
 
 <main class="flex-shrink-0">
 	<div class="container">
-		<div class="row py-3 cols-12">
-			<h1 class="px-0">ESPARGOS Web Tunnel</h1>
+		<div class="row py-1 cols-12">
+			<h3 class="px-0">ESPARGOS Web Tunnel</h3>
 		</div>
 
-		<div class="row py-2 cols-12">
+		<div class="row py-1 cols-12">
 			<div class="col px-0">
 				<p>
 					Connect to an ESPARGOS device over USB and use its built-in web interface right here in your
-					browser — no IP address, network cable or WiFi configuration required. This page opens the
-					device's USB serial port with the
-					<a href="https://developer.mozilla.org/docs/Web/API/Web_Serial_API" target="_blank" rel="noopener">Web Serial API</a>
-					and tunnels the device's web UI over that link, so you can view live status, inspect CSI and
-					change settings exactly as you would over the network.
-				</p>
-				<p class="text-muted small mb-0">
-					Requires a Chromium-based browser (Chrome, Edge or Opera) on desktop. Firmware updates are not
-					available over the tunnel — use the <a href="/firmware/">Firmware</a> page for that.
+					browser, via <a href="https://developer.mozilla.org/docs/Web/API/Web_Serial_API" target="_blank" rel="noopener">Web Serial API</a>.
+					Ideal for the initial network configuration setup!
 				</p>
 			</div>
 		</div>
@@ -31,16 +24,16 @@ layout: article
 		<div id="tunnel-unsupported" hidden class="row py-2 cols-12">
 			<div class="col px-0">
 				<div class="alert alert-warning mb-0" role="alert">
-					Your browser does not support the Web Serial API. Please use Chrome, Edge or another
-					Chromium-based desktop browser to use the Web Tunnel.
+					Your browser does not support the Web Serial API required for the Web Tunnel.
+					Please use a recent desktop browser that supports it.
 				</div>
 			</div>
 		</div>
 
 		<div class="row py-3 align-items-center g-3">
 			<div class="col-auto">
-				<button id="tunnel-connect" class="btn btn-primary" type="button">Connect ESPARGOS via USB</button>
-				<button id="tunnel-disconnect" class="btn btn-outline-secondary" type="button" hidden>Disconnect</button>
+				<button id="tunnel-connect" class="btn btn-primary" type="button">Open ESPARGOS Web Interface</button>
+				<button id="tunnel-disconnect" class="btn btn-outline-light" type="button" hidden>Disconnect</button>
 			</div>
 			<div class="col">
 				<span id="tunnel-status" class="text-muted small"></span>
