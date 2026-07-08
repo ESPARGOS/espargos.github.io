@@ -235,3 +235,58 @@ video.minimal-controls { outline: none; }
 	color: #adb5bd;
 	font-size: 0.95rem;
 }
+
+// Kit cards on the ESPARGOS One page: same visual language as .doc-link-card,
+// but a static card with product image, description, contents list and
+// download links.
+.kit-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.25rem 1.35rem;
+	border: 1px solid #2c3338;
+	border-radius: 0.75rem;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.kit-card-image {
+	display: block;
+	margin: 0 auto 0.85rem;
+	height: 170px;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.kit-card-title {
+	font-weight: 700;
+	font-size: 1.2rem;
+	color: #fff;
+	margin-bottom: 0.5rem;
+}
+
+.kit-card-text {
+	color: #adb5bd;
+	font-size: 0.95rem;
+}
+
+.kit-card-subtitle {
+	font-weight: 700;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #37c964;
+	margin-bottom: 0.35rem;
+}
+
+.kit-card ul {
+	color: #adb5bd;
+	font-size: 0.95rem;
+	padding-left: 1.2rem;
+	margin-bottom: 0.75rem;
+}
+
+// Pins the download links to the bottom so they align across the row.
+.kit-card-footer {
+	margin-top: auto;
+	padding-top: 0.5rem;
+}

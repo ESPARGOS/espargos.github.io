@@ -118,7 +118,8 @@ jobs:
           mkdir -p ./espargos.github.io/site/content/ce
 
           # Latest successful "Build manual" run on main produces the "pdfs"
-          # artifact containing manual.pdf, ce-declaration.pdf and datasheet.pdf.
+          # artifact containing manual.pdf, ce-declaration.pdf, datasheet.pdf
+          # and the aperture-kit configuration supplements.
           run_id=$(GH_TOKEN="$MANUAL_TOKEN" gh api \
             repos/ESPARGOS/espargos-one-manual/actions/workflows/build-manual.yml/runs \
             -f branch=main \
@@ -136,6 +137,8 @@ jobs:
           cp "$tmp/manual.pdf"         ./espargos.github.io/site/content/espargos-one/espargos-one-manual.pdf
           cp "$tmp/datasheet.pdf"      ./espargos.github.io/site/content/espargos-one/espargos-one-datasheet.pdf
           cp "$tmp/ce-declaration.pdf" ./espargos.github.io/site/content/ce/espargos-one-ce-declaration.pdf
+          cp "$tmp/aperture-kit/manual-6x4.pdf" ./espargos.github.io/site/content/espargos-one/espargos-one-aperture-kit-6x4-supplement.pdf
+          cp "$tmp/aperture-kit/manual-8x4.pdf" ./espargos.github.io/site/content/espargos-one/espargos-one-aperture-kit-8x4-supplement.pdf
 
       - name: Install Hugo CLI
         run: |
