@@ -18,28 +18,31 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap" rel="stylesheet">
 
+	{{/* All CSS/JS assets are fingerprinted: espargos.net is served through a
+	     CDN that caches assets with stable URLs across deploys, so a content
+	     hash in the filename is the only reliable cache invalidation. */}}
 	{{ $sass := resources.Get "espargos.scss" }}
-	{{ $style := $sass | css.Sass }}
+	{{ $style := $sass | css.Sass | fingerprint }}
 
 	<link rel="stylesheet" href="{{ $style.RelPermalink }}">
 
-	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" }}
+	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" | fingerprint }}
 
 	<script src="{{ $bootstrap.RelPermalink }}"></script>
 
-	{{ $highlight := resources.Get "highlight.min.js" }}
+	{{ $highlight := resources.Get "highlight.min.js" | fingerprint }}
 
 	<script src="{{ $highlight.RelPermalink }}"></script>
 
-	{{ $copycode := resources.Get "copy-code.js" }}
+	{{ $copycode := resources.Get "copy-code.js" | fingerprint }}
 
 	<script src="{{ $copycode.RelPermalink }}"></script>
 
-	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" }}
+	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" | fingerprint }}
 
 	<script src="{{ $minimalVideoControls.RelPermalink }}"></script>
 
-	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" }}
+	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" | fingerprint }}
 
 	<link rel="stylesheet" href="{{ $highlightTheme.RelPermalink }}">
 
