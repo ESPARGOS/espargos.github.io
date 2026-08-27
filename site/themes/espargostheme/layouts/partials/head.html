@@ -10,9 +10,9 @@
 	{{ $favicon194 := resources.Get "favicon-194x194.png" }}
 
 
-	<link rel="icon" type="image/png" sizes="194x194" href="{{ $favicon16.RelPermalink }}" />
+	<link rel="icon" type="image/png" sizes="194x194" href="{{ $favicon194.RelPermalink }}" />
 	<link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32.RelPermalink }}" />
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon194.RelPermalink }}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon16.RelPermalink }}" />
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
 
 	{{ $bootstrap := resources.Get "bootstrap/js/bootstrap.min.js" | fingerprint }}
 
-	<script src="{{ $bootstrap.RelPermalink }}"></script>
+	<script src="{{ $bootstrap.RelPermalink }}" defer></script>
 
 	{{ $highlight := resources.Get "highlight.min.js" | fingerprint }}
 
@@ -36,11 +36,11 @@
 
 	{{ $copycode := resources.Get "copy-code.js" | fingerprint }}
 
-	<script src="{{ $copycode.RelPermalink }}"></script>
+	<script src="{{ $copycode.RelPermalink }}" defer></script>
 
 	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" | fingerprint }}
 
-	<script src="{{ $minimalVideoControls.RelPermalink }}"></script>
+	<script src="{{ $minimalVideoControls.RelPermalink }}" defer></script>
 
 	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" | fingerprint }}
 
