@@ -290,3 +290,85 @@ video.minimal-controls { outline: none; }
 	margin-top: auto;
 	padding-top: 0.5rem;
 }
+
+// Publication / resource cards on the research page: same visual language as
+// .kit-card. Equal heights across a row, fixed-height thumbnail area and the
+// call-to-action button pinned to the bottom so the buttons align.
+.pub-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border: 1px solid #2c3338;
+	border-radius: 0.75rem;
+	background: rgba(255, 255, 255, 0.02);
+	overflow: hidden;
+	transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pub-card:hover,
+.pub-card:focus-within {
+	transform: translateY(-3px);
+	border-color: #37c964;
+	box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.35);
+}
+
+.pub-card-thumb {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 200px;
+	background: rgba(255, 255, 255, 0.04);
+	border-bottom: 1px solid #2c3338;
+}
+
+.pub-card-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+// For diagrams / figures (rather than paper or video screenshots), show the
+// whole image with some padding instead of cropping it.
+.pub-card-thumb.pub-card-thumb-contain img {
+	object-fit: contain;
+	padding: 0.75rem;
+}
+
+.pub-card-body {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	padding: 1.25rem 1.35rem;
+}
+
+.pub-card-title {
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: #fff;
+	margin-bottom: 0.5rem;
+}
+
+.pub-card-title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.pub-card-title a:hover {
+	text-decoration: underline;
+}
+
+.pub-card-text {
+	color: #adb5bd;
+	font-size: 0.95rem;
+	margin-bottom: 1rem;
+}
+
+.pub-card-footer {
+	margin-top: auto;
+}
+
+// Paper thumbnails are cropped first pages: keep the title at the top visible.
+.pub-card-thumb.pub-card-thumb-top img {
+	object-position: top;
+}
