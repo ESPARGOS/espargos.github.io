@@ -5,28 +5,28 @@
         {{ if (eq $pagecount 0) }}
             <div class="text-center h2">Datasets coming soon!</div>
         {{ end }}
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             {{ range $datasets.Pages.ByDate.Reverse }}
             {{ $metadata := ((.Resources.GetMatch "metadata.json").Content | unmarshal) }}
             {{ $datasetDataPath := .File.Dir }}
             <div class="col">
-                <div class="card shadow-sm position-relative">
-                    <a href="/{{ $datasetDataPath }}">
-                        <img class="card-img-top" width="100%" src="/{{$datasetDataPath}}/{{$metadata.thumbnail}}">
+                <div class="pub-card">
+                    <a class="pub-card-thumb" href="/{{ $datasetDataPath }}">
+                        <img src="/{{$datasetDataPath}}/{{$metadata.thumbnail}}" alt="{{ $metadata.name }}">
                     </a>
 
-                    <div class="card-body">
-                        <p class="card-title"><b><a class="text-white text-underline-hover" href="/{{ $datasetDataPath }}">{{ $metadata.name }}</a></b></p>
-                        <p class="card-text">{{ .RenderString $metadata.shortDescription }}</p>
+                    <div class="pub-card-body">
+                        <div class="pub-card-title"><a href="/{{ $datasetDataPath }}">{{ $metadata.name }}</a></div>
+                        <p class="pub-card-text">{{ .RenderString $metadata.shortDescription }}</p>
 
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="pub-card-footer d-flex justify-content-between align-items-center">
                             <small class="text-muted">{{ printf "%.1f" ( div $metadata.totalSize 1e9 ) }} GB</small>
 
-                            <div>
+                            <div class="d-flex gap-2">
                                 {{ if isset $metadata "doi" }}
-                                    <a class="btn btn-secondary" href="https://doi.org/{{ $metadata.doi }}" type="button">DaRUS</a>
+                                    <a class="btn btn-outline-secondary text-white" href="https://doi.org/{{ $metadata.doi }}">DaRUS</a>
                                 {{ end }}
-                                <a class="btn btn-dark" href="/{{ $datasetDataPath }}">Explore</a>
+                                <a class="btn btn-outline-primary" href="/{{ $datasetDataPath }}">Explore</a>
                             </div>
                         </div>
                     </div>
