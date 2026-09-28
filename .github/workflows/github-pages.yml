@@ -91,10 +91,16 @@ jobs:
               run_id=$(GH_TOKEN="$token" gh api \
                 repos/ESPARGOS/$repo/actions/workflows/build.yml/runs \
                 -f branch="$branch" \
-                -f status=completed \
-                -f conclusion=success \
+                -f status=success \
+                -f per_page=1 \
                 -X GET \
-                --jq '.workflow_runs[0].id')
+                --jq '.workflow_runs[0].id // empty')
+
+              if [[ ! "$run_id" =~ ^[0-9]+$ ]]; then
+                echo "No successful build.yml run for $repo on $branch." >&2
+                exit 1
+              fi
+              echo "Downloading $artifact from $repo run $run_id"
 
               GH_TOKEN="$token" gh run download "$run_id" \
                 -R ESPARGOS/$repo \
@@ -123,10 +129,16 @@ jobs:
           run_id=$(GH_TOKEN="$MANUAL_TOKEN" gh api \
             repos/ESPARGOS/espargos-one-manual/actions/workflows/build-manual.yml/runs \
             -f branch=main \
-            -f status=completed \
-            -f conclusion=success \
+            -f status=success \
+            -f per_page=1 \
             -X GET \
-            --jq '.workflow_runs[0].id')
+            --jq '.workflow_runs[0].id // empty')
+
+          if [[ ! "$run_id" =~ ^[0-9]+$ ]]; then
+            echo "No successful build-manual.yml run on main." >&2
+            exit 1
+          fi
+          echo "Downloading pdfs from espargos-one-manual run $run_id"
 
           tmp="$(mktemp -d)"
           GH_TOKEN="$MANUAL_TOKEN" gh run download "$run_id" \
