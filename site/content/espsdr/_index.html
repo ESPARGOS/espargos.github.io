@@ -1,0 +1,364 @@
+---
+title: "ESP-SDR: Raw IQ Capture with Espressif's ESP32 Chips"
+draft: false
+type: page
+layout: list
+
+menu:
+  main:
+    identifier: "espsdr"
+    name: "ESP-SDR"
+    weight: 15
+---
+
+<main class="flex-shrink-0">
+	<div class="container col-xxl-8 px-4 py-4">
+		<h1 class="display-5 fw-bold lh-1 mb-0"><span class="text-gradient">ESP-SDR</span></h1>
+		<p class="h3 mb-2">Raw IQ Capture with Espressif's ESP32 Chips</p>
+		<div class="row align-items-center g-4 my-2">
+			<div class="col-12 col-lg-4">
+				<p class="mb-0">
+					Espressif Systems' ESP32 microcontrollers are well known for their Wi-Fi and Bluetooth capabilities.
+					Over the past few months (and with the help of LLMs), we have found an undocumented feature that allows the firmware to bypass the fixed-function modems to capture raw IQ baseband samples.
+					This opens up the possibility of using the ESP32 as a low-cost software-defined radio (SDR) platform, capable of receiving signals in the 2.4 GHz band (and the 5 GHz band on the ESP32-C5).
+				</p>
+			</div>
+			<figure class="col-12 col-lg-8 mb-0">
+				<img src="/espsdr/esp32-sdr-bypass.svg" class="d-block img-fluid w-100"
+					alt="ESP32 signal chain: RF front-end, ADC/DAC, fixed Wi-Fi modem, and CPU. A green debug path connects the ADC/DAC directly to the CPU for raw IQ reception and transmission, bypassing the Wi-Fi modem.">
+				<figcaption class="text-muted text-center small mt-2">
+					The raw IQ path bypasses the fixed-function Wi-Fi modem, giving software access to baseband samples.
+				</figcaption>
+			</figure>
+		</div>
+
+		<h2 class="fw-bold mb-3 mt-4">Try it out in your browser (Web Serial)</h2>
+		<div class="row align-items-center g-4">
+			<div class="col-12 col-lg-6">
+				<p>
+					To prove the concept, we made a simple web interface that displays the live power spectrum and waterfall of the captured IQ samples (at <b>a very low</b> duty cycle).
+					Use a browser with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API">Web Serial</a> support.
+				</p>
+
+				<section class="setup-step setup-step-compact border rounded p-3 my-2">
+					<h4 class="setup-step-heading h5 mt-0 mb-2">
+						<span class="setup-step-number">1</span>
+						<span>Flash ESP-SDR firmware to your board</span>
+					</h4>
+					<p class="mb-2">
+						Connect your board over USB and install the SDR firmware using the browser flasher.
+						Supported chips are the <b>original ESP32</b>, <b>ESP32-C5</b>, <b>ESP32-C6</b>, <b>ESP32-C61</b>, <b>ESP32-S2</b>, <b>ESP32-S3</b> and <b>ESP32-S31</b>.
+						The original ESP32 requires a USB-to-UART bridge, often built into the development board.
+					</p>
+					<a href="/espsdr/app/flash.html" class="btn btn-dark px-3">Open firmware flasher</a>
+				</section>
+				<section class="setup-step setup-step-compact border rounded p-3 mt-2 mb-0">
+					<h4 class="setup-step-heading h5 mt-0 mb-2">
+						<span class="setup-step-number">2</span>
+						<span>Explore the live radio spectrum</span>
+					</h4>
+					<p class="mb-2">After flashing, unplug the board for five seconds and reconnect. Open ESP-WebSDR and select your device to see the live spectrum.</p>
+					<a href="/espsdr/app/" class="btn btn-dark px-3">ESP-WebSDR</a>
+				</section>
+			</div>
+			<figure class="col-12 col-lg-6 mb-0">
+				<video class="minimal-controls d-block w-100 rounded-3 mx-auto" style="height: auto; border: 4px solid white;"
+					muted loop playsinline controls preload="metadata" width="960" height="540"
+					poster="/espsdr/spectrum-demo.jpg" aria-label="ESP-SDR live power spectrum and waterfall at 2412 MHz">
+					<source src="/espsdr/spectrum-demo.mp4" type="video/mp4">
+					<a href="/espsdr/spectrum-demo.mp4">Watch the spectrum and waterfall demo.</a>
+				</video>
+				<figcaption class="text-muted text-center small mt-2">ESP-WebSDR in action. Try it yourself in your browser with a supported ESP32 board.</figcaption>
+			</figure>
+		</div>
+
+		<h2 class="fw-bold mb-3 mt-4">How it works</h2>
+		<p>
+			We assume that Espressif engineers left the IQ sampling path in place for testing and debugging the modem,
+			for example for on-wafer testing in the fab.
+			The exact capture mechanism, trigger modes and memory allocation differ between chips, but the general idea is the same:
+			special debug registers configure the modem's sample-dump engine to write raw IQ samples directly into the chip's internal SRAM, bypassing normal Wi-Fi processing.
+
+			The firmware reserves SRAM so that the heap cannot use it, then lets the modem write raw IQ into that memory.
+
+		</p>
+		<p>
+			For example, on the ESP32-C61, the capture mechanism works as follows:
+			The SRAM inside the ESP32 is organized into banks.
+			Our firmware uses two of these banks and organizes them as a ring buffer.
+			One of the banks is temporarily owned by the modem, which writes raw IQ samples into it, while the other bank is owned by the CPU, which copies the completed samples to a buffer for transfer to the host.
+			The firmware tracks the hardware write pointer to detect when the modem moves to the next bank.
+		</p>
+		<figure class="my-4 mx-auto" style="max-width: 760px;">
+			<img src="/espsdr/iq-ring-buffer.svg" class="d-block img-fluid w-100"
+				alt="ESP32-C61 two-bank ring: the modem writes bank 3 while the CPU copies samples from completed bank 2. Each bank holds 64 KiB. The writer alternates between banks; the CPU must return a bank before it is reused.">
+			<figcaption class="text-muted text-center small mt-2">
+				Capture using a ring buffer with two SRAM banks, shown while bank 3 is being filled. The banks exchange roles on the next pass.
+			</figcaption>
+		</figure>
+
+		<h3 class="h5 fw-bold mt-4 mb-3">IQ sample format</h3>
+		<p>
+			The exact format of the IQ samples is configurable. In our implementation, each complex sample occupies one 32-bit word in memory.
+			Bits 19&ndash;10 hold I and bits 9&ndash;0 hold Q, both signed 10-bit two's-complement values
+			(&minus;512 to +511). Bits 27&ndash;20 report the receiver gain setting (an index into the gain table), while bits 31&ndash;28
+			are most likely the internal state of the automatic gain control's finite state machine.
+		</p>
+		<figure class="my-3 mx-auto" style="max-width: 800px;">
+			<img src="/espsdr/iq-sample-format.svg" class="d-block img-fluid w-100"
+				alt="32-bit IQ dump word, most significant bit first: bits 31 to 28 inferred AGC state, bits 27 to 20 RX gain, bits 19 to 10 signed I, and bits 9 to 0 signed Q.">
+			<figcaption class="text-muted text-center small mt-2">
+				Raw ADC dump word as provided by the modem.
+			</figcaption>
+		</figure>
+		<p>
+			To decode either sample field, mask its 10 bits and subtract 1024 if bit 9 is set.
+			Raw words are stored little-endian. Other capture backends may swap I/Q or repack the
+			samples for USB; browser recordings use interleaved float32 I/Q instead of this memory layout.
+		</p>
+
+		<h3 class="h5 fw-bold mt-4 mb-3">Capture settings</h3>
+		<div class="row row-cols-1 row-cols-sm-2 g-3">
+			<div class="col">
+				<div class="border rounded-3 p-3 h-100">
+					<h4 class="h6 text-body-secondary mb-2">Tuning</h4>
+					<p class="h4 text-primary fw-bold mb-2">2.2&ndash;2.7 GHz<br>4.8&ndash;6.0 GHz</p>
+					<p class="mb-0">5 GHz is only available on ESP32-C5. Exact tuning limits differ by chip.</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="border rounded-3 p-3 h-100">
+					<h4 class="h6 text-body-secondary mb-2">Sample rate</h4>
+					<p class="h4 text-primary fw-bold mb-1">Up to 80 MSa/s</p>
+					<p class="mb-0">Raw complex IQ capture into memory, with transfer to the host at a low duty cycle.</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="border rounded-3 p-3 h-100">
+					<h4 class="h6 text-body-secondary mb-2">Bandwidth</h4>
+					<p class="h4 text-primary fw-bold mb-1">~13&ndash;54 MHz</p>
+					<p class="mb-0">Analog RX bandwidth. Exact limits depend on the chip and filter settings.</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="border rounded-3 p-3 h-100">
+					<h4 class="h6 text-body-secondary mb-2">Gain control</h4>
+					<p class="h4 text-primary fw-bold mb-1">Automatic or manual</p>
+					<p class="mb-0">Internal hardware AGC or a manually selected fixed receiver gain.</p>
+				</div>
+			</div>
+		</div>
+
+		<p class="mt-3">
+			With ESP-SDR, the ESP32 can even capture IQ data <i>beyond</i> the officially supported tuning range.
+			For example, the ESP32-C61 can capture signals up to 2.7 GHz, which includes some <b>LTE and 5G NR cellular bands</b>, such as LTE band 7 and 5G NR band n7 around 2.6 GHz.
+		</p>
+
+		<h3 class="h5 fw-bold mt-4 mb-3">How we discovered this</h3>
+		<p>
+			Our starting point was the <code>adctrig</code> function in Espressif's <code>librftest</code> library.
+			With the help of LLMs, we reverse engineered this function to understand how it configures the hardware to capture raw IQ samples.
+			These findings formed the basis of ESP-SDR's capture implementation.
+		</p>
+
+
+		<h2 class="fw-bold mb-3 mt-4">What this means for ESPARGOS</h2>
+		<p>
+			Without any hardware modifications, <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> can now <i>phase-coherently</i> capture raw IQ samples.
+			If you already have an <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a>, <a href="/firmware/">update its firmware</a> to the latest version from the <i>dev</i> branch to enable this capability. The hardware already supports it.
+			We currently provide the "IQ Signal Analyzer" demo application, but are working on additional demo applications, including an adapted real-time augmented reality demo for arbitrary signals.
+		</p>
+
+		<div class="my-4">
+			<div class="row align-items-center g-3">
+				<div class="col-12 col-lg-4">
+					<img src="/img/espargos-next-enhanced.png" class="d-block img-fluid mx-auto"
+						style="max-width: 320px; width: 100%; transform: rotateY(180deg);"
+						alt="ESPARGOS One antenna array" width="550" height="550" loading="lazy">
+				</div>
+				<div class="col-12 col-lg-1 text-primary" aria-hidden="true">
+					<svg class="d-none d-lg-block mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none">
+						<path d="M5 24H41M27 10L41 24L27 38" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<svg class="d-block d-lg-none mx-auto" width="48" height="48" viewBox="0 0 48 48" fill="none">
+						<path d="M24 5V41M10 27L24 41L38 27" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</div>
+				<figure class="col-12 col-lg-7 mb-0">
+					<video class="minimal-controls d-block w-100 rounded-3" style="height: auto;"
+						muted loop playsinline controls preload="metadata" width="800" height="498"
+						poster="/espsdr/ism-band-capture.jpg" aria-label="ISM-band IQ capture showing waterfalls for eight ESPARGOS antennas">
+						<source src="/espsdr/ism-band-capture.mp4" type="video/mp4">
+						<a href="/espsdr/ism-band-capture.mp4">Watch the ESPARGOS ISM-band capture.</a>
+					</video>
+					<figcaption class="text-muted text-center small mt-2">
+						Phase-coherent ISM-band IQ capture across eight ESPARGOS antennas (real-time screen capture, signal trigger).
+					</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<p>
+			The IQ sampling implementation on <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> is even more powerful than the browser-based demo (ESP-WebSDR):
+		</p>
+		<ul>
+			<li>Higher throughput / duty cycle: <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> uses an internal SPI transport interface, which is much faster than the UART interface used by ESP-WebSDR.</li>
+			<li>Signal trigger: Instead of streaming all samples (mostly silence), <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> can be configured to stream samples only when a signal is detected.</li>
+		</ul>
+
+		<p>
+			In addition to the existing Wi-Fi channel state information (CSI)-based demos, <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> can now also be used as a low-cost, eight-channel SDR platform for the 2.4 GHz ISM band, operating at a low duty cycle.
+			The benefits of raw IQ capture over processed CSI include:
+		</p>
+		<ul>
+			<li>Localize arbitrary signals: <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> can now be used to localize arbitrary signals in the 2.4 GHz ISM band, not just Wi-Fi signals. This includes <b>Bluetooth</b> and <b>Bluetooth Low Energy</b>, <b>Zigbee</b>, and Wi-Fi formats that were previously unsupported for CSI capture (e.g., <b>802.11b</b> and Wi-Fi signals with <b>multiple spatial streams</b>).</li>
+			<li>Array gain: Signal processing and decoding can be performed centrally, improving weak-signal performance.</li>
+			<li>Special waveforms: <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a> can now be used with waveforms more suitable for specific applications, e.g., pulse compression radar. Even better, some preprocessing for such special applications can happen on the chip itself, so they are not throughput-constrained.</li>
+		</ul>
+
+		<div class="alert alert-info" role="note">
+			<strong>Documentation in progress:</strong> The additional capabilities enabled by raw IQ sampling are not yet fully covered in the ESPARGOS library documentation, demos, manual or datasheet.
+		</div>
+
+		<h2 class="fw-bold mb-3 mt-4">Limitations</h2>
+		<p>
+			At 80 MSa/s and 32 bits per sample, the modem writes <b>2,560 Mbit/s</b> into SRAM.
+			Getting those samples off the chip is the bottleneck: the output links are much slower.
+		</p>
+		<figure class="my-4 mx-auto" style="max-width: 900px;">
+			<img src="/espsdr/iq-bandwidth.svg" class="d-block img-fluid w-100"
+				alt="A 2560 Mbit/s input pipe connects the modem to SRAM. Output pipes show UART at 3 Mbit/s, SPI at approximately 13.3 Mbit/s, and ESP32-S31 high-speed USB at 480 Mbit/s and Gigabit Ethernet at 1000 Mbit/s. Widths use a square-root scale.">
+			<figcaption class="text-muted text-center small mt-2">
+				Limited throughput: while the modem can capture 80 MSa/s, the bottleneck is getting the samples off the chip.
+			</figcaption>
+		</figure>
+		<p>
+			Therefore, our firmware streams the IQ samples at a very low duty cycle, which is enough to display a live spectrum and waterfall in the browser.
+			Packets that arrive between capture windows may be missed.
+		</p>
+
+		<h2 id="soapyespsdr" class="fw-bold mb-3 mt-4">SoapyESPSDR: GNU Radio &amp; gqrx</h2>
+		<div class="row align-items-center g-4">
+			<div class="col-12 col-lg-5">
+				<p>
+					<a href="https://github.com/ESPARGOS/SoapyESPSDR">SoapyESPSDR</a> is our receive-only
+					SoapySDR driver for the <b>ESP32-S31</b>. It streams IQ samples over Gigabit Ethernet
+					from a board running ESP-SDR firmware, making the receiver available to applications such as
+					<b>GNU Radio</b> and <b>gqrx</b> through their SoapySDR support.
+				</p>
+				<p>
+					The S31 supports continuous reception at 8 and 16 MSa/s; higher sample rates require a reduced
+					duty cycle.
+				</p>
+				<p>
+					<b>Under development:</b> We will release firmware and SoapySDR driver repositories soon, once everything is ready.
+				</p>
+				<button type="button" class="btn btn-secondary px-4" disabled aria-describedby="soapyespsdr-coming-soon">Download SoapyESPSDR</button>
+				<p id="soapyespsdr-coming-soon" class="text-muted small mt-2 mb-0">Coming soon.</p>
+			</div>
+			<figure class="col-12 col-lg-7 mb-0">
+				<a href="/espsdr/gqrx-esp-sdr.png" aria-label="View the gqrx screenshot at full size">
+					<img src="/espsdr/gqrx-esp-sdr.png" class="d-block img-fluid w-100 rounded-3"
+						alt="gqrx connected to an ESP32-S31 using the SoapyESPSDR driver, displaying the spectrum and waterfall around 2.462 GHz."
+						width="1632" height="847" loading="lazy">
+				</a>
+				<figcaption class="text-muted text-center small mt-2">
+					ESP32-S31 IQ reception in gqrx through SoapyESPSDR. Click to view at full size.
+				</figcaption>
+			</figure>
+		</div>
+
+		<h2 class="fw-bold mb-3 mt-4">More information and firmware</h2>
+		<ul>
+			<li><a href="https://github.com/ESPARGOS/esp-sdr">ESP-SDR firmware</a>: firmware source code and build instructions.</li>
+			<li><a href="https://github.com/ESPARGOS/esp-web-sdr">ESP-WebSDR browser interface</a>: browser-based spectrum viewer and firmware flasher.</li>
+			<li>The firmware of <a href="https://espargos.net/espargos-one"><span class="text-gradient">ESPARGOS One</span></a> remains closed source for now, but we are considering on open-sourcing it now that this "secret" IQ functionality that we were keeping private has been revealed.</li>
+		</ul>
+
+		<h2 class="fw-bold mb-3 mt-4">FAQs</h2>
+		<div class="accordion mb-4" id="espsdrFaq">
+			<div class="accordion-item">
+				<h3 class="accordion-header" id="faqTransmitHeading">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#faqTransmit" aria-expanded="false" aria-controls="faqTransmit">
+						Can the ESP32 also transmit arbitrary signals?
+					</button>
+				</h3>
+				<div id="faqTransmit" class="accordion-collapse collapse" aria-labelledby="faqTransmitHeading" data-bs-parent="#espsdrFaq">
+					<div class="accordion-body">
+						<p class="mb-0">Yes, this is also possible. On <a href="/espargos-one" class="text-underline-hover"><span class="text-gradient">ESPARGOS One</span></a>, even phase-coherent transmission is possible. However, we are not providing a transmitter implementation at this time due to the potential for misuse.</p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h3 class="accordion-header" id="faqBackdoorHeading">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#faqBackdoor" aria-expanded="false" aria-controls="faqBackdoor">
+						Is this a backdoor in the ESP32 chip?
+					</button>
+				</h3>
+				<div id="faqBackdoor" class="accordion-collapse collapse" aria-labelledby="faqBackdoorHeading" data-bs-parent="#espsdrFaq">
+					<div class="accordion-body">
+						<p class="mb-0">
+							No, this is a feature of the ESP32's modem that was not documented in the public datasheet.
+							As far as we are concerned, it is not a security vulnerability, but rather an undocumented capability that can be used for SDR applications.
+							That being said, many ESP32 chips are connected to various cloud services which allow the manufacturer to update the firmware remotely.
+							If sensitive data is transmitted without encryption in the ISM bands, this could pose a security concern. In that case, the underlying issue is the unencrypted transmission.
+							The ability of the ESP32 to transmit arbitrary signals, on the other hand, could be abused for jamming or other malicious purposes, which is why we are not providing a transmitter implementation at this time.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h3 class="accordion-header" id="faqApplicationsHeading">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#faqApplications" aria-expanded="false" aria-controls="faqApplications">
+						Does the SDR mode also work with GNU Radio / gqrx / SDR# / CubicSDR and other applications?
+					</button>
+				</h3>
+				<div id="faqApplications" class="accordion-collapse collapse" aria-labelledby="faqApplicationsHeading" data-bs-parent="#espsdrFaq">
+					<div class="accordion-body">
+						<p class="mb-0">
+							Due to the low duty cycle achievable for most ESP32 models, it does not make much sense to use the SDR mode with these applications.
+							For the ESP32-S31, our <a href="#soapyespsdr">SoapyESPSDR driver</a> provides
+							integration with GNU Radio, gqrx and other SoapySDR-compatible applications over Gigabit Ethernet.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h3 class="accordion-header" id="faqOtherChipsHeading">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#faqOtherChips" aria-expanded="false" aria-controls="faqOtherChips">
+						Which ESP32 chips are supported, and will more be added?
+					</button>
+				</h3>
+				<div id="faqOtherChips" class="accordion-collapse collapse" aria-labelledby="faqOtherChipsHeading" data-bs-parent="#espsdrFaq">
+					<div class="accordion-body">
+						<p class="mb-0">ESP-SDR currently supports the original ESP32, ESP32-C5, ESP32-C6, ESP32-C61, ESP32-S2, ESP32-S3 and ESP32-S31. We are working to extend the range of supported ESP32 chips. Support for additional models will most likely be possible, but each chip needs its own implementation.</p>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h3 class="accordion-header" id="faqMixerHeading">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+						data-bs-target="#faqMixer" aria-expanded="false" aria-controls="faqMixer">
+						Can an external mixer be added to the ESP32's RF input / output to support a wider frequency range?
+					</button>
+				</h3>
+				<div id="faqMixer" class="accordion-collapse collapse" aria-labelledby="faqMixerHeading" data-bs-parent="#espsdrFaq">
+					<div class="accordion-body">
+						<p class="mb-0">Yes, this is possible. An external mixer can translate signals from other frequency bands into the ESP32's transmit / receive range. We already have multi-channel prototype hardware for this.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h2 class="fw-bold mb-3 mt-4">Acknowledgements</h2>
+		<p>
+			User <i>h0m3us3r</i> first disclosed this capability for the ESP32-S3 <a href="https://www.reddit.com/r/esp32/comments/1wq37xz/got_raw_iq_streaming_out_of_an_esp32s3_at_80_mss/" target="_blank" rel="noopener">on Reddit</a>, including firmware source code, a few days before our announcement.
+			They achieve 80 MSa/s of sustained throughput using an additional FPGA to handle the transfer.
+			Since we have been independently working on IQ capture for several months now, we also wanted to share our findings with the community.
+		</p>
+	</div>
+</main>

@@ -103,6 +103,19 @@ pre {
 	text-transform: uppercase;
 }
 
+.setup-step-compact {
+	.setup-step-heading {
+		gap: 0.65rem;
+	}
+
+	.setup-step-number {
+		flex-basis: 1.8rem;
+		width: 1.8rem;
+		height: 1.8rem;
+		box-shadow: 0 0 0 0.2rem rgba($primary, 0.16);
+	}
+}
+
 main {
 	min-height: calc(100vh - 104px - 96px);
 }
