@@ -63,49 +63,59 @@ jobs:
           SENSOR_FIRMWARE_TOKEN: ${{ secrets.SENSOR_FIRMWARE_TOKEN }}
         run: |
           set -euo pipefail
-          mkdir -p ./espargos.github.io/site/content/firmware/dev
-          mkdir -p ./espargos.github.io/site/content/firmware/testing
+          scratch="$(mktemp -d)"
+          trap 'rm -rf "$scratch"' EXIT
 
           for repo in controller-firmware sensor-firmware; do
             if [[ "$repo" == "controller-firmware" ]]; then
               token="$CONTROLLER_FIRMWARE_TOKEN"
-              artifact="controller-firmware-build-artifact"
             else
               token="$SENSOR_FIRMWARE_TOKEN"
-              artifact="sensor-firmware-build-artifact"
             fi
-
-            if [[ -z "${token}" ]]; then
-              echo "Missing token for $repo. Set CONTROLLER_FIRMWARE_TOKEN / SENSOR_FIRMWARE_TOKEN secrets." >&2
+            if [[ -z "$token" ]]; then
+              echo "Missing firmware token for $repo." >&2
               exit 1
             fi
+            artifact="$repo-build-artifact"
+
+            # Select uploads rather than run creation dates: a rerun can upload
+            # fresh artifacts to a run created months earlier.
+            artifacts=$(GH_TOKEN="$token" gh api "repos/ESPARGOS/$repo/actions/artifacts" \
+              -X GET -f name="$artifact" -f per_page=100 --paginate --slurp)
 
             for branch in main testing; do
-              echo "Finding artifacts for $repo, branch $branch"
-
-              channel="dev"
-              if [[ "$branch" == "testing" ]]; then
-                channel="testing"
-              fi
-
-              run_id=$(GH_TOKEN="$token" gh api \
-                repos/ESPARGOS/$repo/actions/workflows/build.yml/runs \
-                -f branch="$branch" \
-                -f status=success \
-                -f per_page=1 \
-                -X GET \
-                --jq '.workflow_runs[0].id // empty')
-
-              if [[ ! "$run_id" =~ ^[0-9]+$ ]]; then
-                echo "No successful build.yml run for $repo on $branch." >&2
+              channel=dev
+              [[ "$branch" != testing ]] || channel=testing
+              echo "Finding $artifact for $repo, branch $branch"
+              candidates=$(jq -r --arg name "$artifact" --arg branch "$branch" '
+                [.[].artifacts[] | select(.name == $name and .expired == false
+                  and .workflow_run.head_branch == $branch)]
+                | sort_by(.created_at, .id) | reverse[]
+                | [.id, .workflow_run.id] | @tsv' <<< "$artifacts")
+              artifact_id=""
+              while IFS=$'\t' read -r candidate_id run_id; do
+                [[ -n "$candidate_id" ]] || continue
+                run=$(GH_TOKEN="$token" gh api "repos/ESPARGOS/$repo/actions/runs/$run_id")
+                if jq -e --arg branch "$branch" '
+                  .head_branch == $branch and .path == ".github/workflows/build.yml"
+                  and .status == "completed" and .conclusion == "success"' <<< "$run" >/dev/null; then
+                  artifact_id="$candidate_id"
+                  echo "Downloading artifact $artifact_id from $repo run $run_id ($branch)"
+                  break
+                fi
+              done <<< "$candidates"
+              if [[ -z "$artifact_id" ]]; then
+                echo "No matching artifact from a successful build.yml run for $repo/$branch." >&2
+                jq -r --arg branch "$branch" '
+                  .[].artifacts[] | select(.workflow_run.head_branch == $branch)
+                  | "Artifact \(.id): \(.name), run \(.workflow_run.id), created \(.created_at), expired=\(.expired)"' <<< "$artifacts" >&2
                 exit 1
               fi
-              echo "Downloading $artifact from $repo run $run_id"
 
-              GH_TOKEN="$token" gh run download "$run_id" \
-                -R ESPARGOS/$repo \
-                -n "$artifact" \
-                -D "./espargos.github.io/site/content/firmware/$channel"
+              archive="$scratch/$repo-$branch.zip"
+              GH_TOKEN="$token" gh api "repos/ESPARGOS/$repo/actions/artifacts/$artifact_id/zip" > "$archive"
+              mkdir -p "./espargos.github.io/site/content/firmware/$channel"
+              unzip -q -o "$archive" -d "./espargos.github.io/site/content/firmware/$channel"
             done
           done
 
