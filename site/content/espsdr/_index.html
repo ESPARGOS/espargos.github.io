@@ -111,11 +111,6 @@ menu:
 				Raw ADC dump word as provided by the modem.
 			</figcaption>
 		</figure>
-		<p>
-			To decode either sample field, mask its 10 bits and subtract 1024 if bit 9 is set.
-			Raw words are stored little-endian. Other capture backends may swap I/Q or repack the
-			samples for USB; browser recordings use interleaved float32 I/Q instead of this memory layout.
-		</p>
 
 		<h3 class="h5 fw-bold mt-4 mb-3">Capture settings</h3>
 		<div class="row row-cols-1 row-cols-sm-2 g-3">
