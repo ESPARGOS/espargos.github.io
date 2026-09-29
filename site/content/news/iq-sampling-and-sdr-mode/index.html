@@ -1,0 +1,55 @@
+---
+title: "IQ Sampling and SDR Mode"
+date: "2026-09-28"
+summary: "We have some very exciting news to share on something that we have been working on \"behind the scenes\" for a couple of months now: With the latest firmware version, ESPARGOS One is now capable of capturing raw I/Q samples, effectively turning it into a phase-coherent 8-channel Software Defined Radio (with low duty cycle)."
+teaser: "iq-streams.jpg"
+teaser_alt: "Eight Phase-Coherent IQ Sample Streams from ESPARGOS One"
+---
+
+<h2>IQ Sampling Turns ESPARGOS One into an 8-channel SDR</h2>
+
+<figure><img alt="ESP32 signal chain with a raw IQ path bypassing the Wi-Fi modem" class="w-100" decoding="async" loading="lazy" src="/espsdr/esp32-sdr-bypass.svg"/></figure>
+
+<p>We have some very exciting news to share on something that we have been working on "behind the scenes" for a couple of months now: With the latest firmware version, <a href="https://espargos.net/espargos-one/">ESPARGOS One</a> is now capable of <strong>capturing raw I/Q samples</strong>, effectively turning it into a phase-coherent 8-channel Software Defined Radio (with low duty cycle).</p>
+
+<p>This makes it possible to not only receive and localize Wi-Fi signals, but also Bluetooth / Bluetooth Low Energy, Zigbee and any other wireless signals transmitted in the 2.4 GHz ISM band frequency range (and even slightly beyond).</p>
+
+<p><a class="btn btn-outline-primary" href="https://espargos.net/espsdr/">
+Learn more about ESP-SDR
+</a></p>
+
+<figure><img alt="Eight Phase-Coherent IQ Sample Streams from ESPARGOS One" decoding="async" height="340" loading="lazy" src="iq-streams.jpg" width="579"/></figure>
+
+<h2>Raw IQ Bypass: Undocumented ESP32 Functionality</h2>
+
+<p>What makes this possible: We figured out that Espressif left undocumented debug functionality in their chips, presumably intended for internal modem testing. We found this functionality and we are now using it to get direct access to baseband IQ samples.</p>
+
+<p>Surprisingly, this functionality has been around for quite a while now. Not only do the ESP32-C61 chips in ESPARGOS One have it, but also older members of the ESP32 family all the way back to the "original" ESP32.</p>
+
+<figure><img alt="An ESP32-C6 capturing an LTE signal at 2.63 GHz carrier frequency" decoding="async" height="287" loading="lazy" src="lte-signal.png" width="579"/></figure>
+
+<p class="news-caption">ESP32-C6 Capturing an LTE Signal at a center frequency of 2.63 GHz</p>
+
+<h2>Try it yourself: ESP-WebSDR</h2>
+
+<p>You don't need an ESPARGOS One antenna array to see this for yourself, a supported ESP32 chip and a modern web browser with builtin WebSerial will do. By flashing the <a href="https://espargos.net/espsdr">ESP-SDR</a> firmware on your ESP32, you can turn it into an incredibly cheap (but also low-duty-cycle) software defined radio.</p>
+
+<p><a class="btn btn-outline-primary" href="https://espargos.net/espsdr/app/flash.html">
+Install ESP-SDR to ESP32
+</a></p>
+
+<p><a class="btn btn-outline-primary" href="https://espargos.net/espsdr/app">
+Run ESP-WebSDR
+</a></p>
+
+<figure><img alt="ESPARGOS One Antenna Array" class="news-product-image" decoding="async" height="435" loading="lazy" src="espargos-one.png" width="580"/></figure>
+
+<h2>ESPARGOS One Availability</h2>
+
+<p>Demand remains high, and production is only now ramping up again after the summer break. We expect availability to improve in early October. Submit a quote request to join the queue. We send your quote and request payment only when your hardware is ready to ship. No advance payment is required to reserve your place!</p>
+
+<p>For various regulatory reasons, we are still limited to EU-only B2B sales for the time being, but are still working on expanding this. Future updates will cover availability in other countries and for private consumers.</p>
+
+<p><a class="btn btn-outline-primary" href="https://buy.espargos.net/">
+Get ESPARGOS One
+</a></p>

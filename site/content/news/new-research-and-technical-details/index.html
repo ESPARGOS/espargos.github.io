@@ -1,0 +1,39 @@
+---
+title: "New Research and Technical Details"
+date: "2025-07-01"
+summary: "I revealed some more details about the ESP32 antenna array at the HAM Radio fair in Friedrichshafen, and some new research results about passive sensing."
+teaser: "sdr-academy.jpg"
+teaser_alt: "YouTube Presentation Thumbnail"
+---
+
+<p>A lot has happened since releasing the <a href="https://www.youtube.com/watch?v=sXwDrcd1t-E">YouTube video</a> about the ESP32 antenna array; there has been solid progress on the hardware side, but also some new research results.</p>
+
+<p>I have distributed the remaining ESPARGOS boards to universities and research institutions and don't have any more units left. Future updates will cover significant developments and availability.</p>
+
+<p>In the meantime, here are some recent publications about ESPARGOS that you might not have seen yet:</p>
+
+<h2>Presentation at SDR Academy</h2>
+
+<div class="ratio ratio-16x9 my-4">
+<iframe src="https://www.youtube-nocookie.com/embed/GrlRUA7dW44" title="Presentation at SDR Academy" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<p>Last weekend, I had the opportunity to reveal some more technical details about ESPARGOS at the <a href="https://2025.sdra.io/">SDR Academy</a>, held at the HAM Radio conference in Friedrichshafen.</p>
+
+<p>You can watch the official recording of my presentation above. The presentation also includes some new video footage from ESPARGOS.</p>
+
+<p>Do you think you can "hide" a Wi-Fi device inside a microwave oven?</p>
+
+<h2>Paper: Passive Sensing with ESPARGOS and Channel Charting</h2>
+
+<p>Can passive objects be tracked using Wi-Fi? What are the privacy implications? We made some experiments to figure out if ESPARGOS can localize objects and people based on signals reflected from a ceiling-mounted transmitter.</p>
+
+<figure><a href="https://arxiv.org/abs/2504.09924">
+<img alt="Passive Target Localization with ESPARGOS" decoding="async" height="659" loading="lazy" src="/publications/pcc_concept.png" width="800" style="width: 580px;"/>
+</a></figure>
+
+<p>In summary, ESPARGOS is definitely capable of detecting and tracking passive objects in such a setup. I was honestly surprised by how well it works! That being said, the limited dynamic range restricts the range and thus potential applications (which is arguably a good thing, given the privacy implications). You can read about all the technical details in our research paper.</p>
+
+<p><a class="btn btn-outline-primary" href="https://arxiv.org/abs/2504.09924">
+Read Paper on arXiv
+</a></p>

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<main class="container col-xxl-8 px-4 py-4">
+  <h1 class="display-5 fw-bold mb-5"><span class="text-gradient">{{ .Title }}</span></h1>
+  <div class="news-list">
+    {{ range .RegularPages.ByDate.Reverse }}
+    <article class="news-preview border-bottom pb-4 mb-4">
+      <div class="row g-3 align-items-start">
+        <div class="col-12 col-sm-auto">
+          <a href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+            {{ $image := .Resources.GetMatch .Params.teaser }}
+            <img class="news-teaser rounded-3" src="{{ $image.RelPermalink }}" alt="{{ .Params.teaser_alt }}" width="{{ $image.Width }}" height="{{ $image.Height }}" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="col-12 col-sm">
+          <time class="text-muted small" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+          <h2 class="h3 fw-bold mt-2 mb-3"><a class="news-title text-body text-decoration-none" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p class="text-body-secondary mb-3">{{ .Params.summary }}</p>
+          <a href="{{ .RelPermalink }}" aria-label="Read article: {{ .Title }}">Read article <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</main>
+{{ end }}

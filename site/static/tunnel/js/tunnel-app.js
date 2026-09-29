@@ -31,11 +31,11 @@ function setStatus(msg, kind = "info") {
 const withTimeout = (p, ms) =>
   Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
 
-async function helloProbe(c) {
-  const p = c.hello();
+async function helloProbe(c, timeoutMs) {
+  const p = timeoutMs === undefined ? c.hello() : c.hello({ timeout: timeoutMs });
   p.catch(() => {}); // swallow a late timeout rejection if withTimeout wins the race
   try {
-    await withTimeout(p, 1500);
+    await withTimeout(p, timeoutMs ?? 1500);
     return true;
   } catch (e) {
     return false;
@@ -45,6 +45,16 @@ async function helloProbe(c) {
 // ---- CSI bridge exposed to the device iframe (same-origin) ----
 function makeTunnelApi() {
   return {
+    async loadDevicePage() {
+      // A navigation can reach the static fallback while the serial link is
+      // still healthy. Restore its document over that link, without reconnecting.
+      await setupServiceWorker(); // reclaim the fallback before it requests assets
+      const resp = await client.request("GET", "");
+      if (resp.status !== 200 || !/text\/html/i.test(resp.contentType)) {
+        throw new Error(`Device page returned HTTP ${resp.status}`);
+      }
+      return td.decode(injectDeviceShim(resp.body));
+    },
     subscribeCsi(cb) {
       const wrapper = (payload) => {
         try {
@@ -88,9 +98,8 @@ async function setupServiceWorker() {
   startSwKeepWarm(ready);
 }
 
-// Keep the Service Worker from idle-terminating while connected. A terminated SW that restarts late
-// can miss an iframe navigation (e.g. the device UI reloading after a settings change), which would
-// fall through to the server's 404 ("Page Not Found") for the SW-virtual /tunnel/device/ path.
+// Reduce worker startup latency while connected. Correct routing also works
+// after worker termination: the worker discovers its owner again on demand.
 function startSwKeepWarm(reg) {
   stopSwKeepWarm();
   swKeepWarmTimer = setInterval(() => {
@@ -210,7 +219,7 @@ async function connect() {
     setStatus("Opening device…");
     const res = await transport.connect({
       onData: (b) => client.feed(b),
-      probe: () => helloProbe(client),
+      probe: (timeoutMs) => helloProbe(client, timeoutMs),
       onError: onConnectionLost,
     });
     client.startKeepalive(1000);

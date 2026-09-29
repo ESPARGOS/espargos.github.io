@@ -37,20 +37,20 @@ export class EspargosUartClient {
     return id;
   }
 
-  _request(frameType, payload, expectType) {
+  _request(frameType, payload, expectType, timeout = this.timeout) {
     const reqId = this._allocId();
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this._pending.delete(reqId);
         reject(new Error(`UART request ${reqId} timed out`));
-      }, this.timeout);
+      }, timeout);
       this._pending.set(reqId, { resolve, reject, expectType, timer });
       this._send(buildFrame(frameType, reqId, payload));
     });
   }
 
-  async hello() {
-    return unpackHello(await this._request(FRAME.HELLO_REQ, new Uint8Array(0), FRAME.HELLO_RESP));
+  async hello({ timeout = this.timeout } = {}) {
+    return unpackHello(await this._request(FRAME.HELLO_REQ, new Uint8Array(0), FRAME.HELLO_RESP, timeout));
   }
 
   // Mirrors UARTRouter.handle_http: method + path + body -> {status, contentType, body}

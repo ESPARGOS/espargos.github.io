@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main class="container px-4 py-4">
+  <article class="news-article mx-auto">
+    <a class="d-inline-block mb-4" href="{{ .Parent.RelPermalink }}"><span aria-hidden="true">&larr;</span> News</a>
+    <header class="mb-5">
+      <time class="text-muted" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      <h1 class="display-6 fw-bold mt-2">{{ .Title }}</h1>
+    </header>
+    <div class="news-article-body">{{ .Content }}</div>
+    <div class="border-top mt-5 pt-4">
+      <a href="{{ .Parent.RelPermalink }}"><span aria-hidden="true">&larr;</span> News</a>
+    </div>
+  </article>
+</main>
+{{ end }}

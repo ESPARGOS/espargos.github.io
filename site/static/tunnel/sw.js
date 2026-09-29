@@ -19,7 +19,12 @@ self.addEventListener("message", (e) => {
   const d = e.data || {};
   if (d.type === "register-owner") {
     ownerId = e.source.id;
-    e.source.postMessage({ type: "owner-registered" });
+    // A hard reload can leave the host uncontrolled even though this worker
+    // is already active. Reclaim it (and any fallback frame) on each connection,
+    // not just on installation, before the host starts loading device assets.
+    e.waitUntil(self.clients.claim().then(() => {
+      e.source.postMessage({ type: "owner-registered" });
+    }));
   }
 });
 

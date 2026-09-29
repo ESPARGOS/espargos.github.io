@@ -9,18 +9,21 @@
 // UI can recover (and the user can reconnect) instead of the tunnel silently dying.
 
 const FT231X = 0x6015; // FTDI FT231X    (vendor 0x0403) -> 2 Mbaud  (matches uart.py FT231XQ)
+const CP2102N = 0xea60; // SiLabs CP2102N (vendor 0x10c4) -> 3 Mbaud
 const CP2102C = 0xea64; // SiLabs CP2102C (vendor 0x10c4) -> 3 Mbaud
 
 export const ESPARGOS_USB_FILTERS = [
   { usbVendorId: 0x0403, usbProductId: FT231X },
+  { usbVendorId: 0x10c4, usbProductId: CP2102N },
   { usbVendorId: 0x10c4, usbProductId: CP2102C },
 ];
 
-const BAUD_BY_PID = { [FT231X]: 2000000, [CP2102C]: 3000000 };
-const CHIP_BY_PID = { [FT231X]: "FTDI FT231X", [CP2102C]: "SiLabs CP2102C" };
+const BAUD_BY_PID = { [FT231X]: 2000000, [CP2102N]: 3000000, [CP2102C]: 3000000 };
+const CHIP_BY_PID = { [FT231X]: "FTDI FT231X", [CP2102N]: "SiLabs CP2102N", [CP2102C]: "SiLabs CP2102C" };
 const SAFE_FALLBACK_BAUD = 2000000; // lower, safer rate if the PID is somehow unavailable
 const BOOT_BAUD = 115200;
 const OPEN_SETTLE_MS = 150;
+const CP2102N_BOOT_SETTLE_MS = 8000;
 const CONNECT_ATTEMPTS = 3;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -99,6 +102,99 @@ export class WebSerialTransport {
     }
   }
 
+  _isCP2102N() {
+    const { usbVendorId, usbProductId } = this.port.getInfo();
+    return usbVendorId === 0x10c4 && usbProductId === CP2102N;
+  }
+
+  async _waitForCP2102NBoot(bootSeen = false) {
+    // Quiet, already-running boards need no fixed startup delay. Boot chatter
+    // means we must wait for app_main: UART can answer before startup finishes.
+    const reader = this.port.readable.getReader();
+    const decoder = new TextDecoder();
+    let timer;
+    let tail = "";
+    const boot = (async () => {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) return;
+        tail += decoder.decode(value, { stream: true });
+        if (tail.includes("Returned from app_main()")) return;
+        if (tail.includes("waiting for download")) return;
+        if (/boot:|cpu_start:|main_task:|[IWE] \(\d+\)/.test(tail)) bootSeen = true;
+        tail = tail.slice(-512);
+      }
+    })();
+    try {
+      await Promise.race([boot, new Promise((resolve) => {
+        timer = setTimeout(() => {
+          if (bootSeen) timer = setTimeout(resolve, CP2102N_BOOT_SETTLE_MS - 200);
+          else resolve();
+        }, 200);
+      })]);
+    } finally {
+      clearTimeout(timer);
+      try { await reader.cancel(); } finally {
+        try { await boot; } finally { reader.releaseLock(); }
+      }
+    }
+  }
+
+  async _connectCP2102N(baud, onData, probe) {
+    let received = false;
+    let ioError = null;
+    this._onError = (error) => { ioError = error; };
+    const feed = (bytes) => { received = true; onData(bytes); };
+    const check = async () => {
+      // Discard a partial boot line in both frame decoders. Retry HELLO on the
+      // same open port: the first response may still follow unframed boot text.
+      for (let n = 0; n < 2; n++) {
+        if (ioError) throw ioError;
+        onData(Uint8Array.of(0));
+        await this.write(Uint8Array.of(0));
+        const ready = await probe(250);
+        if (ioError) throw ioError;
+        if (ready) return true;
+      }
+      return false;
+    };
+    await this._open(baud);
+    this._attach(feed);
+    if (await check()) return { activated: false, baud };
+    const bootSeen = received;
+    await this._detach();
+    await this._closePort();
+
+    // First try activation without resetting a running controller. Only a
+    // failed activation warrants one controlled recovery reset at the boot baud.
+    for (let recovery = 0; recovery < 2; recovery++) {
+      await this._open(BOOT_BAUD);
+      if (recovery) {
+        await this.port.setSignals({ dataTerminalReady: false, requestToSend: true });
+        await sleep(100);
+        await this.port.setSignals({ dataTerminalReady: false, requestToSend: false });
+      }
+      await this._waitForCP2102NBoot(recovery || bootSeen);
+      // Keep GPIO0 high throughout boot, then restore the close/open idle state.
+      await this.port.setSignals({ dataTerminalReady: true, requestToSend: true });
+      const writer = this.port.writable.getWriter();
+      try {
+        // A previous interrupted command can leave a partial activation line.
+        await writer.write(new TextEncoder().encode(`\nESPARGOS-UART-MODE:${baud}\n`));
+      } finally {
+        writer.releaseLock();
+      }
+      await sleep(100);
+      await this._closePort();
+      await this._open(baud);
+      this._attach(feed);
+      if (await check()) return { activated: true, baud };
+      await this._detach();
+      await this._closePort();
+    }
+    throw new Error("CP2102N did not respond after UART activation and one recovery reset");
+  }
+
   _attach(onData) {
     this._onData = onData;
     this._closing = false;
@@ -165,17 +261,21 @@ export class WebSerialTransport {
   // The whole sequence is retried because opening an FT231X can glitch the ESP32 reset line.
   async connect({ onData, probe, onError }) {
     const { baud, chip } = this.info();
+    const cp2102n = this._isCP2102N();
+    const attempts = cp2102n ? 1 : CONNECT_ATTEMPTS;
     let lastErr = null;
-    for (let attempt = 1; attempt <= CONNECT_ATTEMPTS; attempt++) {
+    for (let attempt = 1; attempt <= attempts; attempt++) {
       try {
-        const res = await this._connectOnce(baud, onData, probe);
+        const res = cp2102n
+          ? await this._connectCP2102N(baud, onData, probe)
+          : await this._connectOnce(baud, onData, probe);
         this._onError = onError || null; // only surface losses once we're actually connected
         return { ...res, chip, attempt };
       } catch (e) {
         lastErr = e;
         try { await this._detach(); } catch (err) {}
         try { await this._closePort(); } catch (err) {}
-        if (attempt < CONNECT_ATTEMPTS) await sleep(400);
+        if (attempt < attempts) await sleep(400);
       }
     }
     throw lastErr || new Error("could not connect to device");

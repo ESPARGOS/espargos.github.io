@@ -29,6 +29,59 @@ $carousel-indicator-opacity: 0.2;
 
 @import "bootstrap/scss/bootstrap";
 
+.news-teaser {
+	display: block;
+	width: 220px;
+	max-width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 10;
+	object-fit: contain;
+}
+
+.news-title:hover {
+	text-decoration: underline !important;
+	text-decoration-color: $primary !important;
+}
+
+.news-article {
+	max-width: 780px;
+}
+
+.news-article-body {
+	font-size: 1.125rem;
+	line-height: 1.75;
+	overflow-wrap: break-word;
+
+	h2 {
+		font-size: 1.6rem;
+		font-weight: 700;
+		margin: 2.5rem 0 1rem;
+	}
+
+	figure {
+		margin: 2rem 0;
+		text-align: center;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin-inline: auto;
+		border-radius: 0.5rem;
+	}
+
+	.news-product-image {
+		width: 320px;
+	}
+
+	.news-caption {
+		font-size: 0.875rem;
+		text-align: center;
+		color: var(--bs-secondary-color);
+	}
+}
+
 .btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
     background-color: $primary;
