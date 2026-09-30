@@ -19,8 +19,10 @@ menu:
 			<div class="col-12 col-lg-4">
 				<p class="mb-0">
 					Espressif Systems' ESP32 microcontrollers are well known for their Wi-Fi and Bluetooth capabilities.
-					Over the past few months (and with the help of LLMs), we have found an undocumented feature that allows the firmware to bypass the fixed-function modems to capture raw IQ baseband samples.
-					This opens up the possibility of using the ESP32 as a low-cost software-defined radio (SDR) platform, capable of receiving signals in the 2.4 GHz band (and the 5 GHz band on the ESP32-C5).
+					We have found an <b>undocumented feature</b> in the chip that allows the firmware to bypass these fixed-function modems to capture raw IQ baseband samples.
+
+					While others have previously connected an <a href="https://github.com/hardcoreerik/esp-rtl-sdr">external RTL-SDR</a> or <a href="https://github.com/NorthernMan54/rtl_433_ESP">SubGHz transceiver</a> to an ESP32 or <a href="https://github.com/thaaraak/ESP32-A1S-Tayloe">used external audio ADCs to capture IQ samples</a>, we actually tap into the chips <b>internal</b> modem ADC signal chain, no extra hardware is required.
+					This opens up the possibility of <b>using the ESP32 as a low-cost software-defined radio (SDR) platform</b>, capable of receiving arbitrary signals in the 2.4 GHz band (and the 5 GHz band on the ESP32-C5).
 				</p>
 			</div>
 			<figure class="col-12 col-lg-8 mb-0">
@@ -36,7 +38,8 @@ menu:
 		<div class="row align-items-center g-4">
 			<div class="col-12 col-lg-6">
 				<p>
-					To prove the concept, we made a simple web interface that displays the live power spectrum and waterfall of the captured IQ samples (at <b>a very low</b> duty cycle).
+					The best part: You can try this out in your (desktop) web browser with almost any ESP32 development board!
+					Our web interface shows the power spectrum and waterfall diagram of the captured IQ samples (at <b>a very low</b> duty cycle).
 					Use a browser with <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API">Web Serial</a> support.
 				</p>
 
@@ -46,9 +49,8 @@ menu:
 						<span>Flash ESP-SDR firmware to your board</span>
 					</h4>
 					<p class="mb-2">
-						Connect your board over USB and install the SDR firmware using the browser flasher.
+						Connect your board over USB (if available, the native / debug port of your board) and install the SDR firmware using the flasher.
 						Supported chips are the <b>original ESP32</b>, <b>ESP32-C3</b>, <b>ESP32-C5</b>, <b>ESP32-C6</b>, <b>ESP32-C61</b>, <b>ESP32-S2</b>, <b>ESP32-S3</b> and <b>ESP32-S31</b>.
-						The original ESP32 requires a USB-to-UART bridge, often built into the development board.
 					</p>
 					<a href="/espsdr/app/flash.html" class="btn btn-dark px-3">Open firmware flasher</a>
 				</section>
@@ -100,7 +102,7 @@ menu:
 		<h3 class="h5 fw-bold mt-4 mb-3">IQ sample format</h3>
 		<p>
 			The exact format of the IQ samples is configurable. In our implementation, each complex sample occupies one 32-bit word in memory.
-			Bits 19&ndash;10 hold I and bits 9&ndash;0 hold Q, both signed 10-bit two's-complement values
+			Bits 19&ndash;10 hold I and bits 9&ndash;0 hold Q, both signed 10-bit integers
 			(&minus;512 to +511). Bits 27&ndash;20 report the receiver gain setting (an index into the gain table), while bits 31&ndash;28
 			are most likely the internal state of the automatic gain control's finite state machine.
 		</p>
@@ -118,7 +120,7 @@ menu:
 				<div class="border rounded-3 p-3 h-100">
 					<h4 class="h6 text-body-secondary mb-2">Tuning</h4>
 					<p class="h4 text-primary fw-bold mb-2">2.2&ndash;2.7 GHz<br>4.8&ndash;6.0 GHz</p>
-					<p class="mb-0">5 GHz is only available on ESP32-C5. Exact tuning limits differ by chip.</p>
+					<p class="mb-0">5 GHz is only available on ESP32-C5. Exact PLL stability limits differ by chip.</p>
 				</div>
 			</div>
 			<div class="col">
