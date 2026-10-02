@@ -304,7 +304,7 @@ video.minimal-controls { outline: none; }
 
 // Kit cards on the ESPARGOS One page: same visual language as .doc-link-card,
 // but a static card with product image, description, contents list and
-// download links.
+// pricing, purchase and download links.
 .kit-card {
 	display: flex;
 	flex-direction: column;
@@ -337,9 +337,7 @@ video.minimal-controls { outline: none; }
 
 .kit-card-subtitle {
 	font-weight: 700;
-	font-size: 0.8rem;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
+	font-size: 1rem;
 	color: #37c964;
 	margin-bottom: 0.35rem;
 }
@@ -351,10 +349,25 @@ video.minimal-controls { outline: none; }
 	margin-bottom: 0.75rem;
 }
 
-// Pins the download links to the bottom so they align across the row.
+// Pins prices and actions to the bottom so they align across the row.
 .kit-card-footer {
+	display: grid;
+	gap: 0.5rem;
 	margin-top: auto;
 	padding-top: 0.5rem;
+}
+
+.kit-card-price {
+	margin-bottom: 0.25rem;
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #fff;
+
+	span {
+		font-size: 0.85rem;
+		font-weight: 400;
+		color: #adb5bd;
+	}
 }
 
 // Publication / resource cards on the research page: same visual language as
