@@ -46,5 +46,15 @@
 
 	<link rel="stylesheet" href="{{ $highlightTheme.RelPermalink }}">
 
-	<script src="https://t76eb400e.emailsys1a.net/form/290/526/7daafb4b48/popup.js?_g=1739457672" async></script>
+	<script>
+		// The popup injects third-party stylesheets and images. Even with an
+		// async script, slow requests for these can hold up page loading.
+		// Load it only after the page and its controls have finished loading.
+		window.addEventListener("load", function () {
+			var script = document.createElement("script");
+			script.src = "https://t76eb400e.emailsys1a.net/form/290/526/7daafb4b48/popup.js?_g=1739457672";
+			script.async = true;
+			document.head.appendChild(script);
+		}, { once: true });
+	</script>
 </head>
