@@ -230,37 +230,71 @@ menu:
 			</figcaption>
 		</figure>
 		<p>
-			Therefore, our firmware streams the IQ samples at a very low duty cycle, which is enough to display a live spectrum and waterfall in the browser.
-			Packets that arrive between capture windows may be missed.
+			The serial burst-capture profiles transfer IQ samples at a low duty cycle, which is enough to display a live spectrum and waterfall in the browser.
+			Packets that arrive between capture windows may be missed. The ESP32-S31 streaming profile
+			offers continuous IQ reception over high-speed USB or Gigabit Ethernet, as described below.
 		</p>
 
-		<h2 id="soapyespsdr" class="fw-bold mb-3 mt-4">SoapyESPSDR: GNU Radio &amp; gqrx</h2>
+		<h2 id="soapyespsdr" class="fw-bold mb-3 mt-4">SoapyESPSDR: GNU Radio &amp; Gqrx</h2>
+		<div class="row row-cols-1 row-cols-sm-2 g-3 mb-4">
+			<div class="col">
+				<div class="border rounded-3 p-4 h-100">
+					<h3 class="h6 text-body-secondary mb-2">High-speed USB</h3>
+					<p class="h2 text-primary fw-bold mb-2">Up to 20 MSa/s</p>
+					<p class="mb-0">Continuous IQ reception through the native USB port.</p>
+				</div>
+			</div>
+			<div class="col">
+				<div class="border rounded-3 p-4 h-100">
+					<h3 class="h6 text-body-secondary mb-2">Gigabit Ethernet</h3>
+					<p class="h2 text-primary fw-bold mb-2">Up to 40 MSa/s</p>
+					<p class="mb-0">Continuous IQ reception over a gigabit network.</p>
+				</div>
+			</div>
+		</div>
 		<div class="row align-items-center g-4">
 			<div class="col-12 col-lg-5">
 				<p>
-					<a href="https://github.com/ESPARGOS/SoapyESPSDR">SoapyESPSDR</a> is our receive-only
-					SoapySDR driver for the <b>ESP32-S31</b>. It streams IQ samples over Gigabit Ethernet
-					from a board running ESP-SDR firmware, making the receiver available to applications such as
-					<b>GNU Radio</b> and <b>gqrx</b> through their SoapySDR support.
+					<a href="https://github.com/ESPARGOS/SoapyESPSDR">SoapyESPSDR</a> is our open-source,
+					receive-only SoapySDR driver for the <b>ESP32-S31</b>. It brings continuous IQ samples
+					to desktop applications: listen to signals in <b>Gqrx</b>, record samples, or build
+					your own demodulator in <b>GNU Radio</b>.
 				</p>
 				<p>
-					The S31 supports continuous reception at 8 and 16 MSa/s; higher sample rates require a reduced
-					duty cycle.
+					<b>Experimental:</b> The firmware and driver are available now. Signal quality may not yet be optimal.
 				</p>
-				<p>
-					<b>Under development:</b> We will release firmware and SoapySDR driver repositories soon, once everything is ready.
-				</p>
-				<button type="button" class="btn btn-secondary px-4" disabled aria-describedby="soapyespsdr-coming-soon">Download SoapyESPSDR</button>
-				<p id="soapyespsdr-coming-soon" class="text-muted small mt-2 mb-0">Coming soon.</p>
+				<section class="setup-step setup-step-compact border rounded p-3 my-2">
+					<h3 class="setup-step-heading h5 mt-0 mb-2">
+						<span class="setup-step-number">1</span>
+						<span>Flash the streaming firmware</span>
+					</h3>
+					<p class="mb-2">
+						Connect an <b>ESP32-S31 Function-CoreBoard</b> through its USB debug port or UART adapter.
+						In the web flasher, select the <b>ESP32-S31 Function-CoreBoard · Ethernet / USB for SoapyESPSDR</b> profile and install the firmware.
+					</p>
+					<a href="/espsdr/app/flash.html" class="btn btn-dark px-3">Open firmware flasher</a>
+				</section>
+				<section class="setup-step setup-step-compact border rounded p-3 mt-2 mb-0">
+					<h3 class="setup-step-heading h5 mt-0 mb-2">
+						<span class="setup-step-number">2</span>
+						<span>Connect your SDR application</span>
+					</h3>
+					<p class="mb-2">
+						Install SoapyESPSDR on your Linux computer, then connect the board through its
+						native high-speed USB port or Ethernet. Follow the setup guide to select the
+						receiver in Gqrx, GNU Radio, or another SoapySDR-compatible application.
+					</p>
+					<a href="https://github.com/ESPARGOS/SoapyESPSDR#build-and-install" class="btn btn-dark px-3">Install and set up SoapyESPSDR</a>
+				</section>
 			</div>
 			<figure class="col-12 col-lg-7 mb-0">
-				<a href="/espsdr/gqrx-esp-sdr.png" aria-label="View the gqrx screenshot at full size">
+				<a href="/espsdr/gqrx-esp-sdr.png" aria-label="View the Gqrx LTE screenshot at full size">
 					<img src="/espsdr/gqrx-esp-sdr.png" class="d-block img-fluid w-100 rounded-3"
-						alt="gqrx connected to an ESP32-S31 using the SoapyESPSDR driver, displaying the spectrum and waterfall around 2.462 GHz."
-						width="1632" height="847" loading="lazy">
+						alt="Gqrx displaying the spectrum and waterfall of an LTE signal at 2.63 GHz, continuously sampled at 40 MSa/s by an ESP32-S31 over Ethernet using SoapyESPSDR."
+						width="1920" height="1048" loading="lazy">
 				</a>
 				<figcaption class="text-muted text-center small mt-2">
-					ESP32-S31 IQ reception in gqrx through SoapyESPSDR. Click to view at full size.
+					LTE at 2.63 GHz, continuously sampled at 40 MSa/s over Ethernet with an ESP32-S31 and SoapyESPSDR, displayed in Gqrx. Click to view at full size.
 				</figcaption>
 			</figure>
 		</div>
@@ -268,6 +302,7 @@ menu:
 		<h2 class="fw-bold mb-3 mt-4">More information and firmware</h2>
 		<ul>
 			<li><a href="https://github.com/ESPARGOS/esp-sdr">ESP-SDR firmware</a>: firmware source code and build instructions.</li>
+			<li><a href="https://github.com/ESPARGOS/SoapyESPSDR">SoapyESPSDR driver</a>: installation and setup for desktop SDR applications.</li>
 			<li><a href="https://github.com/ESPARGOS/esp-web-sdr">ESP-WebSDR browser interface</a>: browser-based spectrum viewer and firmware flasher.</li>
 			<li>The firmware of <a href="https://espargos.net/espargos-one"><span class="text-gradient">ESPARGOS One</span></a> remains closed source for now, but we are considering on open-sourcing it now that this "secret" IQ functionality that we were keeping private has been revealed.</li>
 		</ul>
@@ -316,9 +351,10 @@ menu:
 				<div id="faqApplications" class="accordion-collapse collapse" aria-labelledby="faqApplicationsHeading" data-bs-parent="#espsdrFaq">
 					<div class="accordion-body">
 						<p class="mb-0">
-							Due to the low duty cycle achievable for most ESP32 models, it does not make much sense to use the SDR mode with these applications.
-							For the ESP32-S31, our <a href="#soapyespsdr">SoapyESPSDR driver</a> provides
-							integration with GNU Radio, gqrx and other SoapySDR-compatible applications over Gigabit Ethernet.
+							Yes: on the ESP32-S31, <a href="#soapyespsdr">SoapyESPSDR</a> connects GNU Radio,
+							Gqrx and other SoapySDR-compatible applications to continuous IQ reception at up to
+							20 MSa/s over high-speed USB or 40 MSa/s over Gigabit Ethernet. Other supported
+							ESP32 models use the browser viewer with the standard burst/FFT firmware profiles.
 						</p>
 					</div>
 				</div>
