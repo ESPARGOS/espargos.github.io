@@ -451,3 +451,22 @@ video.minimal-controls { outline: none; }
 .pub-card-thumb.pub-card-thumb-top img {
 	object-position: top;
 }
+
+.espsdr-browser-support {
+	display: grid;
+	grid-template-columns: max-content 1fr max-content;
+	align-items: center;
+	gap: 0.75rem;
+
+	svg {
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 575.98px) {
+		grid-template-columns: max-content 1fr;
+
+		a {
+			grid-column: 2;
+		}
+	}
+}
