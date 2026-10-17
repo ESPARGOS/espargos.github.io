@@ -1,26 +1,15 @@
-# Convenience targets for local development.
-#
-# The firmware page uses a self-hosted, patched esp-web-tools bundle that is
-# generated (not committed) by scripts/build-esp-web-tools.sh. These targets
-# make sure it is built before Hugo runs.
+# Build the recovery catalog from the firmware images available locally.
+.PHONY: serve build recovery-catalog clean
 
-.PHONY: serve build vendor vendor-force clean
+recovery-catalog:
+	python3 scripts/build-recovery-catalog.py
 
-# Build the patched esp-web-tools bundle (skips if already up to date).
-vendor:
-	./scripts/build-esp-web-tools.sh
-
-# Force a rebuild (e.g. after updating the esptool-js fork).
-vendor-force:
-	FORCE_REBUILD=1 ./scripts/build-esp-web-tools.sh
-
-# Run the local dev server (Web Serial works on http://localhost).
-serve: vendor
+serve: recovery-catalog
 	hugo server
 
-# Produce the production build into ./public.
-build: vendor
+build: recovery-catalog
 	hugo --minify
 
 clean:
-	rm -rf static/vendor public
+	rm -rf public
+	rm -f static/recovery-flasher/firmware.json

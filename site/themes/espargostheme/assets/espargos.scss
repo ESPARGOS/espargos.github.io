@@ -119,6 +119,14 @@ pre {
 	border: 2px solid white;
 }
 
+.firmware-screenshot {
+	display: block;
+	padding: 0.75rem;
+	margin-block: 0.75rem;
+	border: 3px solid #fff;
+	border-radius: 0.375rem;
+}
+
 .setup-step {
 	border-color: rgba($primary, 0.45) !important;
 	border-left: 6px solid $primary !important;
@@ -469,4 +477,101 @@ video.minimal-controls { outline: none; }
 			grid-column: 2;
 		}
 	}
+}
+
+.site-footer {
+	border-top: 1px solid var(--bs-border-color);
+	a { text-underline-offset: 0.2em; }
+}
+
+.skip-link {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	z-index: 1100;
+	padding: 0.75rem 1rem;
+	background: $body-bg-dark;
+	color: #fff;
+	transform: translateY(-150%);
+	&:focus { transform: translateY(0); }
+}
+
+a:focus-visible, button:focus-visible {
+	outline: 2px solid $primary;
+	outline-offset: 4px;
+}
+
+.video-minimal-play:focus-visible {
+	opacity: 1 !important;
+	outline: 2px solid $primary;
+	outline-offset: 4px;
+}
+
+.video-minimal-play.is-playing .video-minimal-play-icon {
+	width: 18px;
+	height: 25px;
+	border: 0;
+	border-inline: 6px solid #fff;
+	transform: translate(-50%, -50%);
+}
+
+@media (max-width: 991.98px) {
+	header nav { width: 100%; }
+	header .nav { justify-content: center; }
+	header .nav-purchase {
+		flex-basis: 100%;
+		text-align: center;
+		margin-top: 0.75rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.doc-link-card, .pub-card, .video-minimal-play { transition: none; }
+}
+
+// Separate the overview link from the native submenu disclosure.
+.nav-section {
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	> .nav-link { padding-right: 0; }
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		min-height: 44px;
+		color: #fff;
+		cursor: pointer;
+		list-style: none;
+		border-radius: 0.375rem;
+	}
+	summary::-webkit-details-marker { display: none; }
+	summary::after {
+		content: "";
+		border: 0.25rem solid transparent;
+		border-bottom: 0;
+		border-top-color: currentColor;
+	}
+	summary:hover { background: $secondary; }
+	summary:focus-visible { outline: 2px solid $primary; outline-offset: 2px; }
+	details[open] summary::after { transform: rotate(180deg); }
+}
+
+.nav-submenu {
+	position: absolute;
+	left: 0;
+	z-index: 1050;
+	min-width: 13rem;
+	padding: 0.4rem;
+	margin: 0.25rem 0 0;
+	list-style: none;
+	background: $body-bg-dark;
+	border: 1px solid var(--bs-border-color);
+	border-radius: 0.375rem;
+
+	a { display: block; padding: 0.65rem 0.8rem; color: #fff; text-decoration: none; }
+	a:hover, a:focus-visible { background: $secondary; }
+	a[aria-current="page"] { color: $primary; }
 }

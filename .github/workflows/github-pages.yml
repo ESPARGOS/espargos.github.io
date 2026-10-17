@@ -177,9 +177,9 @@ jobs:
           node-version: 20
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: Build self-hosted esp-web-tools (patched esptool-js)
+      - name: Build recovery image catalog
         working-directory: ./espargos.github.io/site
-        run: bash ./scripts/build-esp-web-tools.sh
+        run: python3 ./scripts/build-recovery-catalog.py
       - name: Build with Hugo
         working-directory: ./espargos.github.io/site
         env:

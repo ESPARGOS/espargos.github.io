@@ -1,22 +1,39 @@
-<header class="d-flex text-white flex-wrap justify-content-center p-3 mb-4">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="d-flex text-white flex-wrap justify-content-center p-3 {{ if .IsHome }}mb-1{{ else }}mb-4{{ end }}">
 	<div class="container">
 		<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 			{{ $logo := resources.Get "logo.svg" }}
-			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-				<img height="35" class="px-3" src="{{ $logo.Permalink }}">
+			<a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-white text-decoration-none">
+				<img height="35" alt="ESPARGOS home" class="px-3" src="{{ $logo.Permalink }}">
 			</a>
 
+			<nav aria-label="Main navigation">
 			<ul class="nav nav-pills">
 				{{ $currentPage := . }}
 				{{ range .Site.Menus.main }}
 				<li class="nav-item">
-					<a href="{{ .Page.RelPermalink }}" title="{{ .Title }}" class="nav-link text-white fw-bold {{if (in $currentPage.Permalink .Page.Permalink) }} active{{end}}" aria-current="page">{{ .Name }}</a>
+					{{ if .HasChildren }}
+					<div class="nav-section">
+						<a href="{{ .Page.RelPermalink }}" class="nav-link text-white fw-bold {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{ end }}" {{ if eq $currentPage .Page }}aria-current="page"{{ end }}>{{ .Name }}</a>
+						<details>
+						<summary aria-label="{{ .Name }} subpages"></summary>
+						<ul class="nav-submenu">
+							{{ range .Children }}
+							<li><a href="{{ .Page.RelPermalink }}" {{ if eq $currentPage .Page }}aria-current="page"{{ end }}>{{ .Name }}</a></li>
+							{{ end }}
+						</ul>
+						</details>
+					</div>
+					{{ else }}
+					<a href="{{ .Page.RelPermalink }}" title="{{ .Title }}" class="nav-link text-white fw-bold {{if (in $currentPage.Permalink .Page.Permalink) }} active{{end}}" {{if eq $currentPage .Page }}aria-current="page"{{end}}>{{ .Name }}</a>
+					{{ end }}
 				</li>
 				{{ end }}
-				<li class="nav-item">
+				<li class="nav-item nav-purchase">
 					<a href="https://buy.espargos.net/" class="btn btn-dark text-white fw-bold px-3">Get ESPARGOS One</a>
 				</li>
 			</ul>
+			</nav>
 		</div>
 	</div>
 </header>

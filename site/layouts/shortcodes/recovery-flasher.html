@@ -1,0 +1,3 @@
+{{- $source := resources.Get "recovery-flasher/app.mjs" -}}
+{{- $bundle := $source | js.Build (dict "targetPath" "js/recovery-flasher.js" "minify" true "format" "esm") | fingerprint -}}
+<script type="module" src="{{ $bundle.RelPermalink }}"></script>

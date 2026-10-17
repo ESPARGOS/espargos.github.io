@@ -3,6 +3,11 @@ title: "Firmware"
 draft: false
 type: page
 layout: article
+menu:
+  main:
+    parent: "espargos-one"
+    name: "Firmware downloads"
+    weight: 20
 ---
 
 <main class="flex-shrink-0">
@@ -465,29 +470,58 @@ layout: article
 			</div>
 		</div>
 		
-		<h3>Update Instructions</h3>
-		<div class="alert alert-primary" role="alert"><b>Important:</b> Always update ALL firmware components of your ESPARGOS device and update them in this order: First sensor firmware, then controller firmware, then web assets.</div>
+		<h3 id="update-instructions">Update Instructions</h3>
+		<p>Update directly from the internet with <a href="#web-update">Web Update</a>, or <a href="#local-update">upload firmware files manually</a>.</p>
 
-		<h5>Web Browser</h5>
-		<div class="row justify-content-md-center">
-			<img class="col col-12 col-md-12 col-lg-8, col-xl-6 screenshot" src="img/fwupdate-browser.png" class="screenshot">
-		</div>
-		<div class="px-1 py-3">
-			<ul>
-				<li>Go to the web interface of your ESPARGOS device. See <a href="/setup">Setup</a> to learn how.</li>
-				<li>
-					One after the other, select and flash the firmware files for
-					<ul>
-						<li>sensor firmware,</li>
-						<li>controller firmware and</li>
-						<li>controller web assets.</li>
-					</ul>
-					ESPARGOS will reboot after every firmware update.
-				</li>
-			</ul>
-		</div>
+		<h4 id="web-update" class="mt-4">Web Update</h4>
+		<p>Connect ESPARGOS via Ethernet with internet access. Open its web interface and click <strong>Update</strong> in the sidebar. See <a href="/setup/#connect">Setup</a> for connection instructions.</p>
+		<ol class="ps-4">
+			<li class="mb-4">
+				<strong>Choose the update channel.</strong>
+				<p class="mt-2">Choose <code>stable</code> for regular use, or <code>testing</code> or <code>dev</code> for newer builds. Leave the server and token fields as they are. Click <strong>Save Settings</strong> if you made changes.</p>
+				<figure class="mb-0" style="max-width: 864px;">
+					<a href="img/webupdate-settings.png" aria-label="View the Web Update settings screenshot at full size"><img class="img-fluid firmware-screenshot" src="img/webupdate-settings.png" width="853" height="304" loading="lazy" alt="Web Update settings showing the dev channel, HTTPS server espargos.net, and Save Settings button."></a>
+				</figure>
+			</li>
+			<li class="mb-4">
+				<strong>Check for updates.</strong>
+				<p class="mt-2">Click <strong>Check for Updates</strong> to see what is available. Use the <strong>Suggested Update Plan</strong>, which selects the components that need updating.</p>
+				<figure class="mb-0" style="max-width: 864px;">
+					<!-- Availability is illustrated with older local versions; the progress screenshot below is from a real full dev reinstall (346.7 seconds). -->
+					<a href="img/webupdate-plan.png" aria-label="View the update check and suggested plan screenshot at full size"><img class="img-fluid firmware-screenshot" src="img/webupdate-plan.png" width="853" height="435" loading="lazy" alt="Example update check showing newer controller and sensor firmware available, all three components selected for update, and Start Web Update enabled."></a>
+				</figure>
+			</li>
+			<li class="mb-3">
+				<strong>Start the update.</strong>
+				<p class="mt-2">Click <strong>Start Web Update</strong>. The update takes around 5–10 minutes. Leave the page open and keep ESPARGOS powered and connected. It will reboot during the update. The page reconnects on its own.</p>
+				<figure class="mb-0" style="max-width: 680px;">
+					<a href="img/webupdate-progress.png" aria-label="View the update progress screenshot at full size"><img class="img-fluid firmware-screenshot" src="img/webupdate-progress.png" width="680" height="690" loading="lazy" alt="Live firmware update in progress, with completed steps in green and the remaining download and installation steps listed below."></a>
+				</figure>
+			</li>
+			<li class="mb-4">
+				<strong>Check the firmware version.</strong>
+				<p class="mt-2">Once finished, reopen the <strong>Home</strong> page to check the installed versions under <strong>Firmware Version</strong>.</p>
+			</li>
+		</ol>
 
-		<h5>Command Line</h5>
+		<h4 id="local-update" class="mt-4">Manual Update in the Web Browser</h4>
+		<div class="alert alert-primary" role="note"><b>Update all three components from the same channel:</b> sensors first, then controller, then web assets. Wait for each update and reboot to finish.</div>
+		<p>Download the files above, then upload them under <strong>Update → Local Update</strong> in this order:</p>
+		<div class="table-responsive">
+			<table class="table align-middle">
+				<thead><tr><th scope="col">Order</th><th scope="col">File</th><th scope="col">Field in Local Update</th><th scope="col">Button</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">1</th><td><code>espargos-sensor-firmware.bin</code></td><td>Sensor application file</td><td>Upload Sensor App</td></tr>
+					<tr><th scope="row">2</th><td><code>espargos-controller-firmware.bin</code></td><td>Controller app file</td><td>Upload Firmware</td></tr>
+					<tr><th scope="row">3</th><td><code>espargos-controller-assets.bin</code></td><td>Controller assets partition</td><td>Upload Image</td></tr>
+				</tbody>
+			</table>
+		</div>
+		<figure class="mb-4" style="max-width: 864px;">
+			<a href="img/local-update.png" aria-label="View the Local Update screenshot at full size"><img class="img-fluid firmware-screenshot" src="img/local-update.png" width="864" height="283" loading="lazy" alt="Local Update form with file selectors and upload buttons for controller firmware, controller web assets and sensor application."></a>
+		</figure>
+
+		<h4>Command Line</h4>
 		<div class="p-2">
 			<pre class="m-0"><code class="language-bash" style="background: black;"># Download dev firmware files from espargos.net
 cd /tmp
@@ -666,49 +700,36 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 		<div class="alert alert-info">Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process. A failed firmware update cannot "brick" ESPARGOS.</div>
 
 		<h4>Controller Firmware Recovery</h4>
-		<h5>From a WebSerial-enabled Browser</h5>
-		<p>
-			With a WebSerial-enabled browser (e.g., Firefox, Google Chrome), connect ESPARGOS to your computer via USB and click the appropriate button for your chosen channel to flash the recovery firmware directly from your browser.
-			Note that this method is quite slow (can take around 10 minutes):
-		</p>
-		<!-- Self-hosted esp-web-tools built against a patched esptool-js that adds
-		     hardware-flow-control adapter support (e.g. CP2102C). This directory is
-		     generated (git-ignored) by site/scripts/build-esp-web-tools.sh. -->
-		<script type="module" src="/vendor/esp-web-tools/install-button.js"></script>
-		<div class="row justify-content-center my-3">
-			<div class="col-12 col-lg-9 col-xl-8">
-				<div class="border rounded-3 overflow-hidden">
-					<div class="table-responsive">
-						<table class="table table-striped table-hover align-middle mb-0" id="recovery-install-table" style="--bs-table-bg: transparent; --bs-table-striped-bg: rgba(255, 255, 255, 0.06); --bs-table-hover-bg: rgba(255, 255, 255, 0.08);">
-							<thead>
-								<tr>
-									<th>Channel</th>
-									<th>Build</th>
-									<th class="text-end">Install</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="fw-semibold">Dev</td>
-									<td class="small text-muted">{{< firmware-meta channel="dev" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="dev" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-dev-manifest.json"></esp-web-install-button></td>
-								</tr>
-								<tr>
-									<td class="fw-semibold">Testing</td>
-									<td class="small text-muted">{{< firmware-meta channel="testing" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="testing" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-testing-manifest.json"></esp-web-install-button></td>
-								</tr>
-								<tr>
-									<td class="fw-semibold">Stable</td>
-									<td class="small text-muted">{{< firmware-meta channel="stable" field="build_date" artifact="espargos-controller-artifact.json" >}} · {{< firmware-meta channel="stable" field="build_version" artifact="espargos-controller-artifact.json" >}}</td>
-									<td class="text-end"><esp-web-install-button manifest="https://espargos.net/firmware/controller-recovery-stable-manifest.json"></esp-web-install-button></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+		<h5>From your browser</h5>
+		<p>Connect ESPARGOS to your computer via USB and open this page in Chrome or Edge. Close any other programs using the serial port. The installer uses the same flasher as ESP-WebSDR, with compressed writes at 2 Mbaud.</p>
+		<div id="recovery-flasher" data-firmware-base="/firmware/" data-catalog="/recovery-flasher/firmware.json" class="border rounded p-3 p-md-4 my-3" style="max-width: 864px;">
+			<div class="d-flex flex-wrap gap-2 mb-3">
+				<button type="button" class="btn btn-primary" data-recovery="connect" disabled>Connect controller</button>
+				<button type="button" class="btn btn-outline-light" data-recovery="disconnect" disabled>Disconnect</button>
 			</div>
+			<p class="text-muted" data-recovery="device">Not connected</p>
+			<label for="recovery-channel" class="form-label">Recovery channel</label>
+			<select id="recovery-channel" class="form-select mb-2" data-recovery="channel" disabled></select>
+			<p class="small text-muted" data-recovery="build"></p>
+			<div class="form-check my-3">
+				<input id="recovery-confirm" class="form-check-input" type="checkbox" data-recovery="confirm">
+				<label for="recovery-confirm" class="form-check-label">I understand that recovery replaces the controller firmware and resets its settings.</label>
+			</div>
+			<button type="button" class="btn btn-primary mb-3" data-recovery="install" disabled>Install recovery firmware</button>
+			<p data-recovery="status" role="status" aria-live="polite">Loading recovery installer…</p>
+			<progress class="w-100" data-recovery="progress" max="100" value="0" aria-label="Recovery write progress"></progress>
+			<details class="mt-3">
+				<summary>Installation log</summary>
+				<pre data-recovery="log" class="small mt-2" style="max-height: 16rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere;"></pre>
+			</details>
+			<p class="small mt-3 mb-0">After recovery, follow the <a href="/setup/">setup guide</a>. If the controller does not restart automatically, unplug and reconnect USB.</p>
+			<noscript><p class="mt-3">Enable JavaScript to use the browser installer, or use manual recovery below.</p></noscript>
 		</div>
+		{{< recovery-flasher >}}
+		<details class="small mb-4">
+			<summary>Flasher licenses</summary>
+			<p class="mt-2"><a href="/recovery-flasher/vendor/LICENSE-esptool-js">esptool-js</a>, <a href="/recovery-flasher/vendor/LICENSE-pako">pako</a>, <a href="/recovery-flasher/vendor/LICENSE-atob-lite">atob-lite</a>, <a href="/recovery-flasher/vendor/LICENSE-tslib">tslib</a></p>
+		</details>
 		<h5>Manual Recovery with esptool</h5>
 		<p>
 			<ul>
