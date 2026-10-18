@@ -76,7 +76,7 @@ window.addEventListener('beforeunload', event => {
 });
 controls();
 if (!supported) {
-  status('Use Chrome or Edge on a computer, over HTTPS or localhost, to flash via USB. You can also use manual recovery below.');
+  status('Use Chrome, Edge, or Firefox on a computer, over HTTPS or localhost, to flash via USB. You can also use manual recovery below.');
 } else {
   status('Connect ESPARGOS via USB, then click Connect controller.');
   $('build').textContent = 'Loading available firmware…';
