@@ -700,6 +700,7 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 		<div class="alert alert-info">Recovery images are only needed in case your ESPARGOS device is not functioning properly after a failed update. This way, you can always restore your device to a working state even if something goes wrong during the update process. A failed firmware update cannot "brick" ESPARGOS.</div>
 
 		<h4>Controller Firmware Recovery</h4>
+		<p>Controller recovery only restores the controller firmware. After recovery, follow the <a href="/setup/">setup guide</a>, then run <a href="#web-update">Web Update</a> to flash the sensor firmware.</p>
 		<h5>From your browser</h5>
 		<p>Connect ESPARGOS to your computer via USB and open this page in Chrome, Edge, or Firefox. Close any other programs using the serial port.</p>
 		<div id="recovery-flasher" data-firmware-base="/firmware/" data-catalog="/recovery-flasher/firmware.json" class="border rounded p-3 p-md-4 my-3" style="max-width: 864px;">
@@ -722,7 +723,7 @@ curl -# "http://$ESPARGOS_HOST/upload_partition?partition=web" --compressed -H "
 				<summary>Installation log</summary>
 				<pre data-recovery="log" class="small mt-2" style="max-height: 16rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere;"></pre>
 			</details>
-			<p class="small mt-3 mb-0">After recovery, follow the <a href="/setup/">setup guide</a>. If the controller does not restart automatically, unplug and reconnect USB.</p>
+			<p class="small mt-3 mb-0">After recovery, follow the <a href="/setup/">setup guide</a>, then run <a href="#web-update">Web Update</a> to flash the sensor firmware. If the controller does not restart automatically, unplug and reconnect USB.</p>
 			<noscript><p class="mt-3">Enable JavaScript to use the browser installer, or use manual recovery below.</p></noscript>
 		</div>
 		{{< recovery-flasher >}}

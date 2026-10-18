@@ -61,7 +61,7 @@ $('install').addEventListener('click', async () => {
     const reset = await session.install(catalog.channels[channel], channel,
       new URL(root.dataset.firmwareBase, document.baseURI), value => { $('progress').value = value; }, status);
     const seconds = Math.round((performance.now() - start) / 1000);
-    status(`Recovery installed and verified in ${seconds} seconds. ${reset ? 'Restart requested.' : 'Unplug and reconnect USB to restart.'} Continue with the setup guide.`);
+    status(`Controller recovery installed and verified in ${seconds} seconds. ${reset ? 'Restart requested.' : 'Unplug and reconnect USB to restart.'} Follow the setup guide, then run Web Update to flash the sensor firmware.`);
   } catch (error) {
     status(`${error.message} Recovery did not finish. Reconnect to retry.`, true);
     await session.close();
