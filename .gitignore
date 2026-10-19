@@ -6,3 +6,6 @@ site/.hugo_build.lock
 
 # Generated from the deployed recovery images
 site/static/recovery-flasher/firmware.json
+
+# Downloaded from the manuals CI artifact.
+site/content/espargos-one/espargos-one-antenna-datasheet.pdf

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
   # Allow triggering build from controller-firmware / sensor-firmware
-  # and from espargos-one-manual (manual / CE declaration PDFs).
+  # and from espargos-one-manual (manuals, datasheets, and CE declaration).
   repository_dispatch:
     types: [firmware-update, manual-update, sdr-update]
 
@@ -134,8 +134,8 @@ jobs:
           mkdir -p ./espargos.github.io/site/content/ce
 
           # Latest successful "Build manual" run on main produces the "pdfs"
-          # artifact containing manual.pdf, ce-declaration.pdf, datasheet.pdf
-          # and the aperture-kit configuration supplements.
+          # artifact containing the manuals, product and antenna datasheets,
+          # CE declaration, and aperture-kit configuration supplements.
           run_id=$(GH_TOKEN="$MANUAL_TOKEN" gh api \
             repos/ESPARGOS/espargos-one-manual/actions/workflows/build-manual.yml/runs \
             -f branch=main \
@@ -158,6 +158,7 @@ jobs:
 
           cp "$tmp/manual.pdf"         ./espargos.github.io/site/content/espargos-one/espargos-one-manual.pdf
           cp "$tmp/datasheet.pdf"      ./espargos.github.io/site/content/espargos-one/espargos-one-datasheet.pdf
+          cp "$tmp/antenna-datasheet.pdf" ./espargos.github.io/site/content/espargos-one/espargos-one-antenna-datasheet.pdf
           cp "$tmp/ce-declaration.pdf" ./espargos.github.io/site/content/ce/espargos-one-ce-declaration.pdf
           cp "$tmp/aperture-kit/manual-6x4.pdf" ./espargos.github.io/site/content/espargos-one/espargos-one-aperture-kit-6x4-supplement.pdf
           cp "$tmp/aperture-kit/manual-8x4.pdf" ./espargos.github.io/site/content/espargos-one/espargos-one-aperture-kit-8x4-supplement.pdf
