@@ -250,6 +250,56 @@ video.minimal-controls { outline: none; }
 	color: transparent;
 }
 
+.technical-specs {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	align-items: center;
+	gap: 2.5rem;
+}
+
+.technical-specs-diagram {
+	width: 100%;
+	max-width: 560px;
+	margin: 0 auto;
+
+	img { width: 100%; height: auto; }
+}
+
+.technical-specs-grid {
+	margin: 0;
+	font-size: 0.95rem;
+	line-height: 1.45;
+
+	> li {
+		display: grid;
+		grid-template-columns: 8rem minmax(0, 1fr);
+		gap: 0.5rem 1rem;
+		padding: 0.85rem 0;
+		border-bottom: 1px solid #2c3338;
+	}
+
+	> li:first-child { padding-top: 0; }
+
+	h3 {
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	ul { padding-left: 1.1rem; margin: 0; }
+	ul li + li { margin-top: 0.25rem; }
+	.technical-specs-note { margin: 0 0 0.4rem; }
+}
+
+@media (max-width: 991.98px) {
+	.technical-specs { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+@media (max-width: 575.98px) {
+	.technical-specs-grid > li { grid-template-columns: 1fr; }
+}
+
 // Clickable "documentation / downloads" link cards (e.g. on the ESPARGOS One page):
 // whole card is a link, with an icon tile, hover lift and a green accent.
 .doc-link-card {
