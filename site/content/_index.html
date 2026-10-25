@@ -34,7 +34,7 @@ layout: list
 			<div class="container">
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
 <div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<div width="100%" style="display: flex; flex-direction: column; justify-content: space-around; background: black; aspect-ratio: 8 / 5;">
@@ -45,15 +45,32 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/camera">Camera Overlay</a></b></p>
 								<p class="card-text">Show received WiFi signal power and delay as an overlay on top of a camera image.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/camera">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/camera">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
+							<div class="text-center">
+								<div width="100%" style="overflow: hidden; margin: 0 auto;">
+									<video controls class="minimal-controls" muted style="display: block; width: 100%; aspect-ratio: 8 / 5; object-fit: contain; background: black;" preload="metadata">
+										<source src="video/mimo-radar.mp4" type="video/mp4">
+									</video>
+								</div>
+							</div>
+
+							<div class="card-body d-flex flex-column">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/iq/mimo-radar">MIMO Radar</a></b></p>
+								<p class="card-text">Detect moving targets and display their range, radial velocity and direction using ESPARGOS as a MIMO radar.</p>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/iq/mimo-radar">View Demo on GitHub</a>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -62,15 +79,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/azimuth-delay">Azimuth-Delay Diagram</a></b></p>
 								<p class="card-text">Visualize the azimuth and delay characteristics of incoming WiFi signals in real time.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/azimuth-delay">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/azimuth-delay">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -79,15 +96,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/music-spectrum">MUSIC Spatial Spectrum</a></b></p>
 								<p class="card-text">Use the MUSIC algorithm for angle of arrival estimation: Visualize spatial spectrum.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/music-spectrum">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/music-spectrum">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -96,15 +113,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
-								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/combined-array">Combined Antenna Array</a></b></p>
-								<p class="card-text">Combine multiple 4 &times; 2 ESPARGOS antenna arrays into one large phase-synchronous array.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/combined-array">View Demo on GitHub</a>
+							<div class="card-body d-flex flex-column">
+								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-by-antenna">Phases by Antenna</a></b></p>
+								<p class="card-text">Visualize the received WiFi phase at each antenna of a single ESPARGOS array or a larger combined array.</p>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-by-antenna">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -113,15 +130,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">Instantaneous Frequency-Domain CSI</a></b></p>
 								<p class="card-text">Visualize the frequency-domain channel state information captured by all antennas.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -130,32 +147,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">Instantaneous Time-Domain CSI</a></b></p>
 								<p class="card-text">Visualize the time-domain channel state information captured by all antennas.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/instantaneous-csi">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
-							<div class="text-center">
-								<div width="100%" style="overflow: hidden; margin: 0 auto;">
-									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
-										<source src="video/phases-over-space.webm" type="video/webm">
-									</video>
-								</div>
-							</div>
-		
-							<div class="card-body">
-								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-over-space">Phases by Antenna</a></b></p>
-								<p class="card-text">Visualize the received phase at each of the 4 &times; 2 antennas of the antenna array.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-over-space">View Demo on GitHub</a>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -164,15 +164,15 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-over-time">Received Phases over Time</a></b></p>
 								<p class="card-text">Monitor the average received phase at all antennas as it changes over time.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-over-time">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/phases-over-time">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
 					<div class="col">
-						<div class="card shadow-sm position-relative">
+						<div class="card shadow-sm position-relative h-100">
 							<div class="text-center">
 								<div width="100%" style="overflow: hidden; margin: 0 auto;">
 									<video controls class="minimal-controls" muted style="width: 100%;" preload="metadata">
@@ -181,10 +181,10 @@ layout: list
 								</div>
 							</div>
 		
-							<div class="card-body">
+							<div class="card-body d-flex flex-column">
 								<p class="card-title"><b><a class="text-white text-underline-hover" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/tdoas-over-time">Time of Arrival</a></b></p>
 								<p class="card-text">Monitor the precise time of arrival of WiFi packets at each antenna array.</p>
-								<a class="btn btn-outline-primary w-100" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/tdoas-over-time">View Demo on GitHub</a>
+								<a class="btn btn-outline-primary w-100 mt-auto" href="https://github.com/ESPARGOS/pyespargos/tree/main/demos/wifi/tdoas-over-time">View Demo on GitHub</a>
 							</div>
 						</div>
 					</div>
