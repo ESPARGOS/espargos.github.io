@@ -334,13 +334,14 @@ video.minimal-controls { outline: none; }
 	width: 2.75rem;
 	height: 2.75rem;
 	border-radius: 0.6rem;
-	background: linear-gradient(135deg, #5edf34 0%, #37c964 100%);
-	color: #fff;
+	background: rgba($primary, 0.1);
+	border: 1px solid rgba($primary, 0.22);
+	color: #83eaa1;
 }
 
 .doc-link-icon svg {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 1.625rem;
+	height: 1.625rem;
 }
 
 .doc-link-body {

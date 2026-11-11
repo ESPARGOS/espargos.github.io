@@ -104,11 +104,14 @@ menu:
 		</div>
 
 		<h2 class="fw-bold px-0 mb-3 mt-5">Documentation &amp; Downloads</h2>
-		<div class="row row-cols-1 row-cols-lg-3 g-4">
+		<div class="row row-cols-1 row-cols-md-2 g-4">
 			<div class="col">
 				<a href="/setup" class="doc-link-card">
 					<span class="doc-link-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 5.5 10.5v-5a.5.5 0 0 1 .771-.445z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M12 3v8"/>
+							<path d="M6.35 5.65a8 8 0 1 0 11.3 0"/>
+						</svg>
 					</span>
 					<span class="doc-link-body">
 						<span class="doc-link-title">Setup &amp; Getting Started</span>
@@ -119,7 +122,11 @@ menu:
 			<div class="col">
 				<a href="/firmware" class="doc-link-card">
 					<span class="doc-link-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<rect x="5" y="5" width="14" height="14" rx="2"/>
+							<path d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/>
+							<path d="M12 8v8m-3-3 3 3 3-3"/>
+						</svg>
 					</span>
 					<span class="doc-link-body">
 						<span class="doc-link-title">Firmware</span>
@@ -127,14 +134,43 @@ menu:
 					</span>
 				</a>
 			</div>
+		</div>
+
+		<h2 class="fw-bold px-0 mb-3 mt-5">Experiment Resources</h2>
+		<div class="row row-cols-1 row-cols-md-2 g-4">
 			<div class="col">
 				<a href="https://espargos.net/t-dongle-c5-transmitter/" class="doc-link-card">
 					<span class="doc-link-icon">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="1" fill="currentColor" stroke="none"/><path d="M5.2 5.2a4 4 0 0 0 0 5.6m5.6-5.6a4 4 0 0 1 0 5.6M3 3a7 7 0 0 0 0 10M13 3a7 7 0 0 1 0 10M8 9v6"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="M5.64 3.64a9 9 0 0 0 0 12.72m12.72-12.72a9 9 0 0 1 0 12.72" opacity=".55"/>
+							<path d="M8.46 6.46a5 5 0 0 0 0 7.08m7.08-7.08a5 5 0 0 1 0 7.08M12 12v9m-3 0h6"/>
+							<circle cx="12" cy="10" r="1.5" fill="currentColor" stroke="none"/>
+						</svg>
 					</span>
 					<span class="doc-link-body">
 						<span class="doc-link-title">T-Dongle-C5 Test Transmitter</span>
 						<span class="doc-link-text">Turn a LILYGO T-Dongle-C5 into a portable WiFi test transmitter for CSI experiments.</span>
+					</span>
+				</a>
+			</div>
+			<div class="col">
+				<a href="https://github.com/ESPARGOS/plutosdr-radar-target-simulator" class="doc-link-card">
+					<span class="doc-link-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<circle cx="12" cy="12" r="9"/>
+							<circle cx="12" cy="12" r="5" opacity=".4"/>
+							<path d="M12 3v18M3 12h18" stroke-width="1" opacity=".25"/>
+							<path d="M12 12V3a9 9 0 0 1 7.79 4.5Z" fill="currentColor" fill-opacity=".12" stroke="none"/>
+							<path d="M12 12l7.79-4.5"/>
+							<g fill="currentColor" stroke="none">
+							<circle cx="14" cy="8.5" r="1.1"/>
+							<circle cx="7.5" cy="17" r="1.1"/>
+							</g>
+						</svg>
+					</span>
+					<span class="doc-link-body">
+						<span class="doc-link-title">PlutoSDR Radar Target Simulator</span>
+						<span class="doc-link-text">Use an ADALM-PLUTO SDR to simulate radar targets with configurable distances, velocities and echo strengths for evaluating ESPARGOS One's radar performance.</span>
 					</span>
 				</a>
 			</div>
