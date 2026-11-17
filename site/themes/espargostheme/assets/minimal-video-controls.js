@@ -58,6 +58,15 @@
 
 		function togglePlay() {
 			if (video.paused || video.ended) {
+				// Poster-only demos have no active video URL until the first click.
+				var pendingSources = video.querySelectorAll("source[data-src]");
+				pendingSources.forEach(function (source) {
+					source.src = source.dataset.src;
+					source.removeAttribute("data-src");
+				});
+				if (pendingSources.length) {
+					video.load();
+				}
 				var p = video.play();
 				// Ignore promise rejection (autoplay policy etc.), the overlay remains.
 				if (p && typeof p.catch === "function") {
