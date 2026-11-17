@@ -30,6 +30,10 @@
 
 	<script src="{{ $bootstrap.RelPermalink }}" defer></script>
 
+	{{/* Dataset code blocks come from their layout rather than .Content.
+	     Keep highlight.js synchronous for the existing inline hljs calls. */}}
+	{{ $hasCodeBlocks := or (eq .Layout "dataset-details") (gt (len (findRE `(?s)<pre\b[^>]*>\s*<code\b` .Content 1)) 0) }}
+	{{ if $hasCodeBlocks }}
 	{{ $highlight := resources.Get "highlight.min.js" | fingerprint }}
 
 	<script src="{{ $highlight.RelPermalink }}"></script>
@@ -38,13 +42,14 @@
 
 	<script src="{{ $copycode.RelPermalink }}" defer></script>
 
-	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" | fingerprint }}
-
-	<script src="{{ $minimalVideoControls.RelPermalink }}" defer></script>
-
 	{{ $highlightTheme := resources.Get "tomorrow-night-bright.css" | fingerprint }}
 
 	<link rel="stylesheet" href="{{ $highlightTheme.RelPermalink }}">
+	{{ end }}
+
+	{{ $minimalVideoControls := resources.Get "minimal-video-controls.js" | fingerprint }}
+
+	<script src="{{ $minimalVideoControls.RelPermalink }}" defer></script>
 
 	<script>
 		// The popup injects third-party stylesheets and images. Even with an
